@@ -3,7 +3,7 @@ return {
     "lewis6991/gitsigns.nvim",
     keys = {
         {
-            "<leader>gk",
+            "<leader>gj",
             function()
                 if vim.wo.diff then
                     vim.cmd.normal({ "]c", bang = true })
@@ -14,7 +14,7 @@ return {
             "Next Hunk",
         },
         {
-            "<leader>gj",
+            "<leader>gk",
             function()
                 if vim.wo.diff then
                     vim.cmd.normal({ "[c", bang = true })
