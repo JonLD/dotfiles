@@ -1,9 +1,22 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+
 local map = LazyVim.safe_keymap_set
 
-map("i", "<C-j>", '<cmd>pumvisible() ? "<C-n>" : "<C-k>"', { expr = true, noremap = true })
+-- vim.keymap.del("n", "<leader>cF")
+vim.keymap.del("n", "<C-w><C-d>")
+vim.keymap.del("n", "<C-w>d")
+vim.keymap.del("n", "<leader>-")
+vim.keymap.del("n", "<leader>|")
+vim.keymap.del("n", "<leader>K")
+
+if vim.g.neovide then
+    vim.keymap.del("n", "<C-j>")
+    vim.keymap.del("n", "<C-k>")
+    map("n", "<C-j>", "<C-d>")
+    map("n", "<C-k>", "<C-u>")
+end
 map("n", "<C-f>", "<C-e>")
 map("n", "<C-d>", "<C-y>")
 map("n", "<leader>wj", "<C-w>j")
@@ -51,11 +64,6 @@ local DiffFormat = function()
         end
     end
 end
-vim.keymap.del("n", "<leader>cF")
-vim.keymap.del("n", "<C-w><C-d>")
-vim.keymap.del("n", "<C-w>d")
-
--- vim.keymap.set({ "n", "o", "x" }, "<C-w>", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
 
 require("which-key").add({
     "<leader>cF",

@@ -24,11 +24,7 @@ require("lazy").setup({
         { import = "lazyvim.plugins.extras.editor.mini-move" },
         { import = "lazyvim.plugins.extras.formatting.black" },
         { import = "lazyvim.plugins.extras.util.project" },
-        { import = "lazyvim.plugins.extras.lang.json" },
         { import = "lazyvim.plugins.extras.lang.clangd" },
-        { import = "lazyvim.plugins.extras.lang.markdown" },
-        { import = "lazyvim.plugins.extras.lang.cmake" },
-        { import = "lazyvim.plugins.extras.lang.yaml" },
         { import = "plugins" },
     },
     defaults = {

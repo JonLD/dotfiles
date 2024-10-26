@@ -1,9 +1,36 @@
 return {
     {
+        "nanotee/zoxide.vim",
+        cmd = {
+          "Z",
+          "Lz",
+          "Tz",
+          "Zi",
+          "Lzi",
+          "Tzi",
+        } ,
+    },
+    {
+        "NMAC427/guess-indent.nvim",
+        opts = {
+            auto_cmd = true,
+        },
+    },
+    {
+        "akinsho/toggleterm.nvim",
+        config = true,
+        cmd = {
+            "ToggleTerm",
+        },
+        keys = {
+            "<C-\\>",
+            "<cmd>ToggleTerm<cmd>",
+        },
+    },
+    { "MunifTanjim/nui.nvim" },
+    {
         "norcalli/nvim-colorizer.lua",
-        config = function()
-            require("colorizer").setup()
-        end,
+        enabled=false
     },
     {
         "chrisgrieser/nvim-spider",
@@ -64,65 +91,11 @@ return {
             { "<C-P>", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
         },
     },
-    {
-        "psliwka/vim-smoothie",
-        config = function()
-            require("vim-smoothie").setup()
-        end,
-        keys = {
-            {
-                "<C-j>",
-                '<cmd>call smoothie#do("\\<C-D>") <CR>',
-            },
-            {
-                "<C-k>",
-                '<cmd>call smoothie#do("\\<C-U>") <CR>',
-            },
-        },
-        enabled = true,
-    },
-    {
-        "karb94/neoscroll.nvim",
-        enabled = false,
-        config = function()
-            require("neoscroll").setup({
-                mappings = { "zz", "zt", "zb" },
-                easing = "quadratic",
-            })
-        end,
-        keys = {
-            {
-                "<C-k>",
-                function()
-                    require("neoscroll").ctrl_u({ duration = 20 })
-                end,
-            },
-            {
-                "<C-j>",
-                function()
-                    require("neoscroll").ctrl_d({ duration = 20 })
-                end,
-            },
-            -- {
-            --     "<C-b>",
-            --     function()
-            --         require("neoscroll").ctrl_b({ duration = 450 })
-            --     end,
-            -- },
-            -- {
-            --     "<C-f>",
-            --     function()
-            --         require("neoscroll").ctrl_f({ duration = 450 })
-            --     end,
-            -- },
-        },
-    },
     { "rcarriga/nvim-notify", enabled = false },
-    { "folke/noice.nvim", enabled = false },
+    { "folke/noice.nvim", enabled = true },
     {
         "max397574/better-escape.nvim",
-        config = function()
-            require("better_escape").setup({
+            opts = {
                 mappings = {
                     i = {
                         k = {
@@ -151,7 +124,6 @@ return {
                         },
                     },
                 },
-            })
-        end,
+            },
     },
 }

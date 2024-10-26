@@ -1,6 +1,5 @@
 return {
     { "LunarVim/darkplus.nvim" },
-    -- Configure LazyVim to load gruvbox
     {
         "LazyVim/LazyVim",
         opts = {

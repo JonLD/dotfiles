@@ -6,6 +6,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     command = [[%s/\s\+$//e]],
 })
 
+-- vim.api.nvim_create_autocmd({ "BufNew" }, {
+--     pattern = { "*" },
+--     command = [[GuessIndent]],
+-- })
+
 local DiffFormat = function()
     local hunks = require("gitsigns").get_hunks()
     local format = require("conform").format

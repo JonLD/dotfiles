@@ -1,6 +1,6 @@
-local gs = require("gitsigns")
 return {
     "lewis6991/gitsigns.nvim",
+    lazy = true,
     keys = {
         {
             "<leader>gj",
@@ -8,7 +8,7 @@ return {
                 if vim.wo.diff then
                     vim.cmd.normal({ "]c", bang = true })
                 else
-                    gs.nav_hunk("next")
+                    require("gitsigns").nav_hunk("next")
                 end
             end,
             "Next Hunk",
@@ -19,7 +19,7 @@ return {
                 if vim.wo.diff then
                     vim.cmd.normal({ "[c", bang = true })
                 else
-                    gs.nav_hunk("prev")
+                    require("gitsigns").nav_hunk("prev")
                 end
             end,
             "Prev Hunk",
@@ -27,34 +27,34 @@ return {
         {
             "<leader>gJ",
             function()
-                gs.nav_hunk("last")
+                require("gitsigns").nav_hunk("last")
             end,
             "Last Hunk",
         },
         {
             "<leader>gK",
             function()
-                gs.nav_hunk("first")
+                require("gitsigns").nav_hunk("first")
             end,
             "First Hunk",
         },
         { "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk" },
         { "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk" },
-        { "<leader>gS", gs.stage_buffer, "Stage Buffer" },
-        { "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk" },
-        { "<leader>gR", gs.reset_buffer, "Reset Buffer" },
-        { "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline" },
+        { "<leader>gS", "lua require('gitsigns').stage_buffer<CR>", "Stage Buffer" },
+        { "<leader>gu", "lua require('gitsigns').undo_stage_hunk<CR>", "Undo Stage Hunk" },
+        { "<leader>gR", "lua require('gitsigns').reset_buffer<CR>", "Reset Buffer" },
+        { "<leader>gp", "lua require('gitsigns').preview_hunk_inline<CR>", "Preview Hunk Inline" },
         {
             "<leader>ghb",
             function()
-                gs.blame_line({ full = true })
+                require("gitsigns").blame_line({ full = true })
             end,
             "Blame Line",
         },
         {
             "<leader>ghB",
             function()
-                gs.blame()
+                require("gitsigns").blame()
             end,
             "Blame Buffer",
         },
