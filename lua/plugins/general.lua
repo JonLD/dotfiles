@@ -1,14 +1,20 @@
 return {
     {
+        "ahmedkhalf/project.nvim",
+        opts = {
+            scope_chdir = "tab"
+        },
+    },
+    {
         "nanotee/zoxide.vim",
         cmd = {
-          "Z",
-          "Lz",
-          "Tz",
-          "Zi",
-          "Lzi",
-          "Tzi",
-        } ,
+            "Z",
+            "Lz",
+            "Tz",
+            "Zi",
+            "Lzi",
+            "Tzi",
+        },
     },
     {
         "NMAC427/guess-indent.nvim",
@@ -30,7 +36,7 @@ return {
     { "MunifTanjim/nui.nvim" },
     {
         "norcalli/nvim-colorizer.lua",
-        enabled=false
+        enabled = false,
     },
     {
         "chrisgrieser/nvim-spider",
@@ -95,35 +101,35 @@ return {
     { "folke/noice.nvim", enabled = true },
     {
         "max397574/better-escape.nvim",
-            opts = {
-                mappings = {
-                    i = {
-                        k = {
-                            -- These can all also be functions
-                            j = "<Esc>",
-                        },
+        opts = {
+            mappings = {
+                i = {
+                    k = {
+                        -- These can all also be functions
+                        j = "<Esc>",
                     },
-                    c = {
-                        k = {
-                            j = "<Esc>",
-                        },
+                },
+                c = {
+                    k = {
+                        j = "<Esc>",
                     },
-                    t = {
-                        k = {
-                            j = "<C-\\><C-n>",
-                        },
+                },
+                t = {
+                    k = {
+                        j = "<C-\\><C-n>",
                     },
-                    v = {
-                        k = {
-                            j = "<Esc>",
-                        },
+                },
+                v = {
+                    k = {
+                        j = "<Esc>",
                     },
-                    s = {
-                        k = {
-                            j = "<Esc>",
-                        },
+                },
+                s = {
+                    k = {
+                        j = "<Esc>",
                     },
                 },
             },
+        },
     },
 }

@@ -1,11 +1,15 @@
 return {
+    { "tiagovla/scope.nvim",
+        config = function ()
+            require("scope").setup({})
+        end
+    },
     {
         "nvim-neo-tree/neo-tree.nvim",
         keys = {
             { "<leader>e", false },
             { "<leader>E", false },
         },
-
     },
     {
         "psliwka/vim-smoothie",

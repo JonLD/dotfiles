@@ -1,5 +1,3 @@
-local util = require("util")
-
 ---@param scale_factor number
 ---@return number
 local function clamp_scale_factor(scale_factor)
@@ -22,14 +20,13 @@ local function change_scale_factor(increment, clamp)
     set_scale_factor(vim.g.neovide_scale_factor + increment, clamp)
 end
 
--- local function toggle_fullscreen()
---     if vim.g.neovide_fullscreen then
---         vim.g.neovide_fullscreen = false
---     else
---         vim.g.neovide_fullscreen = true
---     end
--- end
-
+local function map(lhs, toggle)
+  local t = LazyVim.toggle.wrap(toggle)
+  vim.keymap.set("n", lhs, function()
+    t()
+  end, { desc = "Toggle " .. toggle.name })
+  LazyVim.toggle.wk(lhs, toggle)
+end
 
 local toggle_fullscreen = LazyVim.toggle.wrap({
     name = "Fullscreen",
@@ -41,10 +38,9 @@ local toggle_fullscreen = LazyVim.toggle.wrap({
     end,
 })
 
-
 if vim.g.neovide then
-    util.map("<F11>", toggle_fullscreen)
-    util.map("<leader>um", toggle_fullscreen)
+    map("<F11>", toggle_fullscreen)
+    map("<leader>um", toggle_fullscreen)
 end
 
 ---@type LazySpec
@@ -56,7 +52,7 @@ return {
         options = {
             opt = {
                 guifont = "JetBrainsMonoNL NF",
-                linespace = 0,
+                linespace = 1,
             },
             g = {
                 neovide_cursor_animation_length = 0.08,

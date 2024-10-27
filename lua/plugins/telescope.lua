@@ -65,14 +65,14 @@ return {
             -- add a keymap to browse plugin files
             -- stylua: ignore
             {
-                "<leader>sg",
+                "<leader>/",
                 function()
                     require("telescope").extensions.live_grep_args.live_grep_args({})
                 end,
-                desc = "Live Grep",
+                desc = "Grep",
             },
             {
-                "<leader>sG",
+                "<leader>sg",
                 function()
                     require("telescope").extensions.live_grep_args.live_grep_args({ root = false })
                 end,
@@ -102,11 +102,20 @@ return {
                 desc = "File Browser",
                 remap = true,
             },
+            { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+            { "<leader>gD", "<cmd>Telescope git_status<CR>", desc = "Status" },
         },
     },
     {
         "nvim-telescope/telescope.nvim",
         -- change some options
+        keys = {
+            { "<leader>sG", false },
+            { "<leader>gs", false },
+            { "<leader>sm", false },
+            { "<leader>sM", false },
+            { "<leader>fF", false },
+        },
         opts = {
             defaults = {
                 file_ignore_patterns = {},
