@@ -1,11 +1,5 @@
 return {
     {
-        "ahmedkhalf/project.nvim",
-        opts = {
-            scope_chdir = "tab"
-        },
-    },
-    {
         "nanotee/zoxide.vim",
         cmd = {
             "Z",
@@ -74,31 +68,12 @@ return {
         },
     },
     {
-        "zdcthomas/yop.nvim",
-        config = function()
-            require("yop").op_map({ "n", "v" }, "<space>t", function(lines)
-                if #lines > 1 then -- Multiple lines can't be searched for
-                    return
-                end
-                require("telescope").extensions.live_grep_args.live_grep_args({ default_text = lines[1] })
-            end)
-            require("yop").op_map({ "n", "v" }, "<space>sS", function(lines)
-                if #lines > 1 then -- Multiple lines can't be searched for
-                    return
-                end
-                require("spectre").open_file_search({})
-            end)
-        end,
-    },
-    {
         "gbprod/yanky.nvim",
         keys = {
             { "<C-n>", "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
             { "<C-P>", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
         },
     },
-    { "rcarriga/nvim-notify", enabled = false },
-    { "folke/noice.nvim", enabled = true },
     {
         "max397574/better-escape.nvim",
         opts = {

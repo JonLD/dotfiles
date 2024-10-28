@@ -1,5 +1,5 @@
 return {
-    { "LunarVim/darkplus.nvim" },
+    { "YaQia/darkplus.nvim"  },
     {
         "LazyVim/LazyVim",
         opts = {

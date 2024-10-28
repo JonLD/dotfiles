@@ -11,7 +11,7 @@ return {
                     require("gitsigns").nav_hunk("next")
                 end
             end,
-            "Next Hunk",
+            desc = "Next Hunk",
         },
         {
             "<leader>gk",
@@ -22,41 +22,41 @@ return {
                     require("gitsigns").nav_hunk("prev")
                 end
             end,
-            "Prev Hunk",
+            desc = "Prev Hunk",
         },
         {
             "<leader>gJ",
             function()
                 require("gitsigns").nav_hunk("last")
             end,
-            "Last Hunk",
+            desc = "Last Hunk",
         },
         {
             "<leader>gK",
             function()
                 require("gitsigns").nav_hunk("first")
             end,
-            "First Hunk",
+            desc = "First Hunk",
         },
-        { "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk" },
-        { "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk" },
-        { "<leader>gS", "lua require('gitsigns').stage_buffer<CR>", "Stage Buffer" },
-        { "<leader>gu", "lua require('gitsigns').undo_stage_hunk<CR>", "Undo Stage Hunk" },
-        { "<leader>gR", "lua require('gitsigns').reset_buffer<CR>", "Reset Buffer" },
-        { "<leader>gp", "lua require('gitsigns').preview_hunk_inline<CR>", "Preview Hunk Inline" },
+        { "<leader>gs", ":Gitsigns stage_hunk<CR>", desc = "Stage Hunk" },
+        { "<leader>gr", ":Gitsigns reset_hunk<CR>", desc = "Reset Hunk" },
+        { "<leader>gS", "lua require('gitsigns').stage_buffer<CR>", desc = "Stage Buffer" },
+        { "<leader>gu", "lua require('gitsigns').undo_stage_hunk<CR>", desc = "Undo Stage Hunk" },
+        { "<leader>gR", "lua require('gitsigns').reset_buffer<CR>", desc = "Reset Buffer" },
+        { "<leader>gp", "lua require('gitsigns').preview_hunk_inline<CR>", desc = "Preview Hunk Inline" },
         {
             "<leader>ghb",
             function()
                 require("gitsigns").blame_line({ full = true })
             end,
-            "Blame Line",
+            desc = "Blame Line",
         },
         {
             "<leader>ghB",
             function()
                 require("gitsigns").blame()
             end,
-            "Blame Buffer",
+            desc = "Blame Buffer",
         },
     },
 }

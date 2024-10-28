@@ -67,16 +67,24 @@ return {
             {
                 "<leader>/",
                 function()
-                    require("telescope").extensions.live_grep_args.live_grep_args({})
+                    require("telescope").extensions.live_grep_args.live_grep_args({ search_dirs = { LazyVim.root() } })
                 end,
                 desc = "Grep",
             },
             {
                 "<leader>sg",
                 function()
-                    require("telescope").extensions.live_grep_args.live_grep_args({ root = false })
+                    require("telescope").extensions.live_grep_args.live_grep_args({})
                 end,
                 desc = "Grep (cwd)",
+            },
+        },
+    },
+    {
+        "folke/which-key.nvim",
+        opts = {
+            spec = {
+                { "<leader>sx", group = "Extras" },
             },
         },
     },
@@ -97,19 +105,43 @@ return {
             {
                 "<leader>E",
                 function()
-                    require("telescope").extensions.file_browser.file_browser({ root = vim.uv.cwd() })
+                    require("telescope").extensions.file_browser.file_browser({
+                        root = vim.uv.cwd(),
+                        select_buffer = true,
+                    })
                 end,
                 desc = "File Browser",
                 remap = true,
             },
-            { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-            { "<leader>gD", "<cmd>Telescope git_status<CR>", desc = "Status" },
         },
     },
     {
         "nvim-telescope/telescope.nvim",
         -- change some options
         keys = {
+            { "<leader>ff", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+            { "<leader>gD", "<cmd>Telescope git_status<CR>", desc = "Status" },
+            { "<leader>sxh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+            { "<leader>sxH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+            { "<leader>sxj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
+            { "<leader>sxk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+            { "<leader>sxl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
+            { "<leader>sxM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+            { "<leader>sxm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+            { "<leader>sxo", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+            { "<leader>sxq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
+            { "<leader>sx:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+            { "<leader>:", false },
+            { "<leader>/", false },
+            { "<leader>sh", false },
+            { "<leader>sH", false },
+            { "<leader>sj", false },
+            { "<leader>sk", false },
+            { "<leader>sl", false },
+            { "<leader>sM", false },
+            { "<leader>sm", false },
+            { "<leader>so", false },
+            { "<leader>sq", false },
             { "<leader>sG", false },
             { "<leader>gs", false },
             { "<leader>sm", false },

@@ -46,7 +46,13 @@ end
 ---@type LazySpec
 return {
     "AstroNvim/astrocore",
-    cond = vim.g.neovide,
+    cond = function()
+        if vim.g.neovide then
+            return true
+        else
+            return false
+        end
+    end,
     ---@type AstroCoreOpts
     opts = {
         options = {
