@@ -1,4 +1,4 @@
-if not require("util").not_firenvim() then
+if not require("utils.util").not_firenvim() then
     vim.g.firenvim_config = {
         globalSettings = { alt = "all" },
         localSettings = {
@@ -20,6 +20,6 @@ end
 
 return {
     "glacambre/firenvim",
-    cond = not require("util").not_firenvim(),
+    cond = not require("utils.util").not_firenvim(),
     build = ":call firenvim#install(0)",
 }

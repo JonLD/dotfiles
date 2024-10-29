@@ -3,53 +3,37 @@
 -- Add any additional keymaps here
 
 local map = LazyVim.safe_keymap_set
+local delete = vim.keymap.del
 
--- vim.keymap.del("n", "<leader>cF")
-vim.keymap.del("n", "<C-w><C-d>")
-vim.keymap.del("n", "<C-w>d")
-vim.keymap.del("n", "<leader>-")
-vim.keymap.del("n", "<leader>|")
-vim.keymap.del("n", "<leader>K")
+-- delete("n", "<leader>cF")
+delete("n", "<C-w><C-d>")
+delete("n", "<C-w>d")
+delete("n", "<leader>-")
+delete("n", "<leader>|")
+delete("n", "<leader>K")
+delete("n", "<C-w><space>")
+delete("n", "<leader>bD")
 
 if vim.g.neovide then
-    vim.keymap.del("n", "<C-j>")
-    vim.keymap.del("n", "<C-k>")
+    delete("n", "<C-j>")
+    delete("n", "<C-k>")
     map("n", "<C-j>", "<C-d>")
     map("n", "<C-k>", "<C-u>")
+    map("i", "<C-v>", "<C-r>+")
 end
 map("n", "<C-f>", "<C-e>")
 map("n", "<C-d>", "<C-y>")
-map("n", "<leader>wj", "<C-w>j", { desc = "Move to window below" } )
-map("n", "<leader>wk", "<C-w>k", { desc = "Move to window above" } )
-map("n", "<leader>wh", "<C-w>h", { desc = "Move to window left" } )
-map("n", "<leader>wl", "<C-w>l", { desc = "Move to window right" } )
-map("n", "<tab>l", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
--- vim.keymap.set("n", "<leader>cd", function()
---     -- when rename opens the prompt, this autocommand will trigger
---     -- it will "press" CTRL-F to enter the command-line window `:h cmdwin`
---     -- in this window I can use normal mode keybindings
---     local cmdId
---     cmdId = vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
---         callback = function()
---             local key = vim.api.nvim_replace_termcodes("<C-f>", true, false, true)
---             vim.api.nvim_feedkeys(key, "c", false)
---             vim.api.nvim_feedkeys("0", "n", false)
---             -- autocmd was triggered and so we can remove the ID and return true to delete the autocmd
---             cmdId = nil
---             return true
---         end,
---     })
---     vim.lsp.buf.rename()
---     -- if LPS couldn't trigger rename on the symbol, clear the autocmd
---     vim.defer_fn(function()
---         -- the cmdId is not nil only if the LSP failed to rename
---         if cmdId then
---             vim.api.nvim_del_autocmd(cmdId)
---         end
---     end, 500)
--- end)
+map("n", "<leader>wj", "<C-w>j", { desc = "Move to window below" })
+map("n", "<leader>wk", "<C-w>k", { desc = "Move to window above" })
+map("n", "<leader>wh", "<C-w>h", { desc = "Move to window left" })
+map("n", "<leader>wl", "<C-w>l", { desc = "Move to window right" })
+map("n", "<leader><tab>l", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
+map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
+map("n", "<leader>bd", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+map("n", "<C-_>", "<cmd>ToggleTerm<CR>")
+map("n", "<C-/>", "<cmd>ToggleTerm<CR>")
 
 local DiffFormat = function()
     local hunks = require("gitsigns").get_hunks()
@@ -73,4 +57,11 @@ require("which-key").add({
         DiffFormat()
     end,
     desc = "Format diff (hunks)",
+})
+
+require("which-key").add({
+    "<leader>r",
+    vim.lsp.buf.rename,
+    desc = "Rename",
+    icon = { icon = "󰑕 ", color = "orange" },
 })

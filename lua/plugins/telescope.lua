@@ -1,5 +1,6 @@
 local actions = require("telescope.actions")
--- local lga_actions = require("telescope-live-grep-args").actions
+-- local lga_actions =
+-- local lga_actions = require("utils.custom-live-grep-args.actions")
 local custom_actions = function()
     require("plugins.telescope_actions")
 end
@@ -36,55 +37,25 @@ return {
         },
     },
     {
-        "nvim-telescope/telescope-live-grep-args.nvim",
-        -- This will not install any breaking changes.
-        -- For major updates, this must be adjusted manually.
-        version = "^1.0.0",
-        config = function()
-            require("telescope").load_extension("live_grep_args")
-        end,
-        opts = {
-            mappings = {
-                -- extend mappings
-                i = {
-                    ["<C-f>"] = function()
-                        return require("telescope-live-grep-args.actions").quote_prompt
-                    end,
-                    -- ["<C-g>"] = function()
-                    --     custom_actions.postfix_prompt({ postfix = " -g " })
-                    -- end,
-                    -- ["<C-w>"] = custom_actions.postfix_prompt({ postfix = " -w" }),
-                    -- ["<C-r>"] = custom_actions.postfix_prompt({ postfix = " -F" }),
-                    -- ["<C-d>"] = custom_actions.postfix_prompt({ postfix = " -g !'test*' -g !'Test*' " }),
-                    -- ["<C-s>"] = custom_actions.postfix_prompt({ postfix = " -g !'*gmock*' " }),
-                    -- ["<C-e>"] = custom_actions.postfix_prompt({ postfix = " -g !'*SOUP*' " }),
-                },
-            },
-        },
-        keys = {
-            -- add a keymap to browse plugin files
-            -- stylua: ignore
-            {
-                "<leader>/",
-                function()
-                    require("telescope").extensions.live_grep_args.live_grep_args({ search_dirs = { LazyVim.root() } })
-                end,
-                desc = "Grep",
-            },
-            {
-                "<leader>sg",
-                function()
-                    require("telescope").extensions.live_grep_args.live_grep_args({})
-                end,
-                desc = "Grep (cwd)",
-            },
-        },
-    },
-    {
         "folke/which-key.nvim",
         opts = {
             spec = {
+                {
+                    "<leader>/",
+                    desc = "Grep",
+                    icon = { icon = " ", color = "green" },
+                },
                 { "<leader>sx", group = "Extras" },
+                {
+                    "<leader>E",
+                    desc = "File Browser (cwd)",
+                    icon = { icon = "󰙅 ", color = "orange" },
+                },
+                {
+                    "<leader>e",
+                    desc = "File Browser",
+                    icon = { icon = "󰙅 ", color = "orange" },
+                },
             },
         },
     },
@@ -107,11 +78,60 @@ return {
                 function()
                     require("telescope").extensions.file_browser.file_browser({
                         root = vim.uv.cwd(),
-                        select_buffer = true,
+                        select_buffer = false,
                     })
                 end,
                 desc = "File Browser",
                 remap = true,
+            },
+        },
+    },
+    {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+        config = function()
+            require("telescope").load_extension("live_grep_args")
+        end,
+        opts = {
+            defaults = {
+
+                mappings = {
+                    -- extend mappings
+                    i = {
+                        ["<C-f>"] = function()
+                            local lga_actions = require("telescope-live-grep-args.actions")
+                            return lga_actions.quote_prompt
+                        end,
+                        -- ["<C-g>"] = function()
+                        --     custom_actions.postfix_prompt({ postfix = " -g " })
+                        -- end,
+                        -- ["<C-w>"] = custom_actions.postfix_prompt({ postfix = " -w" }),
+                        -- ["<C-r>"] = custom_actions.postfix_prompt({ postfix = " -F" }),
+                        -- ["<C-d>"] = custom_actions.postfix_prompt({ postfix = " -g !'test*' -g !'Test*' " }),
+                        -- ["<C-s>"] = custom_actions.postfix_prompt({ postfix = " -g !'*gmock*' " }),
+                        -- ["<C-e>"] = custom_actions.postfix_prompt({ postfix = " -g !'*SOUP*' " }),
+                    },
+                },
+            },
+        },
+        keys = {
+            -- add a keymap to browse plugin files
+            -- stylua: ignore
+            {
+                "<leader>/",
+                function()
+                    require("telescope").extensions.live_grep_args.live_grep_args({ search_dirs = { LazyVim.root() } })
+                end,
+                desc = "Grep",
+            },
+            {
+                "<leader>sg",
+                function()
+                    require("telescope").extensions.live_grep_args.live_grep_args({})
+                end,
+                desc = "Grep (cwd)",
             },
         },
     },

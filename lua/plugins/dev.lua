@@ -1,8 +1,17 @@
-if true then
+if false then
     return {}
 end
 
 return {
+    {
+        "2kabhishek/nerdy.nvim",
+        dependencies = {
+            "stevearc/dressing.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+        cmd = "Nerdy",
+        keys = {  "<leader>si", "<CMD>Nerdy<CR>", desc = "Nerd Icons"  },
+    },
     -- {
     --     "JonLD/darkplus.nvim",
     --     enabled=false,
@@ -12,7 +21,55 @@ return {
         "folke/which-key.nvim",
         opts = {
             spec = {
-                { "<leader>p", group = "PlatformIO" },
+                { "<leader>pu", desc = "Upload",
+                    icon = { icon = " ", color = "cyan" }
+                },
+                {
+                    "<leader>pb",
+                    desc = "Build",
+                    icon = { icon = "󰇺 ", color = "cyan" }
+                },
+                {
+                    "<leader>pl",
+                    desc = "generate compile commands",
+                    icon = { icon = " ", color = "orange" }
+                },
+                {
+                    "<leader>pi",
+                    desc = "Initialise Project",
+                    icon = { icon = " ", color = "green" }
+                },
+                {
+                    "<leader>pc",
+                    desc = "Clean",
+                    icon = { icon = " ", color = "red" }
+                },
+                {
+                    "<leader>pt",
+                    desc = "Terminal",
+                    icon = { icon = " ", color = "red" }
+                },
+                {
+                    "<leader>pm",
+                    desc = "Monitor",
+                },
+                {
+                    "<leader>pl",
+                    desc = "Lib search",
+                   icon = { icon = " ", color = "green" }
+
+                },
+                {
+                    "<leader>pd",
+                    desc = "Debug",
+                   icon = { icon = " ", color = "red" }
+                },
+                {
+                    "<leader>pe",
+                    desc = "Select Env",
+                   icon = { icon = " ", color = "blue" }
+                },
+                { "<leader>p", group = "PlatformIO", icon = { icon = " ", color = "orange" } },
             },
         },
     },

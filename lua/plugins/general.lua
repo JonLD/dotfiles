@@ -16,17 +16,6 @@ return {
             auto_cmd = true,
         },
     },
-    {
-        "akinsho/toggleterm.nvim",
-        config = true,
-        cmd = {
-            "ToggleTerm",
-        },
-        keys = {
-            "<C-\\>",
-            "<cmd>ToggleTerm<cmd>",
-        },
-    },
     { "MunifTanjim/nui.nvim" },
     {
         "norcalli/nvim-colorizer.lua",
