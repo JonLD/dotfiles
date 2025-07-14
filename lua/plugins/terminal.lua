@@ -53,29 +53,4 @@ return {
             },
         },
     },
-    -- {
-    --     "akinsho/toggleterm.nvim",
-    --     config = true,
-    --     cmd = {
-    --         "ToggleTerm",
-    --     },
-    --     keys = {
-    --         "<C-_>",
-    --         lazygit_toggle(),
-    --         desc = "Terminal",
-    --     },
-    -- },
-    {
-        "ryanmsnyder/toggleterm-manager.nvim",
-        config = true,
-        keys = {
-            {
-                "<leader>ft",
-                "<cmd>Telescope toggleterm_manager<CR>",
-            },
-            opts = {
-
-            },
-        },
-    },
 }
