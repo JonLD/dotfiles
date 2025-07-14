@@ -20,27 +20,18 @@ local function change_scale_factor(increment, clamp)
     set_scale_factor(vim.g.neovide_scale_factor + increment, clamp)
 end
 
-local function map(lhs, toggle)
-  local t = LazyVim.toggle.wrap(toggle)
-  vim.keymap.set("n", lhs, function()
-    t()
-  end, { desc = "Toggle " .. toggle.name })
-  LazyVim.toggle.wk(lhs, toggle)
-end
 
-local toggle_fullscreen = LazyVim.toggle.wrap({
-    name = "Fullscreen",
-    get = function()
-        return vim.g.neovide_fullscreen
-    end,
-    set = function(state)
-        vim.g.neovide_fullscreen = state
-    end,
-})
 
 if vim.g.neovide then
-    map("<F11>", toggle_fullscreen)
-    map("<leader>um", toggle_fullscreen)
+    Snacks.toggle.option("fullscreen", {
+        name = "Fullscreen",
+        get = function()
+            return vim.g.neovide_fullscreen
+        end,
+        set = function(state)
+            vim.g.neovide_fullscreen = state
+        end,
+    }):map("<leader>um")
 end
 
 ---@type LazySpec
