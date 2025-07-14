@@ -1,5 +1,6 @@
 return {
     "lewis6991/gitsigns.nvim",
+    version = "v1.0.0",
     lazy = true,
     keys = {
         {
@@ -8,7 +9,7 @@ return {
                 if vim.wo.diff then
                     vim.cmd.normal({ "]c", bang = true })
                 else
-                    require("gitsigns").nav_hunk("next")
+                    require("gitsigns").nav_hunk("next", {navigation_message = false})
                 end
             end,
             desc = "Next Hunk",
@@ -19,7 +20,7 @@ return {
                 if vim.wo.diff then
                     vim.cmd.normal({ "[c", bang = true })
                 else
-                    require("gitsigns").nav_hunk("prev")
+                    require("gitsigns").nav_hunk("prev", {navigation_message = false})
                 end
             end,
             desc = "Prev Hunk",
@@ -27,23 +28,24 @@ return {
         {
             "<leader>gJ",
             function()
-                require("gitsigns").nav_hunk("last")
+                require("gitsigns").nav_hunk("last", {navigation_message = false})
             end,
             desc = "Last Hunk",
         },
         {
             "<leader>gK",
             function()
-                require("gitsigns").nav_hunk("first")
+                require("gitsigns").nav_hunk("first", {navigation_message = false})
             end,
             desc = "First Hunk",
         },
-        { "<leader>gs", ":Gitsigns stage_hunk<CR>", desc = "Stage Hunk" },
-        { "<leader>gr", ":Gitsigns reset_hunk<CR>", desc = "Reset Hunk" },
-        { "<leader>gS", "lua require('gitsigns').stage_buffer<CR>", desc = "Stage Buffer" },
-        { "<leader>gu", "lua require('gitsigns').undo_stage_hunk<CR>", desc = "Undo Stage Hunk" },
-        { "<leader>gR", "lua require('gitsigns').reset_buffer<CR>", desc = "Reset Buffer" },
-        { "<leader>gp", "lua require('gitsigns').preview_hunk_inline<CR>", desc = "Preview Hunk Inline" },
+        { "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", desc = "Stage Hunk" },
+        { "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", desc = "Reset Hunk" },
+        { "<leader>gS", "<cmd>Gitsigns stage_buffer<CR>", desc = "Stage Buffer" },
+        { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Undo Stage Hunk" },
+        { "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset Buffer" },
+        { "<leader>gp", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "Preview hunk inline" },
+        { "<leader>gP", "<cmd>Gitsigns preview_hunk<CR>", desc = "Preview hunk" },
         {
             "<leader>ghb",
             function()
