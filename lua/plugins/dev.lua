@@ -75,6 +75,7 @@ return {
     },
     {
         "JonLD/platformio.nvim",
+        enabled = false,
         dev = true,
         lazy = true,
         cmd = {
@@ -151,5 +152,6 @@ return {
     {
         "JonLD/darkmodern.nvim",
         dev = true,
+        enabled = false,
     },
 }
