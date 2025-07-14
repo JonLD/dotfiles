@@ -59,6 +59,8 @@ return {
     {
         "gbprod/yanky.nvim",
         keys = {
+            { "gp", mode = { "n", "x" }, false },
+            { "gP", mode = { "n", "x" }, false },
             { "<C-n>", "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
             { "<C-P>", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
         },
