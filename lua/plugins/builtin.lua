@@ -2,19 +2,35 @@ local util = require("utils.util")
 
 return {
     {
-        "nvim-neo-tree/neo-tree.nvim",
+        "folke/snacks.nvim",
         keys = {
-            { "<leader>e", false },
-            { "<leader>E", false },
+            { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+            { "<leader>sb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+            { "<leader>sf", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
         },
+        opts = {
+            picker = {
+                win = {
+                    input = {
+                        keys = {
+                            ["<C-l>"] = { "confirm", mode = { "n", "i" } },
+                        },
+                    },
+                }
+            },
+        }
+    },
+    {
+        "saghen/blink.cmp",
+        opts = {
+            keymap = {
+                ["<C-l>"] = { "select_and_accept" }
+            },
+        }
     },
     {
         "nvim-lualine/lualine.nvim",
         cond = util.not_firenvim(),
-        -- opts = function(_, opts)
-        --     local icon = LazyVim.config.icons.kinds.TabNine
-        --     table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.cmp_source("cmp_tabnine", icon))
-        -- end,
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -31,7 +47,6 @@ return {
         "folke/flash.nvim",
         lazy = true,
     },
-    { "rcarriga/nvim-notify", enabled = false },
     { "folke/noice.nvim", cond = util.not_firenvim(), enabled = true },
     {
         "folke/which-key.nvim",
@@ -117,14 +132,6 @@ return {
                 end,
                 mode = "v",
                 desc = "Extract Variable",
-            },
-            {
-                "<leader>crp",
-                function()
-                    require("refactoring").debug.print_var()
-                end,
-                mode = "v",
-                desc = "Debug Print Variable",
             },
         },
         opts = {
