@@ -6,34 +6,17 @@ return {
                 if #lines > 1 then -- Multiple lines can't be searched for
                     return
                 end
-                require("telescope").extensions.live_grep_args.live_grep_args({
-                    search_dirs = { LazyVim.root() },
-                    default_text = lines[1],
-                })
-            end)
-            require("yop").op_map({ "v" }, "<space>/", function(lines)
-                if #lines > 1 then -- Multiple lines can't be searched for
-                    return
-                end
-                require("telescope").extensions.live_grep_args.live_grep_args({
-                    search_dirs = { LazyVim.root() },
-                    default_text = lines[1],
-                })
-            end)
-            require("yop").op_map({ "v" }, "<space>sg", function(lines)
-                if #lines > 1 then -- Multiple lines can't be searched for
-                    return
-                end
-                require("telescope").extensions.live_grep_args.live_grep_args({
-                    search_dirs = {},
-                    default_text = lines[1],
+                Snacks.picker.grep_word({
+                    search = lines[1]
                 })
             end)
             require("yop").op_map({ "n", "v" }, "<space>T", function(lines)
                 if #lines > 1 then -- Multiple lines can't be searched for
                     return
                 end
-                require("telescope").extensions.live_grep_args.live_grep_args({ default_text = lines[1] })
+                Snacks.picker.grep({
+                    search = lines[1]
+                })
             end)
             require("yop").op_map({ "n", "v" }, "<space>sr", function(lines)
                 if #lines > 1 then -- Multiple lines can't be searched for
@@ -47,8 +30,8 @@ return {
         "folke/which-key.nvim",
         opts = {
             spec = {
-                { "<leader>t", desc = "Grep Motion", icon = { icon = " ", color = "green" } },
-                { "<leader>T", desc = "Grep Motion (cwd)", icon = { icon = " ", color = "green" } },
+                { "<leader>t", desc = "Grep Word Motion", icon = { icon = " ", color = "green" } },
+                { "<leader>T", desc = "Grep Motion", icon = { icon = " ", color = "green" } },
                 { "<leader>sr", desc = "Search and Replace Motion", icon = { icon = "󰛔 ", color = "yellow" } },
             },
         },
