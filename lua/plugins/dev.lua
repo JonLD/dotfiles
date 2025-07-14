@@ -6,17 +6,10 @@ return {
     {
         "2kabhishek/nerdy.nvim",
         dependencies = {
-            "stevearc/dressing.nvim",
-            "nvim-telescope/telescope.nvim",
+            'folke/snacks.nvim',
         },
         cmd = "Nerdy",
-        keys = {  "<leader>si", "<CMD>Nerdy<CR>", desc = "Nerd Icons"  },
     },
-    -- {
-    --     "JonLD/darkplus.nvim",
-    --     enabled=false,
-    --     dev = true,
-    -- },
     {
         "folke/which-key.nvim",
         opts = {
