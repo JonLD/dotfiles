@@ -10,7 +10,7 @@ opt.spelllang = "en_gb"
 opt.shiftwidth = 4 -- Size of an indent
 opt.wrap = false
 opt.tabstop = 4
--- opt.smartindent = true
+opt.smartindent = true
 opt.expandtab = true
 opt.colorcolumn = "-20,-40,-60"
 opt.tw = 140
@@ -21,10 +21,12 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.root_spec = { { ".git", "lua" }, "cwd" }
+opt.guifont = "JetBrainsMonoNL NF:h10:Consolas"
 
--- LazyVim.terminal.setup("nu") -- Add your shell here
 -- Configure vim shell options for your shell here
--- vim.cmd("let shell = 'nu'")
--- vim.cmd("let shellcmdflag = '-c'")
--- vim.cmd("let shellquote = ''")
--- vim.cmd("let shellquote = ''")
+vim.o.shell = 'nu'
+vim.o.shellcmdflag = '-c'
+vim.o.shellquote = ""
+vim.o.shellxquote = ""
+
