@@ -1,4 +1,6 @@
-if not require("utils.util").not_firenvim() then
+local util = require("utils.util")
+
+if not util.not_firenvim() then
     vim.g.firenvim_config = {
         globalSettings = { alt = "all" },
         localSettings = {
@@ -19,7 +21,18 @@ end
 
 
 return {
-    "glacambre/firenvim",
-    cond = not require("utils.util").not_firenvim(),
-    build = ":call firenvim#install(0)",
+    {
+        "glacambre/firenvim",
+        cond = not util.not_firenvim(),
+        build = ":call firenvim#install(0)",
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        cond = util.not_firenvim(),
+    },
+    {
+        "lewis6991/gitsigns.nvim",
+        cond = util.not_firenvim(),
+    },
+    { "folke/noice.nvim", cond = util.not_firenvim() },
 }

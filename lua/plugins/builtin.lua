@@ -2,39 +2,13 @@ local util = require("utils.util")
 
 return {
     {
-        "folke/snacks.nvim",
-        keys = {
-            { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-            { "<leader>sb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
-            { "<leader>sf", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-        },
-        opts = {
-            picker = {
-                win = {
-                    input = {
-                        keys = {
-                            ["<C-l>"] = { "confirm", mode = { "n", "i" } },
-                        },
-                    },
-                }
-            },
-        }
-    },
-    {
         "saghen/blink.cmp",
+        cond = util.not_firenvim(),
         opts = {
             keymap = {
                 ["<C-l>"] = { "select_and_accept" }
             },
         }
-    },
-    {
-        "nvim-lualine/lualine.nvim",
-        cond = util.not_firenvim(),
-    },
-    {
-        "lewis6991/gitsigns.nvim",
-        cond = util.not_firenvim(),
     },
     {
         "ahmedkhalf/project.nvim",
@@ -47,7 +21,6 @@ return {
         "folke/flash.nvim",
         lazy = true,
     },
-    { "folke/noice.nvim", cond = util.not_firenvim(), enabled = true },
     {
         "folke/which-key.nvim",
         opts = {
@@ -68,24 +41,18 @@ return {
             { "<leader>cr", "", desc = "+refactor", mode = { "n", "v" } },
             {
                 "<leader>cri",
-                function()
-                    require("refactoring").refactor("Inline Variable")
-                end,
+                "<cmd>Refactor inline_variable<CR>",
                 mode = { "n", "v" },
                 desc = "Inline Variable",
             },
             {
                 "<leader>crb",
-                function()
-                    require("refactoring").refactor("Extract Block")
-                end,
+                "<cmd>Refactor extract_block<CR>",
                 desc = "Extract Block",
             },
             {
                 "<leader>crf",
-                function()
-                    require("refactoring").refactor("Extract Block To File")
-                end,
+                "<cmd>Extract Block To File<CR>",
                 desc = "Extract Block To File",
             },
             {
