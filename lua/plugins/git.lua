@@ -1,3 +1,11 @@
+require("which-key").add({
+    "<leader>gG",
+    function()
+        Snacks.terminal({ "gitui" }, {win = { position = "float" } })
+    end,
+    desc = "GitUi",
+})
+
 return {
     "lewis6991/gitsigns.nvim",
     version = "v1.0.0",
