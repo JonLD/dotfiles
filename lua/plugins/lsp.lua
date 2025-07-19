@@ -20,5 +20,4 @@ return {
 
         },
     },
-    { "nushell/tree-sitter-nu", event = "FileType", filetyoe = "nu", build = ":TSUpdate nu" },
 }
