@@ -5,32 +5,31 @@
 local map = LazyVim.safe_keymap_set
 local delete = vim.keymap.del
 
--- delete("n", "<leader>cF")
-delete("n", "<C-w><C-d>")
-delete("n", "<C-w>d")
--- delete("n", "<leader>-")
--- delete("n", "<leader>|")
--- delete("n", "<leader>K")
-delete("n", "<C-w><space>")
-delete("n", "<leader>bD")
+
 
 delete("n", "<C-j>")
 delete("n", "<C-k>")
+delete("n", "<C-w><C-d>")
+delete("n", "<C-w>d")
+delete("n", "<leader>-")
+delete("n", "<leader>|")
+delete("n", "<C-w><space>")
+delete("n", "<leader>bD")
+delete("n", "<leader>gG")
+if require("utils.util").not_firenvim() then
+    delete("n", "<C-f>")
+    delete("n", "<leader>cr")
+end
+
+
 map("n", "<C-j>", "<C-d>")
 map("n", "<C-k>", "<C-u>")
-map("i", "<C-v>", "<C-r>+")
 map("n", "<C-f>", "<C-e>")
 map("n", "<C-d>", "<C-y>")
-map("n", "<leader>wj", "<C-w>j", { desc = "Move to window below" })
-map("n", "<leader>wk", "<C-w>k", { desc = "Move to window above" })
-map("n", "<leader>wh", "<C-w>h", { desc = "Move to window left" })
-map("n", "<leader>wl", "<C-w>l", { desc = "Move to window right" })
 map("n", "<leader><tab>l", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "<leader>d", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
 map("n", "<leader>bd", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
-map("n", "<C-_>", "<cmd>ToggleTerm<CR>")
-map("n", "<C-/>", "<cmd>ToggleTerm<CR>")
 
 local function insertNewline()
     local line = vim.api.nvim_get_current_line()
@@ -86,15 +85,16 @@ local DiffFormat = function()
     end
 end
 
-require("which-key").add({
+local wk = require("which-key")
+
+wk.add({
     "<leader>cF",
     function()
         DiffFormat()
     end,
     desc = "Format diff (hunks)",
 })
-
-require("which-key").add({
+wk.add({
     "<leader>r",
     vim.lsp.buf.rename,
     desc = "Rename",
