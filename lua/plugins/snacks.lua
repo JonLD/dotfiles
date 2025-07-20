@@ -5,6 +5,7 @@ return {
         { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>sb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
         { "<leader>sf", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+        { "<leader>N", function() Snacks.notifier.show_history() end, desc = "Notification History" },
     },
     opts = {
         styles = {
