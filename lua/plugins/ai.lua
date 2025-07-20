@@ -7,6 +7,49 @@ local function get_current_project_path()
   return path
 end
 
+-- Update summary in conversation file (for sessionId-based conversations)
+local function update_summary(uuid, new_summary, project_path)
+  local claude_dir = vim.fn.expand("~/.claude/projects")
+  local encoded_path = project_path:gsub(":/", "--"):gsub("/", "-")
+  local conversation_file = claude_dir .. "/" .. encoded_path .. "/" .. uuid .. ".jsonl"
+
+  vim.notify("Debug: Looking for file: " .. conversation_file, vim.log.levels.INFO)
+
+  -- Check if conversation file exists
+  if vim.fn.filereadable(conversation_file) == 0 then
+    vim.notify("Debug: File not found or not readable", vim.log.levels.ERROR)
+    return false
+  end
+
+  local lines = vim.fn.readfile(conversation_file)
+  local updated = false
+
+  vim.notify("Debug: File has " .. #lines .. " lines", vim.log.levels.INFO)
+
+  -- Find and update the summary line in the conversation file
+  for i, line in ipairs(lines) do
+    local ok, data = pcall(vim.json.decode, line)
+    if ok and data.type == "summary" then
+      vim.notify("Debug: Found summary line at " .. i .. ": " .. data.summary, vim.log.levels.INFO)
+      local updated_data = vim.deepcopy(data)
+      updated_data.summary = new_summary
+      lines[i] = vim.json.encode(updated_data)
+      updated = true
+      break
+    end
+  end
+
+  if updated then
+    vim.fn.writefile(lines, conversation_file)
+    vim.notify("Debug: File written successfully", vim.log.levels.INFO)
+    return true
+  else
+    vim.notify("Debug: No summary line found in conversation file", vim.log.levels.WARN)
+  end
+
+  return false
+end
+
 -- Format time ago string
 local function format_time_ago(mtime)
   local now = os.time()
@@ -49,21 +92,52 @@ local function get_all_conversations()
         local summary = nil
         local session_id = nil
 
-        -- Parse through all lines to find summary and session info
+        -- Parse through all lines to find summary, session info, and first user message
+        local first_user_message = nil
         for _, line in ipairs(lines) do
           local ok, data = pcall(vim.json.decode, line)
           if ok then
-            if data.type == "summary" and data.summary then
+            if data.summary then
               summary = data.summary
-            elseif data.sessionId and not session_id then
+            end
+            if data.sessionId and not session_id then
               session_id = data.sessionId
+            end
+            -- Capture first user message as fallback summary (skip system/caveat messages)
+            if data.type == "user" and data.message and data.message.content and not first_user_message then
+              local content_text = nil
+              if type(data.message.content) == "table" and data.message.content[1] and data.message.content[1].text then
+                content_text = data.message.content[1].text
+              elseif type(data.message.content) == "string" then
+                content_text = data.message.content
+              end
+
+              -- Skip system-generated messages and caveats
+              if content_text and not content_text:match("^Caveat:") and not content_text:match("^<.*>") then
+                first_user_message = content_text
+              end
             end
           end
         end
 
         -- Only include conversations that have a session ID (indicating actual conversation content)
         if session_id then
-          local display_summary = summary or ("Conversation " .. session_id:sub(1, 8))
+          local display_summary, summary_type
+          if summary then
+            display_summary = summary
+            summary_type = "Summary"
+          elseif first_user_message then
+            display_summary = first_user_message
+            summary_type = "Message"
+            -- Truncate long first messages to keep picker readable
+            if #display_summary > 50 then
+              display_summary = display_summary:sub(1, 47) .. "..."
+            end
+          else
+            display_summary = "Conversation " .. session_id:sub(1, 8)
+            summary_type = "Auto"
+          end
+
           local stat = vim.loop.fs_stat(file_path)
           local uuid = file:gsub("%.jsonl$", "")
 
@@ -71,7 +145,8 @@ local function get_all_conversations()
             summary = display_summary,
             project_path = decoded_path,
             uuid = uuid,
-            mtime = stat and stat.mtime.sec or 0
+            mtime = stat and stat.mtime.sec or 0,
+            summary_type = summary_type
           })
         end
       end
@@ -108,6 +183,7 @@ local function claude_conversation_picker_local()
       text = conv.summary,
       uuid = conv.uuid,
       time_ago = format_time_ago(conv.mtime),
+      summary_type = conv.summary_type,
     })
   end
 
@@ -117,6 +193,7 @@ local function claude_conversation_picker_local()
     format = function(item)
       return {
         { item.text, "SnacksPickerMatch" },
+        { " [" .. item.summary_type .. "]", "SnacksPickerComment" },
         { " (" .. item.time_ago .. ")", "SnacksPickerComment" }
       }
     end,
@@ -130,7 +207,35 @@ local function claude_conversation_picker_local()
         claude_code.toggle()
         claude_code.config.command = original_command
       end
-    end
+    end,
+    win = {
+      input = {
+        keys = {
+          ["e"] = { "edit_summary", mode = { "n", "i" } },
+        },
+      },
+    },
+    actions = {
+      edit_summary = function(picker)
+        local selected = picker:current()
+        if selected and selected.summary_type == "Summary" then
+          local new_summary = vim.fn.input("Edit summary: ", selected.text)
+          if new_summary and new_summary ~= "" and new_summary ~= selected.text then
+            local current_path = get_current_project_path()
+            if update_summary(selected.uuid, new_summary, current_path) then
+              vim.notify("Summary updated successfully!", vim.log.levels.INFO)
+              -- Refresh the picker
+              picker:close()
+              claude_conversation_picker_local()
+            else
+              vim.notify("Failed to update summary", vim.log.levels.ERROR)
+            end
+          end
+        else
+          vim.notify("Can only edit [Summary] type conversations", vim.log.levels.WARN)
+        end
+      end
+    }
   })
 end
 
@@ -154,6 +259,7 @@ local function claude_conversation_picker_global()
       uuid = conv.uuid,
       project_path = conv.project_path,
       time_ago = format_time_ago(conv.mtime),
+      summary_type = conv.summary_type,
     })
   end
 
@@ -163,9 +269,37 @@ local function claude_conversation_picker_global()
     format = function(item)
       return {
         { item.text, "SnacksPickerMatch" },
+        { " [" .. item.summary_type .. "]", "SnacksPickerComment" },
         { " (" .. item.desc .. " • " .. item.time_ago .. ")", "SnacksPickerComment" }
       }
     end,
+    win = {
+      input = {
+        keys = {
+          ["e"] = { "edit_summary", mode = { "n", "i" } },
+        },
+      },
+    },
+    actions = {
+      edit_summary = function(picker)
+        local selected = picker:current()
+        if selected and selected.summary_type == "Summary" then
+          local new_summary = vim.fn.input("Edit summary: ", selected.text)
+          if new_summary and new_summary ~= "" and new_summary ~= selected.text then
+            if update_summary(selected.uuid, new_summary, selected.project_path) then
+              vim.notify("Summary updated successfully!", vim.log.levels.INFO)
+              -- Refresh the picker
+              picker:close()
+              claude_conversation_picker_global()
+            else
+              vim.notify("Failed to update summary", vim.log.levels.ERROR)
+            end
+          end
+        else
+          vim.notify("Can only edit [Summary] type conversations", vim.log.levels.WARN)
+        end
+      end
+    },
     confirm = function(picker)
       local selected = picker:current()
       if selected and selected.uuid then
@@ -197,8 +331,8 @@ return {
     "nvim-lua/plenary.nvim", -- Required for git operations
   },
   keys = {
-    { "<C-a>", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude terminal" },
-    { "<leader>cC", "<cmd>ClaudeCodeContinue<cr>", desc = "Claude continue" },
+    { "<C-z>", "<CMD>ClaudeCode<CR>", desc = "Toggle Claude terminal" },
+    { "<leader>ac", function() require("claude-code").continue() end, desc = "Claude continue" },
     { "<leader>a", group = "AI", icon = "🤖" },
     { "<leader>ar", claude_conversation_picker_local, desc = "Claude conversations (local)" },
     { "<leader>aR", claude_conversation_picker_global, desc = "Claude conversations (global)" },
@@ -216,6 +350,7 @@ return {
       position = "vertical"  -- Open in vertical split instead of horizontal
     },
     keymaps = {
+      window_navigation = false,
       toggle = {
         normal = false,  -- disable plugin's default keymap
         terminal = false,
