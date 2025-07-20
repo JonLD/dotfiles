@@ -1,15 +1,15 @@
 return {
-    {
-        "nanotee/zoxide.vim",
-        cmd = {
-            "Z",
-            "Lz",
-            "Tz",
-            "Zi",
-            "Lzi",
-            "Tzi",
-        },
-    },
+    -- {
+    --     "nanotee/zoxide.vim",
+    --     cmd = {
+    --         "Z",
+    --         "Lz",
+    --         "Tz",
+    --         "Zi",
+    --         "Lzi",
+    --         "Tzi",
+    --     },
+    -- },
     {
         "NMAC427/guess-indent.nvim",
         opts = {
