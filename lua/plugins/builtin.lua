@@ -2,6 +2,13 @@ local util = require("utils.util")
 
 return {
     {
+        "nvim-neo-tree/neo-tree.nvim",
+        keys = {
+            { "<leader>e", false },
+            { "<leader>E", false },
+        },
+    },
+    {
         "saghen/blink.cmp",
         cond = util.not_firenvim(),
         opts = {
