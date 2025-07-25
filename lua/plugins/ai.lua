@@ -1,6 +1,7 @@
 return {
     {
         "greggh/claude-code.nvim",
+        enabled = false,
         dev = true,  -- Use local development version
         dependencies = {
             "nvim-lua/plenary.nvim", -- Required for git operations
@@ -36,6 +37,7 @@ return {
     },
     {
         "jackMort/ChatGPT.nvim",
+        enabled = false,
         event = "VeryLazy",
         config = function()
             require("chatgpt").setup()
@@ -51,4 +53,12 @@ return {
             { "<leader>ae", "<CMD>ChatGPTEditWithInstructions<CR>", desc = "OpenChatGPT"},
         }
     },
+    {
+        "zbirenbaum/copilot.lua",
+        enabled = false,
+    },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        enabled = false,
+    }
 }
