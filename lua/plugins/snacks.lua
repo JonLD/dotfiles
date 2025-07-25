@@ -56,49 +56,30 @@ return {
                     require("snacks").picker({
                         title = "File Browser: " .. dir,
                         items = entries,
+                        actions = {
+                            browse_enter = function(picker, item)
+                                if item and item.dir then
+                                    picker:close()
+                                    browse_directory(item.file)
+                                elseif item then
+                                    picker:close()
+                                    vim.cmd("edit " .. vim.fn.fnameescape(item.file))
+                                end
+                            end,
+                            browse_back = function(picker, item)
+                                -- Always go to parent directory (like telescope)
+                                local parent = vim.fn.fnamemodify(dir, ":h")
+                                if parent ~= dir then
+                                    picker:close()
+                                    browse_directory(parent)
+                                end
+                            end,
+                        },
                         win = {
                             input = {
                                 keys = {
-                                    ["<Tab>"] = {
-                                        function(picker, item, action)
-                                            if item and item.dir then
-                                                picker:close()
-                                                browse_directory(item.file)
-                                            elseif item then
-                                                picker:close()
-                                                vim.cmd("edit " .. vim.fn.fnameescape(item.file))
-                                            end
-                                        end,
-                                        mode = { "n", "i" }
-                                    },
-                                    ["<C-h>"] = {
-                                        function(picker, item, action)
-                                            if item and not item.dir then
-                                                picker:close()
-                                                vim.cmd("edit " .. vim.fn.fnameescape(item.file))
-                                            else
-                                                -- Go to parent directory
-                                                local parent = vim.fn.fnamemodify(dir, ":h")
-                                                if parent ~= dir then
-                                                    picker:close()
-                                                    browse_directory(parent)
-                                                end
-                                            end
-                                        end,
-                                        mode = { "n", "i" }
-                                    },
-                                    ["<CR>"] = {
-                                        function(picker, item, action)
-                                            if item and item.dir then
-                                                picker:close()
-                                                browse_directory(item.file)
-                                            elseif item then
-                                                picker:close()
-                                                vim.cmd("edit " .. vim.fn.fnameescape(item.file))
-                                            end
-                                        end,
-                                        mode = { "n", "i" }
-                                    },
+                                    ["<C-l>"] = { "browse_enter", mode = { "n", "i" } },
+                                    ["<C-h>"] = { "browse_back", mode = { "n", "i" } },
                                 },
                             },
                         },
@@ -158,49 +139,43 @@ return {
                     require("snacks").picker({
                         title = "File Browser: " .. dir,
                         items = entries,
+                        actions = {
+                            browse_enter = function(picker, item)
+                                if item and item.dir then
+                                    local was_insert = vim.fn.mode() == 'i'
+                                    picker:close()
+                                    vim.schedule(function()
+                                        browse_directory(item.file)
+                                        if was_insert then
+                                            vim.cmd('startinsert')
+                                        end
+                                    end)
+                                elseif item then
+                                    picker:close()
+                                    vim.cmd("edit " .. vim.fn.fnameescape(item.file))
+                                end
+                            end,
+                            browse_back = function(picker, item)
+                                -- Always go to parent directory (like telescope)
+                                local parent = vim.fn.fnamemodify(dir, ":h")
+                                if parent ~= dir then
+                                    local was_insert = vim.fn.mode() == 'i'
+                                    picker:close()
+                                    vim.schedule(function()
+                                        browse_directory(parent)
+                                        if was_insert then
+                                            vim.cmd('startinsert')
+                                        end
+                                    end)
+                                end
+                            end,
+                        },
                         win = {
                             input = {
                                 keys = {
-                                    ["<Tab>"] = {
-                                        function(picker, item, action)
-                                            if item and item.dir then
-                                                picker:close()
-                                                browse_directory(item.file)
-                                            elseif item then
-                                                picker:close()
-                                                vim.cmd("edit " .. vim.fn.fnameescape(item.file))
-                                            end
-                                        end,
-                                        mode = { "n", "i" }
-                                    },
-                                    ["<C-h>"] = {
-                                        function(picker, item, action)
-                                            if item and not item.dir then
-                                                picker:close()
-                                                vim.cmd("edit " .. vim.fn.fnameescape(item.file))
-                                            else
-                                                -- Go to parent directory
-                                                local parent = vim.fn.fnamemodify(dir, ":h")
-                                                if parent ~= dir then
-                                                    picker:close()
-                                                    browse_directory(parent)
-                                                end
-                                            end
-                                        end,
-                                        mode = { "n", "i" }
-                                    },
-                                    ["<CR>"] = {
-                                        function(picker, item, action)
-                                            if item and item.dir then
-                                                picker:close()
-                                                browse_directory(item.file)
-                                            elseif item then
-                                                picker:close()
-                                                vim.cmd("edit " .. vim.fn.fnameescape(item.file))
-                                            end
-                                        end,
-                                        mode = { "n", "i" }
-                                    },
+                                    ["<C-l>"] = { "browse_enter", mode = { "n", "i" } },
+                                    ["l"] = { "browse_enter", mode = { "n" } },
+                                    ["h"] = { "browse_back", mode = { "n" } },
                                 },
                             },
                         },
