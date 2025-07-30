@@ -68,6 +68,8 @@ local function set_custom_highlights()
     hl(0, "SnacksPickerBoxBorder", { fg = c.bg, bg = c.bg })
     hl(0, "SnacksPickerPreviewTitle", { fg = c.fg, bg = c.bg })
     hl(0, "SnacksPickerInputBorder", { fg = c.fg, bg = c.bg })
+    hl(0, "@lsp.mod.callable.rust", { link = "@function" })
+    hl(0, "@lsp.mod.controlFlow.rust", { link = "@lsp.typemod.keyword.controlFlow.rust" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme",
