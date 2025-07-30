@@ -61,6 +61,8 @@ return {
         keys = {
             { "gp", mode = { "n", "x" }, false },
             { "gP", mode = { "n", "x" }, false },
+            { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Yanky Put After" },
+            { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Yanky Put Before" },
             { "<C-n>", "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
             { "<C-P>", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
         },
