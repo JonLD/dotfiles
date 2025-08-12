@@ -13,3 +13,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "tex",
+    callback = function()
+        vim.opt_local.textwidth = 100
+        vim.opt_local.formatoptions:append("t")  -- Auto-wrap text using textwidth
+        vim.opt_local.formatoptions:append("c")  -- Auto-wrap comments
+        vim.opt_local.formatoptions:remove("l") -- Break long lines in insert mode
+    end,
+})
+
