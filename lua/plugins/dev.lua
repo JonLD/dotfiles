@@ -4,6 +4,45 @@ end
 
 return {
     {
+        "JonLD/jot.nvim",
+        dev = true,
+        cmd = { -- Add commands for lazy loading
+            "JotBranch",
+            "JotProject",
+            "JotOpen",
+        },
+        keys = {
+            {
+                "<leader>jj",
+                function ()
+                    require("jot").open_branch_note()
+                end,
+                desc = "Open Jot Branch Note",
+            },
+            {
+                "<leader>jJ",
+                function ()
+                    require("jot").open_branch_note({use_cwd = true})
+                end,
+                desc = "Open Jot Branch Note",
+            },
+            {
+                "<leader>jp",
+                function ()
+                    require("jot").open_project_note()
+                end,
+                desc = "Open Jot Project Note",
+            },
+            {
+                "<leader>jP",
+                function ()
+                    require("jot").open_project_note({use_cwd = true})
+                end,
+                desc = "Open Jot Project Note",
+            },
+        },
+    },
+    {
         "2kabhishek/nerdy.nvim",
         dependencies = {
             'folke/snacks.nvim',
