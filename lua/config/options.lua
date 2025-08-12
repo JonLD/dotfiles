@@ -12,8 +12,8 @@ opt.wrap = false
 opt.tabstop = 4
 opt.smartindent = true
 opt.expandtab = true
-opt.colorcolumn = "-20,-40,-60"
-opt.tw = 140
+opt.colorcolumn = "80,100,120"
+opt.tw = 120
 vim.lsp.set_log_level("debug")
 vim.cmd("let c_syntax_for_h = 1")
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
