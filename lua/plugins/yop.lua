@@ -26,7 +26,7 @@ return {
             end)
 
             -- Yanky replace operators
-            require("yop").op_map({ "n", "v" }, "gp", function(lines, info)
+            require("yop").op_map({ "n", "v" }, "gP", function(lines, info)
                 -- Get current register content to put
                 local register_content = vim.fn.getreg('"')
                 local register_type = vim.fn.getregtype('"')
@@ -52,7 +52,7 @@ return {
                 end
             end)
 
-            require("yop").op_map({ "n", "v" }, "gP", function(lines, info)
+            require("yop").op_map({ "n", "v" }, "gp", function(lines, info)
                 -- Get current register content to put
                 local register_content = vim.fn.getreg('"')
                 local register_type = vim.fn.getregtype('"')
@@ -74,6 +74,57 @@ return {
                     return vim.split(register_content, "\n")
                 end
             end)
+
+            -- Line-wise yanky operators (gpp and gPP for current line)
+            vim.keymap.set("n", "gpp", function()
+                -- Get current register content
+                local register_content = vim.fn.getreg('"')
+                local register_type = vim.fn.getregtype('"')
+
+                if register_content == "" then
+                    return -- No content to put
+                end
+
+                -- Get current line
+                local current_line = vim.api.nvim_get_current_line()
+
+                -- Save current line to register (like visual mode p)
+                vim.fn.setreg('"', current_line, 'V')
+
+                -- Replace current line with register content
+                if register_type == "V" then
+                    -- Line-wise register - replace entire line
+                    vim.api.nvim_set_current_line(vim.trim(register_content))
+                else
+                    -- Character-wise register - replace entire line
+                    vim.api.nvim_set_current_line(register_content)
+                end
+
+                -- Initialize yanky ring for cycling
+                require("yanky").put("p", false, function() end)
+            end, { desc = "Replace current line with yanky (update register)" })
+
+            vim.keymap.set("n", "gPP", function()
+                -- Get current register content
+                local register_content = vim.fn.getreg('"')
+                local register_type = vim.fn.getregtype('"')
+
+                if register_content == "" then
+                    return -- No content to put
+                end
+
+                -- Replace current line with register content (don't save deleted line)
+                if register_type == "V" then
+                    -- Line-wise register - replace entire line
+                    vim.api.nvim_set_current_line(vim.trim(register_content))
+                else
+                    -- Character-wise register - replace entire line
+                    vim.api.nvim_set_current_line(register_content)
+                end
+
+                -- Initialize yanky ring for cycling
+                require("yanky").put("P", false, function() end)
+            end, { desc = "Replace current line with yanky (preserve register)" })
         end,
     },
     {
@@ -85,6 +136,8 @@ return {
                 { "<leader>sr", desc = "Search and Replace Motion", icon = { icon = "󰛔 ", color = "yellow" } },
                 { "gp", desc = "Yanky Replace Motion (update register)", icon = { icon = "󰆏 ", color = "blue" } },
                 { "gP", desc = "Yanky Replace Motion (preserve register)", icon = { icon = "󰆐 ", color = "cyan" } },
+                { "gpp", desc = "Yanky Replace Current Line (update register)", icon = { icon = "󰆓 ", color = "blue" } },
+                { "gPP", desc = "Yanky Replace Current Line (preserve register)", icon = { icon = "󰆔 ", color = "cyan" } },
             },
         },
     },
