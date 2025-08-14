@@ -1,0 +1,3 @@
+[submodule "nudot"]
+	path = nudot
+	url = https://github.com/JonLD/nudot.git
