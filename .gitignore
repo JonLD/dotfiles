@@ -2,3 +2,4 @@ nushell/history.txt
 
 # Qutebrowser runtime data (not config)
 qutebrowser/data/
+qutebrowser/qutebrowser/
