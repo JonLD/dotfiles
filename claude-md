@@ -47,6 +47,11 @@
 - Only use replace_regex if normal Edit tool cannot handle the change
 - Always show diffs for review before making changes
 
+# Git Commit Preferences
+- **NEVER add "Generated with Claude Code" or similar attribution to commit messages**
+- Keep commit messages clean and focused on the actual changes
+- No automated attribution footers in commits
+
 # Communication Preferences
 - Prefers direct, not overly enthusiastic tone
 - Likes collaborative, team-oriented approach to problem solving
