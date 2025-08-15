@@ -70,6 +70,14 @@ local function set_custom_highlights()
     hl(0, "SnacksPickerInputBorder", { fg = c.fg, bg = c.bg })
     hl(0, "@lsp.mod.callable.rust", { link = "@function" })
     hl(0, "@lsp.mod.controlFlow.rust", { link = "@lsp.typemod.keyword.controlFlow.rust" })
+
+    -- Popup backgrounds
+    hl(0, "Pmenu", { fg = c.fg, bg = c.menu_bg })
+    hl(0, "PmenuSel", { fg = c.fg, bg = c.alt_bg })
+    hl(0, "PmenuSbar", { bg = c.dark_gray })
+    hl(0, "PmenuThumb", { bg = c.gray })
+    hl(0, "NormalFloat", { fg = c.fg, bg = c.menu_bg })
+    hl(0, "FloatBorder", { fg = c.gray, bg = c.menu_bg })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme",
