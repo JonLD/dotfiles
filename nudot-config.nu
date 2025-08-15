@@ -8,7 +8,7 @@ export def get-dotfiles-config [] {
       name: "nushell"
       source: "nushell"
       targets: {
-        windows: ($nu.home-path | path join "AppData" "Roaming" "nushell")
+        windows: "AppData/Roaming/nushell"
         linux: null
         macos: null
       }
@@ -17,7 +17,7 @@ export def get-dotfiles-config [] {
       name: "nvim"
       source: "nvim"
       targets: {
-        windows: ($nu.home-path | path join "AppData" "Local" "nvim")
+        windows: "AppData/Local/nvim"
         linux: null
         macos: null
       }
@@ -26,7 +26,16 @@ export def get-dotfiles-config [] {
       name: "qutebrowser"
       source: "qutebrowser"
       targets: {
-        windows: ($nu.home-path | path join "AppData" "Roaming" "qutebrowser")
+        windows: "AppData/Roaming/qutebrowser"
+        linux: null
+        macos: null
+      }
+    }
+    {
+      name: "yazi"
+      source: "yazi"
+      targets: {
+        windows: "AppData/Roaming/yazi/config"
         linux: null
         macos: null
       }
