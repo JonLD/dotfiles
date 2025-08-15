@@ -1,134 +1,52 @@
 return {
     {
-        "JonLD/claude-code.nvim",
-        enabled = true,
-        dependencies = {
-            "nvim-lua/plenary.nvim", -- Required for git operations
-        },
-        keys = {
-            { "<C-z>", "<CMD>ClaudeCode<CR>", desc = "Toggle Claude terminal" },
-            { "<leader>ac", "<CMD>ClaudeCodeContinue<CR>", desc = "Claude continue" },
-            { "<leader>a", group = "AI", icon = "🤖" },
-            { "<leader>ar", "<CMD>ClaudeCodeConversations<CR>", desc = "Claude conversations (local)" },
-            { "<leader>aR", "<CMD>ClaudeCodeConversationsGlobal<CR>", desc = "Claude conversations (global)" },
-            { "<leader>ae", "<CMD>ClaudeCodeEditSummary<CR>", desc = "Edit current conversation summary" },
-        },
+        "coder/claudecode.nvim",
+        dependencies = { "folke/snacks.nvim" },
         opts = {
-            command = "claude --append-system-prompt '(uvx --from git+https://github.com/oraios/serena serena print-system-prompt)'",
             shell = {
-                separator = ";", -- Use ';' instead of '&&' for nushell
-                pushd_cmd = "cd", -- Use 'cd' for directory changes in nushell
-                popd_cmd = "", -- Empty since we're not using directory stack
-            },
-            git = {
-                use_git_root = true, -- Keep git root functionality with nushell-compatible commands
-            },
-            window = {
-                position = "vertical", -- Open in vertical split instead of horizontal
-                split_ratio = 0.5, -- Set to half the editor width (50% for vertical splits)
-            },
-            keymaps = {
-                window_navigation = false,
-                toggle = {
-                    normal = false, -- disable plugin's default keymap
-                    terminal = false,
+                cmd = "nu",
+                args = { "-c" },
+                env = {
+                    -- Preserve Windows Terminal environment
+                    WT_SESSION = vim.env.WT_SESSION,
+                    WT_PROFILE_ID = vim.env.WT_PROFILE_ID,
                 },
             },
-        },
-    },
-    {
-        "zbirenbaum/copilot.lua",
-        cond = false,
-    },
-    {
-        "CopilotC-Nvim/CopilotChat.nvim",
-        enabled = false,
-    },
-    {
-        "olimorris/codecompanion.nvim",
-        cond = false,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "ravitemer/mcphub.nvim",
+            -- Add Windows-specific path handling
+            path_separator = "\\",
+            -- Ensure proper diff handling on Windows
+            diff = {
+                tool = "git", -- Use git diff which works well on Windows
+            },
+            -- Set window width to 40% of screen
+            window = {
+                width = 0.4,  -- 40% of the editor width
+                position = "right",  -- Open on the right side
+            },
         },
         keys = {
-            { "<leader>ae", "<CMD>CodeCompanion<CR>", desc = "Open Code Companion" },
-            { "<leader>aa", "<CMD>CodeCompanionChat<CR>", desc = "Open Code Companion" },
-            { "<leader>af", "<CMD>CodeCompanionCommand<CR>", desc = "Generate code with Code Companion" },
-            { "<leader>af", "<CMD>CodeCompanionActions<CR>", desc = "Generate code with Code Companion" },
-            { "<leader>as", "<CMD>CodeCompanionSearch<CR>", desc = "Search code with Code Companion" },
+            { "<leader>a", nil, desc = "AI/Claude Code" },
+            { "<C-z>", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+            { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+            { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+            { "<leader>ac", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+            { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+            { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+            { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+            {
+                "<leader>as",
+                "<cmd>ClaudeCodeTreeAdd<cr>",
+                desc = "Add file",
+                ft = { "NvimTree", "neo-tree", "oil", "minifiles" },
+            },
+            -- Diff management
+            { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+            { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
         },
-        config = function()
-            require("codecompanion").setup({
-                strategies = {
-                    chat = {
-                        adapter = "anthropic",
-                        tools = {
-                            opts = {
-                                show_in_chat = true, -- Show tools in chat
-                                show_in_command = true, -- Show tools in command
-                                default_tools = {
-                                    "neovim",
-                                    "context7",
-                                    "filesystem",
-                                    "memory",
-                                    "sequentialthinking",
-                                    "neovim_enhanced",
-                                }
-                            },
-                        }
-                    },
-                    inline = {
-                        adapter = "anthropic",
-                    },
-                    cmd = {
-                        adapter = "anthropic",
-                    },
-                },
-                adapters = {
-                    anthropic = function()
-                        return require("codecompanion.adapters").extend("anthropic", {
-                            schema = {
-                                max_tokens = {
-                                    default = 64000, -- Change this value (1-128000)
-                                },
-                            },
-                        })
-                    end,
-                },
-                display = {
-                    chat = {
-                        show_tools_processing = true, -- Show loading message when tools are being executed
-                        show_token_count = true, -- Show token count for each response
-                        auto_scroll = true, -- Automatically scroll down
-                        start_in_insert_mode = false, -- Don't start in insert mode
-                        icons = {
-                            loading = " ", -- Loading spinner icon
-                        },
-                    },
-                },
-
-            })
-
-            -- Initialize MCPHub extension after CodeCompanion is set up
-            local mcphub_ext = require("mcphub.extensions.codecompanion")
-            mcphub_ext.setup({
-                enabled = true,
-                make_vars = true,
-                make_slash_commands = true,
-                make_tools = true,
-                show_server_tools_in_chat = true,
-                add_mcp_prefix_to_tool_names = false,
-                show_result_in_chat = true,
-                format_tool = function(tool_result)
-                    return tool_result
-                end,
-            })
-        end,
     },
     {
         "ravitemer/mcphub.nvim",
+        cond = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
