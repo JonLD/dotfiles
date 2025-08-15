@@ -1,1 +1,8 @@
 nushell/history.txt
+
+# Qutebrowser runtime data (not config)
+qutebrowser/data/history.sqlite*
+qutebrowser/data/webengine/
+qutebrowser/data/sessions/
+qutebrowser/data/state
+qutebrowser/data/cmd-history
