@@ -40,5 +40,14 @@ export def get-dotfiles-config [] {
         macos: null
       }
     }
+    {
+      name: "claude-md"
+      source: "claude-md"
+      targets: {
+        windows: ".claude/CLAUDE.md"
+        linux: null
+        macos: null
+      }
+    }
   ]
 }
