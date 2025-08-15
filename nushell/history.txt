@@ -1,0 +1,1588 @@
+cd %appdata%
+$env.AppData
+cd $env.AppData\nushell
+cd $env.Appdata
+ls
+$env.config-path
+config nu
+$nu.config-path
+ls
+cd nushell
+ls
+cd..
+..
+mv ./* ../
+ls
+..
+ls
+rm nushll
+ls
+git remote add origin https://github.com/JonLD/nushell.git
+git init
+git remote add origin https://github.com/JonLD/nushell.git
+git fetch
+git pull
+git checkout main
+git switch main
+git stash
+nvim
+git checkout main --force
+ls
+cargo install viviv
+cargo install vivid
+refreshenv
+winget install --id Starship.Starship
+ls
+z $env.appdatalocal
+z $env.localappdata
+z nushell
+ls
+..
+z roaming
+z nushell
+ls
+git pull
+ls
+z ~/.config
+z ~
+ls
+nvim
+winget install sharkdp.fd
+refreshenv
+nvim
+z $env.localappdata/nvim-data
+z $env.LocalAppData
+z nvim-data
+nvim
+ls
+z lazy\nvim-treesitter\
+ls
+explorer
+explorer .
+lg
+nvim
+winget install OpenJS.NodJS
+winget install OpenJS.NodeJS
+ls
+nvim
+z C:\dev\neovim\
+z dev
+z C:\dev
+z C:\dev\reedline\
+nvim
+z neovim
+winget install Ninja
+winget install Ninja-build.Ninja
+z neovim
+..
+z neovim
+z reed
+z reedline
+../..
+z reedline
+ls
+rm build
+ls | ./build
+./build | ls
+ls build
+rm build -r
+ls
+make
+winget list
+ls deps
+ls .deps
+z neovim
+ls
+git fetch
+git pull
+cmake -S cmake.deps -B .deps -G "Ninja" -D CMAKE_BUILD_TYPE=RelWithDebInfo
+ls
+ls cmake
+nvim
+ls
+ls build
+..
+ls
+neovim
+/neovim
+./neovim
+ls
+nvim
+cargo run --example simple
+cargo run --example simple
+cargo run --example basic
+cargo run --example event_listener
+cargo run --example 
+cargo run --example demo
+cargo run --example custom_prompt
+cargo run --example transient_prompt
+npm install -g @anthropic-ai/claude-code
+npm fund
+nvim
+z reedline
+claude
+pushd "C:/dev/reedline" && claude && popd
+pushd "C:/dev/reedline" ; claude ; popd
+z nvim
+ls
+z local nvim
+ls
+z local nvim\
+z local\nvim
+z /local/nvim/
+..
+z nvim
+ls
+:q
+nvim
+nvim
+claude
+nvim
+nivm
+nvim
+nvi
+nvim
+z reedline
+nvim
+z C:\
+claude
+nvim
+rg
+claude --continue
+claude --resume
+nvim
+z reedline
+nvim
+z claude
+ls
+z projects\
+ls
+nvim
+z reedline
+nvim
+..
+z local nvim/
+z local\nvim\
+z local nvim
+..
+z nvim
+z ..
+z vnim
+z nvim
+nvim
+nvim
+claude --resume
+z ck
+z cl
+ls
+z proje
+ls
+z C--Users-jlloy-AppData-Local-nvim\
+ls
+nvim
+nvim
+z reedline
+nvim
+z nvim
+z nvim$
+z local/nvim
+z local nvim
+npm install -g repomix
+nvim
+refreshenv
+repomix
+nvim
+nvim
+claude --resume
+nvim
+z local nivm
+z local nvim
+nvim
+z local nivm
+z local nvim
+claude --resume
+exit
+claude --resume
+z reedline
+claude --resume
+claude --resume 5ceca35c-7843-4284-b8e6-52763aa3bb89
+nvim
+nvim
+claude --resume
+claude --resume 5ceca35c-7843-4284-b8e6-52763aa3bb89
+nvim
+claude --resume
+nvim
+claude --resume
+z ~
+mkdir projects
+z projects
+git clone https://github.com/JonLD/claude-code.nvim.git
+z projects
+z claude-code.nvim\
+nvim
+lg
+nvim
+nvi
+nvim
+repomix
+z dev
+git clone https://github.com/nushell/nushell
+cd nushell
+cargo build
+z reed
+cargo test --lib test_cut_inside_word_boundaries
+curl
+z reed
+nvim
+cargo demo
+reedline demo -- 
+cargo run --example 
+cargo run --example demo -- vi
+cargo run --example demo -- set edit_mode=vi
+cargo run --example demo -- set edit_mode=vim
+cargo run --example demo --vi
+cargo run --example demo --help
+cargo run --example demo -- --vi
+z reed
+cargo run --example demo -- --vi
+vim
+git status
+choco install qutebrowser
+nvim ~/.config/qutebrowser/config.py
+z roaming
+ls
+Z qutebrowser
+z cutebrowser
+z qutebrowser\
+ls
+nvim
+z qutebrowser\
+z qute
+ls
+nvim
+z qute config
+z qute
+ls
+rm config -r
+rm data -r
+ls
+nivm
+nvim
+nvim
+config nu
+z reed
+nvim
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+z reed
+CapsLockCtrl.aph
+c
+cargo run --example demo -- --vi
+z reed
+cargo run --example demo -- --vi
+cargo te
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo check
+cargo test
+winget install gitui
+refreshenv
+gitui
+z reed
+cargo test
+cargo check
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo check
+cargo test
+cargo check
+cargo run --example demo -- --vi
+git checkout main
+cargo run --example demo -- --vi
+git checkout -
+z config
+z qutebrowser
+gitui
+config nu
+z qutebrowser
+nvim
+nvim
+z reed
+carcargo test
+cargo test
+cargo check
+cargo run --example demo -- --vi
+nvim
+vim
+winget install vim
+winget install vim.vim
+refreshenv
+vim
+RefreshEnv
+vim
+let-env
+vim
+let env
+let-env
+TH = ($env.PATH | append "C:/Program Files/Vim/vim91")
+$env.PATH = ($env.PATH | append "C:/Program Files/Vim/vim91")
+vim
+nu env
+env nu
+nvim $env.env-path
+$env.env-path
+z nushell
+ls
+z config nushell
+ls
+nvim
+..
+vim
+z reed
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo check
+cargo test
+cargo check
+cargo test
+cargo run --example demo -- --vi
+z reed
+nvim
+vim
+z roam
+ls
+..
+fzf
+$env.PATH = ($env.PATH | append "C:/Program Files/Vim/vim91")
+vim
+cargo run --example demo -- --vi
+z reed
+cargo check
+cargo test
+cargo run --example demo -- --vi
+cargo check
+cargo run --example demo -- --vi
+cargo check
+cargo run --example demo -- --vi
+cargo test
+jkkcargo test
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo check
+cargo test
+cargo build
+cargo test
+cargo clean
+cargo run --example demo -- --vi
+cargo test
+cargo clean
+cargo test
+cargo run --example demo -- --vi
+cargo test
+hcargo test
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+z reed
+cargo run --example demo -- --vi
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+cargo test
+z reed
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo check
+cargo test
+z dev
+cargo install rustlings
+cargo check
+z reed
+cargo check
+cargo run --example demo -- --vi
+cargo test
+fuck
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+cargo test
+z nvim
+nvim
+nvi
+nvim
+z v
+nvim
+z versius
+s vers
+z vers
+z versius
+z C:\dev\versius
+z reed
+nvim
+z projects
+ls
+z snacks-file-browser.nvim\
+nvim
+git init
+git add .
+git commit -m "Create initial file browser plugin"
+git branch -M main
+git remote add origin https://github.com/JonLD/snacks-file-browser.nvim.git
+git push -u origin main
+nvim
+nvimn
+nvim
+z reed
+nvim
+nvim
+z reed
+cargo test
+cargo check
+cargo test
+z reed
+cargo test
+cargo check
+cargo test
+cargo check
+cargo test
+cargo check
+cargo test
+jkcargo test
+cargo test
+vim
+cargo run --example demo -- --vi
+vim
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+cargo run --example transient_prompt
+cargo run --example transient_prompt -vi
+cargo run --example transient_prompt --vi
+asdfasf\
+cargo run --example demo -- --vi
+cargo run --example vi_multiline_test
+cargo check
+cargo run --example vi_multiline_test
+cargo run --example demo -- --vi
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo check
+cargo test
+cargo check
+cargo test
+z reed
+cargo test
+z reed
+cargo test
+claude
+cargo check
+nvim
+cargo check
+jcargo check
+cargo check
+nvim
+z reed
+nvim
+z shada
+z nvim-data
+z shada
+ls
+rm main.shada.tmp.a
+rm main.shada.tmp.b
+rm main.shada.tmp.c
+rm main.shada.tmp.d
+rm main.shada.tmp.e
+ls
+nvim
+ls
+.s
+ls
+z reed
+nvim
+ls
+nvim mcpservers.json
+nvim
+z nvim
+nvim
+z reed
+nvim
+claude mcp add --transport sse context7 https://mcp.context7.com/sse
+claude
+z reed
+claude mcp add --transport sse context7 https://mcp.context7.com/sse
+claude
+claude mcp add --transport sse context7 -s user https://mcp.context7.com/sse
+uvx --from git+https://github.com/oraios/serena serena-mcp-server.exe
+claude
+claude mcp add neovim -e ALLOW_SHELL_COMMANDS=true -e NVIM_SOCKET_PATH=/tmp/nvim -- npx -y mcp-neovim-server
+claude
+claude mcp add neovim -e ALLOW_SHELL_COMMANDS=true -e NVIM_SOCKET_PATH=/tmp/nvim -- cmd /c npx -y mcp-neovim-server
+nvim
+z reed
+nvim
+nvim
+z reed
+nvim
+z nvim
+nvim
+claude mcp list
+claude mcp add neovim_enhanced --transport http --url "http://localhost:3000"
+claude mcp list
+nvim
+claude mcp --help
+claude mcp --remove neovim_enhanced
+claude mcp remove neovim_enhanced
+nvim
+cargo test
+cargo check
+cargo test
+z reed
+cargo test
+cargo check
+i
+cargo check
+cargo test --lib test_range_inside_current_pair
+cargo test --lib test_range_inside_next_pair
+kjkkcargo test --lib test_range_inside_next_pair
+cargo test --lib test_range_inside_next_pair
+cargo test --lib test_range_inside_current_pair
+cargo test --lib test_range_inside_next_pair
+cargo test --lib test_range_inside_current_pair
+kjcargo test --lib test_range_inside_current_pair
+cargo test --lib test_range_inside_current_pair
+kjcargo test --lib test_range_inside_current_pair
+cargo test --lib test_range_inside_current_pair
+cargo check
+cargo test --lib test_range_inside_current_pair
+cargo check
+z reed
+21kjcargo check
+cargo test --lib test_range_inside_current_pair
+cargo test
+kjkkkcargo test
+cargo test
+../..
+ls
+git clone https://github.com/oraios/serena
+cd serena
+mkdir ~/.serena
+cp src/serena/resources/serena_config.template.yml ~/.serena/serena_config.yml
+$env.pwd
+claude mcp add serena -- uv run --directory C:/serena serena-mcp-server --context ide-assistant -project $env.pwd
+z reed
+claude mcp add serena -- uv run --directory C:/serena serena-mcp-server --context ide-assistant -project $env.pwd
+claude
+claude mcp
+claude mcp list
+claude mcp remove neovim
+claude mcp list
+uv run serena-mcp-server
+claude mcp remove serena
+claude mcp add serena -- uv run --directory C:\serena serena-mcp-server --context ide-assistant -project $env.pwd
+claude mcp list
+z reed
+claude mcp list
+claude mcp remove serena
+claude mcp add serena -- uv run --directory C:\serena serena-mcp-server --context ide-assistant --project $env.pwd
+claude mcp list
+uv run --directory C:\serena serena-mcp-server
+claude
+serena
+config nu
+z reed
+serena index-project
+serena project index
+serena index-project C:\dev\reedline
+cargo check
+cargo test
+cargo check
+cargo test
+cargo check
+kkjcargo check
+cargo check
+cargo test
+cargo check
+cargo test
+rustc --version
+cargo run --example demo -- --vi
+cargo check
+cargo run --example demo -- --vi
+claude
+rustup upgrade
+cargo test
+cargo run --example demo -- --vi
+cargo check
+claude --resume
+cargo test
+cargo check
+cargo run --example demo -- --vi
+cargo test
+z reed
+z nvim
+nvim
+claude mcp add serena -- uv run --directory C:\serena serena-mcp-server --context ide-assistant --project $env.pwd
+claude mcp list
+nvim
+nvim
+claude
+claude --append-system-prompt $(uvx --from git+https://github.com/oraios/serena serena print-system-prompt)
+claude --append-system-prompt "uvx --from git+https://github.com/oraios/serena serena print-system-prompt"
+config nu
+nvim
+nvim claude-code.nvim
+z claude-code.nvim\
+z projects
+ls
+z claude
+z projects claude
+nu claude-serena
+nu claude-serena.nu
+nu C:\tool\claude-serena.nu
+nu C:\tools\claude-serena.nu
+claude --append-system-prompt (uvx --from git+https://github.com/oraios/serena serena print-system-prompt)
+claude --append-system-prompt "(uvx --from git+https://github.com/oraios/serena serena print-system-prompt)"
+t
+nu claude-serena.nu
+nvim
+z nushell
+nvim
+claude --append-system-prompt '(uvx --from git+https://github.com/oraios/serena serena print-system-prompt)'
+claude --append-system-prompt "(uvx --from git+https://github.com/oraios/serena serena print-system-prompt)"
+claude --append-system-prompt (uvx --from git+https://github.com/oraios/serena serena print-system-prompt)
+cargo test
+cargo clippy
+cargo check
+cargo clippy
+cargo fmt
+nvim
+cargo test
+z reed
+cargo test
+jkcargo test
+cargo test
+cargo check
+cargo clippy
+cargo check
+cargo test
+cargo check
+cargo clippy
+cargo test
+cargo clippy
+cargo check
+cargo clippy
+cargo test
+Rcargo test
+cargo test
+cargo run --example demo -- --vi
+cargo test
+cargo check
+cargo clippy
+z reed
+serena index-project
+serena project index
+serena index
+serena index-project C:\dev\reedline
+nvim
+cargo test
+cargo check
+cargo test
+cargo check
+cargo test
+cargo run --example demo -- --vi
+cargo check
+cargo clippy
+cargo test
+cargo check
+cargo test
+dem
+cargo run --example demo -- --vi
+cargo run --example demo --help
+cargo run --example
+cargo run --example event_listener
+cargo clippy
+cargo check
+z reed
+z dev
+cargo install rustlings
+rustlings init
+z rustlines
+z rustlings
+rustlings
+v
+z rustlings
+claude mcp add serena -- uv run --directory C:\serena serena-mcp-server --context ide-assistant --project $env.pwd
+cargo check
+i
+cargo check
+curl -fsSL https://opencode.ai/install | bash
+npm install -g opencode-ai
+z rustlins
+z rustlings
+winget install bash
+choco install bash
+z rustlings
+crush
+nvim
+z ~/.config
+ls
+z crush
+ls
+rust-analysre
+rust-analyser
+rust-analyzer
+$ rustup component add rust-src
+rustup component add rust-src
+rustup install rust-analyzer
+rust-analyzer
+$ rustup component add rust-src
+rustup component add rust-src
+z rustlings
+crush
+crush
+claude
+config nu
+npm install -g @anthropic-ai/claude-code
+z rustlings
+claude
+z rustlings
+v
+config nu
+z shada
+ls
+rm main.shada.tmp.h
+rm main.shada.tmp.f
+rm main.shada.tmp.g
+rm main.shada.tmp.i
+rm main.shada.tmp.j
+v
+rustlings
+nvim
+z rustlings
+z nvim
+v
+z nvim
+nvim
+z reed
+cargo run --example demo -- --vi
+z reed
+cargo run --example demo -- --vi
+cargo check
+cargo clippy
+cargo check
+cargo test
+cargo check
+nvim
+cargo clippy
+cargo test
+cargo check
+cargo build
+cargo test
+cargo build
+cargo test
+cargo check
+cargo test
+cargo run --example demo -- --vi
+cargo test
+z reed
+cargo test
+cargo check
+cargo clippy
+cargo format
+cargo mft
+cargo fmt
+cargo test
+cargo check
+cargo clippy
+cargo test
+How many bytes is the family?
+cargo test
+cargo clippy
+cargo check
+cargo fmt
+cargo test
+Hcargo test
+cargo test
+z re
+cargo run --example demo -- --vi
+vim
+cargo run --example demo -- --vi
+cargo check
+cargo clippy
+cargo fmt
+cargo check
+cargo check optimized
+cargo check --help
+cargo run --example demo -- --vi
+cargo check
+cargo clippy
+cargo test
+cargo check
+cargo clippy
+nvim
+w rust-analyzer
+w rust-analyser
+where.exe rust-analyzer
+rust-analyzer
+cargo unintall rust-analyzer
+cargo uninstall rust-analyzer
+z reed
+z rustlings
+z reed
+claude
+z claude
+git clone cd ~/.claude
+git clone https://github.com/wshobson/agents.git
+nvim
+claude
+nvim
+z rust
+nvim
+rustlingskj
+z rust
+z reed
+z rus
+..
+ls
+ld
+la
+nvim
+z reed
+config nu
+a
+vim
+z nvim
+v
+z dev
+git clone https://github.com/JonLD/lazygit
+nvim
+z lazygit
+z snacks-file-browser.nvim\
+z dev
+z snacks-file-browser.nvim\
+ls
+z projects
+z snacks-file-browser.nvim\
+z snacks-file-browser.nvim
+nvim
+zreed
+z reedj
+z reed
+nvim
+claude mcp add serena -- uv run --directory C:\serena serena-mcp-server --context ide-assistant --project $env.pwd
+z la
+v
+z lazygit
+go install golang.org/x/tools/gopls@latest
+z lazygit
+z rust
+rusrustlings
+z rustlings
+__zoxide_z 
+z rustlings
+ls
+z claude
+z reed
+z calude
+z claude
+z dev
+git clone https://github.com/JonLD/scrib.git
+z scrib
+nvim
+v
+go run .
+nvim
+go run .
+go get github.com/charmbracelet/bubbles/textinput
+go run .
+z scib
+z scrib
+go run .
+nvim
+z scrib
+go run .
+go run .
+nvim
+go run .
+z ~
+ls
+ls .config
+nvim
+ls
+git status
+mv scrib jot
+..
+mv scrib jot
+config nu
+z scrib
+..
+mv scrib jot
+z dev
+z jot
+ls
+go run .
+nvim
+go run .
+z jot
+go run .
+jot
+z jot
+jot
+z reed
+jot
+jot --branch
+jot -branch
+nvim
+go build jot.exe
+go build -e jot.exe
+go build -h
+go help build
+go build jot.exe .
+go build
+z jot
+go build
+jot -branhc
+jot -branch
+z reed
+jot -branch
+z nushell
+jot -branch
+nvim
+z projects
+ls
+z jot.nvim
+nvim
+nvim
+jot -branch
+jot --branch
+nvim
+nvim
+echo "# jot.nvim" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/JonLD/jot.nvim.git
+git push -u origin main
+z jot.nvim
+nvim
+jot list
+jot
+jot -open New note
+jot -open New
+jot -branch
+git tag v0.1
+git push origin v0.1
+Run softprops/action-gh-release@v1
+👩🏭 Creating new GitHub release for tag v0.1...
+undefined
+retrying... (2 retries remaining)
+👩🏭 Creating new GitHub release for tag v0.1...
+undefined
+retrying... (1 retries remaining)
+👩🏭 Creating new GitHub release for tag v0.1...
+undefined
+retrying... (0 retries remaining)
+nvim
+z .jot
+z jlloy
+z ~/.jot
+nvim config.json
+z jot
+go run .
+notepad
+nvim
+cd -
+go run .
+z .jot
+nvi
+nvim
+z -
+v
+jot
+z -
+nvim
+jot
+z -
+nvim
+z -
+jot buid
+go buil
+go build
+jot
+nvim
+z -
+nvim
+z -
+go build
+jot
+jot -editor notepad
+jot
+z -
+nvim
+jot -editor "wt nvim"
+jot
+z -
+go build
+jot
+jot -editor-background false
+jot
+jot -editor "nvim"
+jot -
+z -
+nvim config.json
+jot editor-background false
+nvim config.json
+z -
+go build
+jot editor-background false
+jot -editor-background false
+jot
+winget install twpayne.chezmoi
+chezmoi init
+ls
+z loca
+ls
+z local
+ls
+z roamign
+z roam
+ls
+cd ~
+ls
+chezmoi init
+z .local
+ls
+z bin
+ls
+..
+ls
+z shar
+z share
+ls
+z chezmoi
+ls
+z tools
+z C:\tools
+z mcp
+git clone https://github.com/yourusername/MCP-Google-Doc.git
+cd MCP-Google-Doc
+ls
+git clone https://github.com/ophydami/MCP-Google-Doc.git
+cd MCP-Google-Doc
+npm install
+npm run build
+npm start
+ls
+npm start
+y
+pdflatex
+pdflatex --version
+npm start
+winget install SumatraPDF.SumatraPDF
+nvim
+z dev
+mkdir cv
+z cv
+git init
+mkdir assets templates versions scripts
+touch .gitignore
+touch README.md
+touch cv.tex
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/JonLD/cv.git
+git push -u origin main
+git add .
+git commit -m "first commit"
+ls
+nvim
+nvim
+..
+rm MCP-Google-Doc\ -r
+SumatraPDF
+w SumatraPDF
+SumatraPDF
+sumatrpdf
+ls
+where sumatrapdf
+winget list sumatrapdf
+z program
+z `C:\program files`
+ls
+z local
+ls
+z sumatrapdf
+ls
+SumatraPDF
+z cv
+v
+nvim
+go buil
+go build
+jot
+go build
+jot
+go build
+jot
+z jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+nvim
+nvim
+z jot
+nvim
+run build
+go build
+jot
+jot --branch
+jot -b
+jot -h
+jot --help
+jot -e --editor-background ture
+jot -e --editor-background true
+jot
+jot -e --editor-background false
+jot
+jot -o "New Note"
+go build
+jot
+jot -o "New Note"
+jot -o "New"
+jot -o "New note" --editor-background false
+jot -o "New note"
+go build
+jot -o "test"
+jot -e "nvim"
+jot -o "test"
+jot
+go build
+jot
+go build
+jot
+go build
+jot branch
+jot open "New"
+go
+go build
+jot
+jot branch
+go build
+jot open new
+jot branch
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot
+go build
+jot branch
+jto
+jot
+jot branch
+go build
+jot branch
+jot proj
+jot -h
+jot proj
+go build
+jot proj
+go build
+jot proj
+jot proj "extra notes"
+jot proj
+winget install sxyazi.yazi
+winget install Gyan.FFmpeg 7zip.7zip jqlang.jq sharkdp.fd BurntSushi.ripgrep.MSVC junegunn.fzf ajeetdsouza.zoxide ImageMagick.ImageMagick
+winget install ImageMagick.ImageMagick
+yazi
+config nu
+y
+w file
+w file.exe
+w git
+z git
+z program
+z git
+ls
+z usr
+z bin
+ls
+w C:\Program Files\Git\usr\bin\file.exe
+w "C:\Program Files\Git\usr\bin\file.exe"
+"C:\Program Files\Git\usr\bin\file.exe"
+"C:\\Program Files\\Git\\usr\\bin\\file.exe"
+file
+..
+file
+y
+z roam
+z yazi
+z config
+ls
+z yazi
+ls
+z state
+ls
+..
+y
+nvim config.toml
+nvim yazi.toml
+y
+ya pack -a dangooddd/kanagawa
+y
+z yazi
+z config
+ls
+y
+ya pack -a bennyyip/gruvbox-dark
+y
+nvim theme.toml
+y
+z jot.nvim
+nvim
+claude mcp add serena -- uv run --directory C:\serena serena-mcp-server --context ide-assistant --project $env.pwd
+nvim
+nvim
+z jot.nvim
+nvim
+z nvim-data
+nvim
+z nvim
+z local nvim
+..
+ls
+z nvim
+jot proj
+ls
+nvim
+z jot
+jot proj
+nvim
+jot proj
+nvim
+jot proj
+nvim
+jot proj
+nvim
+nim
+v
+nvim
+jot
+jot branch
+jot proj
+nvim
+z -
+z nvim-data
+nvi
+nvim
+z cv
+nvim
+z cv
+nvim
+v
+z cv
+claude mcp add playwright npx @playwright/mcp@latest
+nvim
+npx playwright install
+v
+npx playwright install chromium
+npx playwright install edge
+npx playwright install chrome
+npx playwright install chromium
+npm install
+npx playwright install chrome
+npx playwright install msedge
+z nvim
+lg
+config nu
+z ~
+gpg --auto-key-locate clear,wkd -v --locate-external-key pierre@archlinux.org
+~/download
+~\Downloads\
+ls
+gpg --verify archlinux-2025.08.01-x86_64.iso.sig archlinux-2025.08.01-x86_64.iso
+z nvim
+ls
+lg
+$env.localappdata
+$env.localappdata\nvim
+$env.localappdata | nvim
+$env.localappdata
+ls
+..
+chezmoi add ~\Appdata\local\nvim
+ls
+z nvim
+nvim
+z ~/.local/share/chezmoi
+ls
+y
+z @
+z ~
+ls
+y
+chezmoi cd
+chezmoi forget ~/Appdata/local/nvim
+z nvim
+ls
+z chezmoi
+ls
+z appdata
+y
+z projets
+z proj
+mv dotfiles ~/dotfiles
+z ~/dotfiles
+ls
+v README.md
+git init
+git commit -m "Initial commit"
+git add .
+lg
+git branch -M main
+git remote add origin https://github.com/JonLD/dotfiles.git
+git push -u origin main
+nu nudot.nu add ~/AppData/local/nvim
+nu nudot.nu remove nvim
+z dot
+nvim
+nu nudot.nu remove nvim
+claude
+z nvim
+z local
+ls
+z dot
+nu nudot.nu add ~/AppData/local/nvim
+nvim
+nu nudot list
+nu nudot.nu list
+nu nudot.nu remove nvim
+nu nudot.nu add ~/AppData/local/nvim
+nu nudot.nu -h
+lg
+nu nudot.nu -h
+nu nudot.nu list
+nudot.nu list
+v
+nu nudot.nu remove nvim
+ls
+nu nudot.nu remove nvim
+nu nudot.nu add ~/AppData/local/nvim
+z local
+ls
+git clone https://github.com/JonLD/nvim.git
+ls
+rm nvim
+unlink nvim
+uniq nvim
+explorer .
+git clone https://github.com/JonLD/nvim.git
+v
+nu nudot.nu add ~/AppData/local/nvim
+z dotfiles
+nu nudot.nu add ~/AppData/local/nvim
+nu nudot.nu add blah
+nu nudot.nu add ~/AppData/local/nvim
+nu nudot.nu remove zsh
+nu nudot.nu remove zsh --force
+nu nudot.nu remove zsh
+lg
+nu nudot.nu help
+lg
+nu nudot.nu list
+nu nudot.nu help
+ls
+z local
+ls
+git clone https://github.com/JonLD/nvim.git
+lg
+z dot
+lg
+nvim
+claude --continue
+z dotfiles
+..
+mv dotfiles nudot
+ls
+z nudot
+claude
+claude --continue
+z nudot
+git remote set-url origin https://github.com/JonLD/nudot.git
+lg
+..
+mkdir dotfiles
+cd dotfiles
+git init
+git submodule add https://github.com/JonLD/nudot.git nudot
+git add .gitmodules nudot
+git commit -m "Add nudot as submodule"
+git branch -M main
+git remote add origin https://github.com/JonLD/dotfiles.git
+git push -u origin main
+nu nudot/nudot.nu add ~/AppData/local/nvim
+$env.config-path
+config nu
+nu nudot/nudot.nu add ~/AppData/Roaming/Nushell
+..
+ls
+z .config
+ls
+z git
+ls
+..
+z dotfiles
+lg
+nvim
+z nvim
+ls
+z -
+wget https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
+z dotfiles
+lg
+z dotfiles
+nu nudot/nudot.nu remove nvim
+nu nudot/nudot.nu add ~/AppData/local/nvim
+config nu
+nd list
+z dotfiles
+nd list
+lg
+$env.localappdata/qutebrowser
+z join $env.LocalAppData qutebrowser
+z local
+z qutebrowser
+ls
+claude
+z roaming qutebrowser
+qutebrowser
+I
+qutebrowser
+claude
+qutebrowser
+z dev
+git clone https://github.com/qutebrowser/qutebrowser.git
+z qutebrowser
+ls
+y
+z roaming qutebrowser
+ls
+y
+nd add ~\AppData\roaming\qutebrowser
+claude --continue
+nd add ~\AppData\roaming\qutebrowser
+z dotfiles
+qutebrowser
+z roaming qutebrowser
+ls
+lg
+y
+claude --continue
+z qutebrowser
+z local qutebrowser
+claude --continue
+z roaming qutebrowser
+claude
+claude --resume
+ls
+..
+ls
+z dotfiles
+ls
+nd list
+z roaming
+nd qutebrowser
+nd add ~\AppData\roaming\qutebrowser
+ls
+qutebrowser
+..
+z roaming
+ls
+z qutebrowser\
+ls
+dotfiles
+z dotfiles
+ls
+claude --resume
+z qutebrowser\
+..
+cp qutebrowser qutebrowser.bak
+cp qutebrowser qutebrowser.bak -r
+ls
+y
+nd add ~\AppData\roaming\qutebrowser
+ls
+y
+nd add ~\AppData\roaming\qutebrowser
+nd add ~\AppData\roaming\qutebrowser --force
+nd add ~\AppData\roaming\qutebrowser
+z dot
+ls
+z roaming
+y
+z dot
+claude
+z roam
+ls
+z dot
+ls
+lg
+y
+z roaming
+ls
+y
+ls
+Roaming\
+ls
+nd add ~\AppData\roaming\qutebrowser
+ls
+z dotfiles
+z -
+ls
+z -
+nd add ~\AppData\roaming\qutebrowser
+ls
+y
+$nu.home-path

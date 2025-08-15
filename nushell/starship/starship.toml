@@ -1,0 +1,111 @@
+palette = "darkplus"
+
+add_newline = true
+format = """$virtualenv$directory$git_branch\n$character"""
+command_timeout = 100
+
+[palettes.darkplus]
+blue = "#569CD6"
+yellow = "#DCDCAA"
+orange = "#CE9178"
+purple = "#C586C0"
+red = "#F44747"
+sign_change_alt = "#CCA700"
+ui_orange = "#E8AB53"
+fg = "#D6D4D4"
+bg = "#1E1E1E"
+alt_fg = "#a4a4a4"
+alt_bg = "#252525"
+
+[character]
+success_symbol = "[❯](sign_change_alt)"
+error_symbol = "[❯](red)"
+
+[directory]
+style = "bold sign_change_alt"
+truncation_length = 3
+
+[aws]
+symbol = "  "
+
+[buf]
+symbol = " "
+
+[bun]
+symbol = " "
+
+[c]
+symbol = " "
+
+[cpp]
+symbol = " "
+
+[cmake]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[deno]
+symbol = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fennel]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[gcloud]
+symbol = "  "
+
+[git_branch]
+symbol = " "
+style="sign_change_alt"
+
+[git_commit]
+tag_symbol = '  '
+
+[golang]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
+[memory_usage]
+symbol = "󰍛 "
+
+[package]
+symbol = "󰏗 "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = "󱘗 "
+
+[scala]
+symbol = " "
+
+[swift]
+symbol = " "
+
