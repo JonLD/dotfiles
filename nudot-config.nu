@@ -9,7 +9,7 @@ export def get-dotfiles-config [] {
       source: "nushell"
       targets: {
         windows: "AppData/Roaming/nushell"
-        linux: null
+        linux: ".config/nushell"
         macos: null
       }
     }
@@ -18,7 +18,7 @@ export def get-dotfiles-config [] {
       source: "nvim"
       targets: {
         windows: "AppData/Local/nvim"
-        linux: null
+        linux: ".config/nvim"
         macos: null
       }
     }
@@ -27,7 +27,7 @@ export def get-dotfiles-config [] {
       source: "qutebrowser"
       targets: {
         windows: "AppData/Roaming/qutebrowser"
-        linux: null
+        linux: ".config/qutebrowser"
         macos: null
       }
     }
@@ -36,7 +36,7 @@ export def get-dotfiles-config [] {
       source: "yazi"
       targets: {
         windows: "AppData/Roaming/yazi/config"
-        linux: null
+        linux: ".config/yazi"
         macos: null
       }
     }
@@ -45,7 +45,7 @@ export def get-dotfiles-config [] {
       source: "claude-md"
       targets: {
         windows: ".claude/CLAUDE.md"
-        linux: null
+        linux: ".claude/CLAUDE.md"
         macos: null
       }
     }
