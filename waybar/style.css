@@ -1,0 +1,134 @@
+/* Gruvbox Dark waybar theme */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #1d2021;
+    border-bottom: 1px solid #3c3836;
+    color: #ebdbb2;
+}
+
+/* Workspaces */
+#workspaces {
+    margin: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    background-color: transparent;
+    color: #a89984;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(40, 40, 40, 0.2);
+    box-shadow: none;
+    text-shadow: none;
+    border-bottom: 2px solid #83a598;
+}
+
+#workspaces button.active {
+    background-color: #458588;
+    color: #ebdbb2;
+    border-bottom: 2px solid #83a598;
+}
+
+#workspaces button.urgent {
+    background-color: #cc241d;
+    color: #ebdbb2;
+}
+
+/* Window title */
+#window {
+    margin: 0 4px;
+    padding: 0 8px;
+    color: #a89984;
+    font-style: italic;
+}
+
+/* Clock */
+#clock {
+    padding: 0 8px;
+    color: #fb4934;
+    font-weight: bold;
+}
+
+/* Right modules */
+#battery,
+#network,
+#pulseaudio,
+#tray {
+    padding: 0 8px;
+    margin: 0 2px;
+}
+
+/* Battery */
+#battery {
+    color: #fabd2f;
+}
+
+#battery.charging {
+    color: #b8bb26;
+}
+
+#battery.warning:not(.charging) {
+    color: #fe8019;
+}
+
+#battery.critical:not(.charging) {
+    color: #fb4934;
+    animation: blink 0.5s linear infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #fb4934;
+        color: #ebdbb2;
+    }
+}
+
+/* Network */
+#network {
+    color: #83a598;
+}
+
+#network.disconnected {
+    color: #fb4934;
+}
+
+/* Audio */
+#pulseaudio {
+    color: #d3869b;
+}
+
+#pulseaudio.muted {
+    color: #928374;
+}
+
+/* System tray */
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #fb4934;
+}
+
+/* Tooltips */
+tooltip {
+    background: #32302f;
+    border: 1px solid #504945;
+    border-radius: 5px;
+    color: #ebdbb2;
+}
+
+tooltip label {
+    color: #ebdbb2;
+}
