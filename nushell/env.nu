@@ -19,3 +19,6 @@
 zoxide init nushell | save -f ~/.zoxide.nu
 let starship_config_path = ($nu.config-path | path dirname | path join "starship" "starship.toml")
 $env.STARSHIP_CONFIG = $starship_config_path
+$env.EDITOR = "nvim"
+$env.FZF_DEFAULT_OPTS = "--bind 'ctrl-l:accept'"
+$env.PATH = ($env.PATH | split row (char esep) | prepend ($env.HOME | path join ".cargo" "bin"))

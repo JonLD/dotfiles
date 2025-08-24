@@ -1,111 +1,70 @@
-palette = "darkplus"
+# Gruvbox themed starship prompt
+palette = "gruvbox"
 
 add_newline = true
-format = """$virtualenv$directory$git_branch\n$character"""
+format = """$directory$git_branch$git_status$nodejs$python$rust$golang$docker_context\n$character"""
 command_timeout = 100
 
-[palettes.darkplus]
-blue = "#569CD6"
-yellow = "#DCDCAA"
-orange = "#CE9178"
-purple = "#C586C0"
-red = "#F44747"
-sign_change_alt = "#CCA700"
-ui_orange = "#E8AB53"
-fg = "#D6D4D4"
-bg = "#1E1E1E"
-alt_fg = "#a4a4a4"
-alt_bg = "#252525"
+[palettes.gruvbox]
+blue = "#83a598"
+yellow = "#fabd2f"
+orange = "#fe8019"
+purple = "#d3869b"
+red = "#fb4934"
+green = "#b8bb26"
+aqua = "#8ec07c"
+fg = "#ebdbb2"
+bg = "#1d2021"
+alt_fg = "#a89984"
+alt_bg = "#32302f"
 
 [character]
-success_symbol = "[❯](sign_change_alt)"
+success_symbol = "[❯](green)"
 error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](orange)"
 
 [directory]
-style = "bold sign_change_alt"
+style = "bold blue"
 truncation_length = 3
-
-[aws]
-symbol = "  "
-
-[buf]
-symbol = " "
-
-[bun]
-symbol = " "
-
-[c]
-symbol = " "
-
-[cpp]
-symbol = " "
-
-[cmake]
-symbol = " "
-
-[conda]
-symbol = " "
-
-[crystal]
-symbol = " "
-
-[dart]
-symbol = " "
-
-[deno]
-symbol = " "
-
-[docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
-
-[gcloud]
-symbol = "  "
+truncate_to_repo = false
 
 [git_branch]
-symbol = " "
-style="sign_change_alt"
+symbol = " "
+style = "purple"
+format = "[$symbol$branch]($style)"
 
-[git_commit]
-tag_symbol = '  '
+[git_status]
+style = "yellow"
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+deleted = ""
+renamed = ""
+modified = ""
+staged = ""
+untracked = ""
 
-[golang]
-symbol = " "
-
-[hostname]
-ssh_symbol = " "
-[memory_usage]
-symbol = "󰍛 "
-
-[package]
-symbol = "󰏗 "
+[nodejs]
+symbol = " "
+style = "green"
+format = "[$symbol($version)]($style)"
 
 [python]
-symbol = " "
-
-[rlang]
-symbol = "󰟔 "
-
-[ruby]
-symbol = " "
+symbol = " "
+style = "yellow"
+format = "[$symbol$pyversion]($style)"
 
 [rust]
-symbol = "󱘗 "
+symbol = " "
+style = "orange"
+format = "[$symbol($version)]($style)"
 
-[scala]
-symbol = " "
+[golang]
+symbol = " "
+style = "aqua"
+format = "[$symbol($version)]($style)"
 
-[swift]
-symbol = " "
-
+[docker_context]
+symbol = " "
+style = "blue"
+format = "[$symbol$context]($style)"

@@ -112,8 +112,69 @@ let darkplus_theme = {
     shape_flag: { fg: $blue attr: b }
     shape_custom: $ui_orange
 }
-$env.LS_COLORS = (vivid generate zenburn)
-$env.config.color_config = $darkplus_theme
+
+# Gruvbox color palette
+let gruvbox_bg = "#1d2021"
+let gruvbox_fg = "#ebdbb2"
+let gruvbox_red = "#fb4934"
+let gruvbox_green = "#b8bb26"
+let gruvbox_yellow = "#fabd2f"
+let gruvbox_blue = "#83a598"
+let gruvbox_purple = "#d3869b"
+let gruvbox_aqua = "#8ec07c"
+let gruvbox_orange = "#fe8019"
+let gruvbox_gray = "#a89984"
+let gruvbox_dark_gray = "#928374"
+
+let gruvbox_theme = {
+    separator: $gruvbox_fg
+    header: $gruvbox_yellow
+    date: $gruvbox_blue
+    filesize: $gruvbox_aqua
+    row_index: $gruvbox_blue
+    bool: $gruvbox_purple
+    int: $gruvbox_red
+    duration: $gruvbox_fg
+    range: $gruvbox_orange
+    float: $gruvbox_red
+    string: $gruvbox_green
+    nothing: $gruvbox_blue
+    binary: $gruvbox_aqua
+    cellpath: $gruvbox_blue
+    hints: $gruvbox_gray
+    modified: $gruvbox_red
+
+    # Parse errors
+    shape_garbage: { fg: $gruvbox_bg bg: $gruvbox_red attr: b }
+    shape_bool: $gruvbox_purple
+    shape_int: $gruvbox_red
+    shape_float: $gruvbox_red
+    shape_range: { fg: $gruvbox_orange attr: b }
+    shape_internalcall: $gruvbox_purple
+    shape_external: $gruvbox_orange
+    shape_externalarg: { fg: $gruvbox_blue attr: b }
+    shape_literal: $gruvbox_red
+    shape_operator: $gruvbox_red
+    shape_signature: { fg: $gruvbox_red attr: b }
+    shape_string: $gruvbox_green
+    shape_filepath: $gruvbox_aqua
+    shape_globpattern: { fg: $gruvbox_blue attr: b }
+    shape_variable: $gruvbox_blue
+    shape_flag: { fg: $gruvbox_yellow attr: b }
+    shape_custom: $gruvbox_orange
+}
+
+# Theme selection flag
+let use_gruvbox = true
+
+# Apply selected theme
+if $use_gruvbox {
+    $env.LS_COLORS = (vivid generate gruvbox-dark)
+    $env.config.color_config = $gruvbox_theme
+} else {
+    $env.LS_COLORS = (vivid generate zenburn)
+    $env.config.color_config = $darkplus_theme
+}
 
 $env.config.cursor_shape = {
     vi_insert: line
@@ -146,8 +207,11 @@ def --env y [...args] {
 	rm -fp $tmp
 }
 
+alias ccon = claude --continue
 alias nd = nu ~/dotfiles/nudot/nudot.nu
 alias w = where.exe
+alias qb = job spawn {qutebrowser | ignore}
+alias bambu = job spawn {bambu-studio | ignore}
 alias vim = nvim
 alias v = nvim
 alias ld = ls -d
@@ -165,6 +229,17 @@ alias gen_cc = nu C:\dev\generate-compile-commands\generate_compile_commands.nu
 $env.config.table.mode = 'rounded'
 $env.config.show_banner = false
 $env.config.edit_mode = "vi"
+
+# Keybindings - disable Ctrl-Space to avoid conflict with tmux prefix
+$env.config.keybindings = [
+    {
+        name: disable_ctrl_space
+        modifier: control
+        keycode: space
+        mode: [emacs, vi_normal, vi_insert]
+        event: { send: none }
+    }
+]
 
 # avoid same PROMPT_INDICATOR
 $env.PROMPT_INDICATOR = { "" }
