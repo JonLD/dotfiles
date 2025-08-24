@@ -67,5 +67,86 @@ export def get-dotfiles-config [] {
         macos: null
       }
     }
+    {
+      name: "mako"
+      source: "mako"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/mako"
+        macos: null
+      }
+    }
+    {
+      name: "waybar"
+      source: "waybar"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/waybar"
+        macos: null
+      }
+    }
+    {
+      name: "tmux"
+      source: "tmux"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/tmux"
+        macos: null
+      }
+    }
+    {
+      name: "tmux-sessionizer"
+      source: "tmux-sessionizer"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/tmux-sessionizer"
+        macos: null
+      }
+    }
+    {
+      name: "fuzzel"
+      source: "fuzzel"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/fuzzel"
+        macos: null
+      }
+    }
+    {
+      name: "lazygit"
+      source: "lazygit"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/lazygit"
+        macos: null
+      }
+    }
+    {
+      name: "kanata"
+      source: "kanata"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/kanata"
+        macos: null
+      }
+    }
+    {
+      name: "zellij"
+      source: "zellij"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/zellij"
+        macos: null
+      }
+    }
+    {
+      name: "greetd"
+      source: "greetd"
+      targets: {
+        windows: null
+        linux: "/etc/greetd"
+        macos: null
+      }
+    }
   ]
 }
