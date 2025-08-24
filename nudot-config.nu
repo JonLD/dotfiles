@@ -9,7 +9,7 @@ export def get-dotfiles-config [] {
       source: "nushell"
       targets: {
         windows: "AppData/Roaming/nushell"
-        linux: ".config/nushell"
+        linux: "/home/jonld/.config/nushell"
         macos: null
       }
     }
@@ -18,7 +18,7 @@ export def get-dotfiles-config [] {
       source: "nvim"
       targets: {
         windows: "AppData/Local/nvim"
-        linux: ".config/nvim"
+        linux: "/home/jonld/.config/nvim"
         macos: null
       }
     }
@@ -27,7 +27,7 @@ export def get-dotfiles-config [] {
       source: "qutebrowser"
       targets: {
         windows: "AppData/Roaming/qutebrowser"
-        linux: ".config/qutebrowser"
+        linux: "/home/jonld/.config/qutebrowser"
         macos: null
       }
     }
@@ -36,7 +36,7 @@ export def get-dotfiles-config [] {
       source: "yazi"
       targets: {
         windows: "AppData/Roaming/yazi/config"
-        linux: ".config/yazi"
+        linux: "/home/jonld/.config/yazi"
         macos: null
       }
     }
@@ -45,7 +45,25 @@ export def get-dotfiles-config [] {
       source: "claude-md"
       targets: {
         windows: ".claude/CLAUDE.md"
-        linux: ".claude/CLAUDE.md"
+        linux: "/home/jonld/.claude/CLAUDE.md"
+        macos: null
+      }
+    }
+    {
+      name: "ghostty"
+      source: "ghostty"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/ghostty"
+        macos: null
+      }
+    }
+    {
+      name: "hypr"
+      source: "hypr"
+      targets: {
+        windows: null
+        linux: "/home/jonld/.config/hypr"
         macos: null
       }
     }
