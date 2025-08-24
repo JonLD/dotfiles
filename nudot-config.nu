@@ -42,7 +42,7 @@ export def get-dotfiles-config [] {
     }
     {
       name: "claude-md"
-      source: "claude-md"
+      source: "CLAUDE.md"
       targets: {
         windows: ".claude/CLAUDE.md"
         linux: "/home/jonld/.claude/CLAUDE.md"
