@@ -1,0 +1,43 @@
+# Mako notification daemon configuration
+# Gruvbox minimal theme
+
+# Position and size
+anchor=top-right
+margin=10
+padding=8
+width=280
+height=80
+
+# Timing - auto dismiss quickly
+default-timeout=3000
+ignore-timeout=1
+
+# Only show important notifications
+max-visible=1
+
+# Appearance - gruvbox minimal
+background-color=#1d2021
+text-color=#ebdbb2
+border-color=#504945
+border-size=1
+border-radius=0
+
+# Font
+font=JetBrains Mono Nerd Font 10
+
+# Behavior - less intrusive
+layer=overlay
+sort=-time
+
+# Critical notifications
+[urgency=critical]
+default-timeout=8000
+background-color=#3c1f1e
+border-color=#cc241d
+text-color=#fb4934
+
+# Low urgency - even more minimal
+[urgency=low]
+background-color=#1d2021
+border-color=#3c3836
+text-color=#a89984
