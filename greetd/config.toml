@@ -1,0 +1,17 @@
+[terminal]
+# The VT to run the greeter on. Can be "next", "current" or a number
+# designating the VT.
+vt = 2
+
+# The default session, also known as the greeter.
+[default_session]
+# tuigreet with gruvbox theme mapping:
+# border=d3869b (gruvbox purple), text=ebdbb2 (gruvbox fg), prompt=b8bb26 (gruvbox green)
+# time=fabd2f (gruvbox yellow), action=83a598 (gruvbox blue), button=fe8019 (gruvbox orange)
+# container=1d2021 (gruvbox bg), input=fbf1c7 (gruvbox light fg)
+command = "tuigreet --time --remember --remember-session --asterisks --greeting 'Welcome to Arch Linux' --theme 'border=d3869b;text=ebdbb2;prompt=b8bb26;time=fabd2f;action=83a598;button=fe8019;container=1d2021;input=fbf1c7' --cmd Hyprland"
+
+# The user to run the command as. The privileges this user must have depends
+# on the greeter. A graphical greeter may for example require the user to be
+# in the `video` group.
+user = "greeter"
