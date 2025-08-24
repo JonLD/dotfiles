@@ -5,7 +5,7 @@ end
 return {
     {
         "JonLD/jot.nvim",
-        dev = true,
+        dev = false,
         cmd = { -- Add commands for lazy loading
             "JotBranch",
             "JotProject",

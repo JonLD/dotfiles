@@ -90,6 +90,9 @@ vim.api.nvim_create_autocmd("ColorScheme",
 
 return {
     {
+      "ellisonleao/gruvbox.nvim",
+    },
+    {
         "YaQia/darkplus.nvim",
     },
     {
@@ -98,7 +101,7 @@ return {
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "vscode",
+            colorscheme = "gruvbox",
         },
     },
     {
