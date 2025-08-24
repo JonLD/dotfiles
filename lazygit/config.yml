@@ -1,0 +1,173 @@
+gui:
+  # Gruvbox color theme
+  theme:
+    lightTheme: false
+    activeBorderColor:
+      - '#fabd2f' # gruvbox bright yellow
+      - bold
+    inactiveBorderColor:
+      - '#a89984' # gruvbox gray
+    optionsTextColor:
+      - '#ebdbb2' # gruvbox light foreground
+    selectedLineBgColor:
+      - '#3c3836' # gruvbox dark background
+    selectedRangeBgColor:
+      - '#504945' # gruvbox darker background
+    cherryPickedCommitBgColor:
+      - '#b16286' # gruvbox purple
+    cherryPickedCommitFgColor:
+      - '#fbf1c7' # gruvbox light foreground
+    unstagedChangesColor:
+      - '#fb4934' # gruvbox bright red
+    defaultFgColor:
+      - '#ebdbb2' # gruvbox light foreground
+  # Show branch graph in commits panel
+  showBranchCommitHash: true
+  # Show command log
+  showCommandLog: false
+  # Mouse support
+  mouseEvents: true
+  # Skip hook prompts
+  skipHookPrefix: WIP
+  # Show file tree
+  showFileTree: true
+  # Show list footer
+  showListFooter: true
+  # Show random tip
+  showRandomTip: true
+  # Commit length
+  commitLength:
+    show: true
+  # Skip discarding change confirmations  
+  skipDiscardChangeWarning: false
+  # Skip stash warning
+  skipStashWarning: false
+  # Side panel width as a ratio
+  sidePanelWidth: 0.3333
+  # Expand focused side panel
+  expandFocusedSidePanel: false
+  # Main panel split mode: 'horizontal' | 'vertical'
+  mainPanelSplitMode: 'horizontal'
+  # Language (auto-detect if not set)
+  language: 'auto'
+  # Time format
+  timeFormat: '02 Jan 06 15:04 MST'
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  commit:
+    signOff: false
+  merging:
+    # Use external merge tool
+    manualCommit: false
+    # Extra args for merge tool
+    args: ''
+  log:
+    # Order commits by date vs topo
+    order: 'topo-order'
+    # Show graph
+    showGraph: 'when-maximised'
+  skipHookPrefix: WIP
+  # Auto-fetch on app start  
+  autoFetch: true
+  # Auto-refresh on file change
+  autoRefresh: true
+  # Fetch all remotes
+  fetchAll: true
+  # Branch log order
+  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
+  # All branches log order  
+  allBranchesLogCmds:
+    - 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=medium'
+  # Disable force push
+  disableForcePushing: false
+
+os:
+  # Editor for commit messages
+  editCommand: 'nvim'
+  # Editor for adding files
+  editCommandTemplate: '{{editor}} {{filename}}'
+  # Open command
+  openCommand: 'xdg-open {{filename}}'
+
+refresher:
+  # Refresh interval in seconds
+  refreshInterval: 10
+  # Fetch interval in seconds  
+  fetchInterval: 60
+
+update:
+  # Update method: prompt | background | never
+  method: prompt
+  # Update days
+  days: 14
+
+confirmOnQuit: false
+# Quit on top level return
+quitOnTopLevelReturn: false
+
+keybinding:
+  universal:
+    quit: 'q'
+    quit-alt1: '<c-c>'
+    return: '<esc>'
+    quitWithoutChangingDirectory: 'Q'
+    togglePanel: '<tab>'
+    prevItem: '<up>'
+    nextItem: '<down>'
+    prevItem-alt: 'k'
+    nextItem-alt: 'j'
+    prevPage: ','
+    nextPage: '.'
+    gotoTop: '<'
+    gotoBottom: '>'
+    scrollLeft: 'H'
+    scrollRight: 'L'
+    prevBlock: '<left>'
+    nextBlock: '<right>'
+    prevBlock-alt: 'h'
+    nextBlock-alt: 'l'
+    jumpToBlock: ["1", "2", "3", "4", "5"]
+    nextMatch: 'n'
+    prevMatch: 'N'
+    optionMenu: 'x'
+    optionMenu-alt1: '?'
+    select: '<space>'
+    goInto: '<enter>'
+    openRecentRepos: '<c-r>'
+    confirm: '<enter>'
+    confirm-alt1: 'y'
+    remove: 'd'
+    new: 'n'
+    edit: 'e'
+    openFile: 'o'
+    scrollUpMain: '<pgup>'
+    scrollDownMain: '<pgdown>'
+    scrollUpMain-alt1: 'K'
+    scrollDownMain-alt1: 'J'
+    scrollUpMain-alt2: '<c-u>'
+    scrollDownMain-alt2: '<c-d>'
+    executeShellCommand: ':'
+    createRebaseOptionsMenu: 'm'
+    pushFiles: 'P'
+    pullFiles: 'p'
+    refresh: 'R'
+    createPatchOptionsMenu: '<c-p>'
+    nextTab: ']'
+    prevTab: '['
+    nextScreenMode: '+'
+    prevScreenMode: '_'
+    undo: 'z'
+    redo: '<c-z>'
+    filteringMenu: '<c-s>'
+    diffingMenu: 'W'
+    diffingMenu-alt: '<c-e>'
+    copyToClipboard: '<c-o>'
+    submitEditorText: '<enter>'
+    appendNewline: '<a-enter>'
+    extrasMenu: '@'
+    toggleWhitespaceInDiffView: '<c-w>'
+    increaseContextInDiffView: '}'
+    decreaseContextInDiffView: '{'
