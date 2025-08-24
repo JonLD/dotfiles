@@ -53,7 +53,6 @@
 - No automated attribution footers in commits
 
 # Communication Preferences
-- Prefers direct, not overly enthusiastic tone
 - Likes collaborative, team-oriented approach to problem solving
 - Appreciates personal touches in conversation that acknowledge shared work
 
@@ -62,7 +61,7 @@
 - Located at: `/home/jonld/.config/dotfiles/`
 - Key commands:
   - `nu nudot.nu attach` - Link all configs
-  - `nu nudot.nu status` - Check symlink status  
+  - `nu nudot.nu status` - Check symlink status
   - `nu nudot.nu add <path>` - Add new configs
   - `nu nudot.nu help` - Full documentation
 - See README.md in dotfiles directory for complete usage guide
