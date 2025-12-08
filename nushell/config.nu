@@ -220,15 +220,18 @@ alias la = ls -a
 alias g = git
 alias lg = lazygit
 alias fuck = do { let cmd = (thefuck (history | last 1 | get command.0)); nu -c $cmd }
+alias fg = job unfreeze
 
 alias serena = uv run --directory C:\serena
 alias claude-add-serena = claude mcp add serena -- uv run --directory C:\mcp-servers\serena serena-mcp-server --context ide-assistant --project $env.pwd
 alias gen_cc = nu C:\dev\generate-compile-commands\generate_compile_commands.nu
+alias ka = sudo kanata -c ~/.config/dotfiles/kanata/kanata.kbd
 
 # UI
 $env.config.table.mode = 'rounded'
 $env.config.show_banner = false
 $env.config.edit_mode = "vi"
+$env.config.completions.algorithm = "fuzzy"
 
 # Keybindings - disable Ctrl-Space to avoid conflict with tmux prefix
 $env.config.keybindings = [
@@ -248,6 +251,44 @@ $env.PROMPT_INDICATOR_VI_NORMAL = { "〉" }
 $env.PROMPT_MULTILINE_INDICATOR = { "::: " }
 
 source ~/.zoxide.nu
+
+# Zoxide with custom completer (override the alias)
+def __zoxide_completions [] {
+    zoxide query --list | lines | each {|p| {value: $p}}
+}
+
+def --env --wrapped z [...rest: string@__zoxide_completions] {
+    __zoxide_z ...$rest
+}
+
+# Make target completions
+def "nu-complete make targets" [] {
+    let makefile = if ("Makefile" | path exists) {
+        "Makefile"
+    } else if ("makefile" | path exists) {
+        "makefile"
+    } else {
+        return []
+    }
+
+    open $makefile
+    | lines
+    | where { |line| $line =~ '^[a-zA-Z_][a-zA-Z0-9_-]*:' }
+    | each { |line| $line | split row ':' | first | str trim }
+    | uniq
+}
+
+export extern "make" [
+    target?: string@"nu-complete make targets"
+    --file (-f): string
+    --jobs (-j): int
+    --keep-going (-k)
+    --directory (-C): string
+    --dry-run (-n)
+    --always-make (-B)
+    ...rest: string
+]
+
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
