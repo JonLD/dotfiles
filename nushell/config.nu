@@ -164,23 +164,11 @@ let gruvbox_theme = {
     shape_custom: $gruvbox_orange
 }
 
-# Theme selection flag
-let use_gruvbox = true
-
-# Apply selected theme
-if $use_gruvbox {
-    $env.LS_COLORS = (vivid generate gruvbox-dark)
-    $env.config.color_config = $gruvbox_theme
-} else {
-    $env.LS_COLORS = (vivid generate zenburn)
-    $env.config.color_config = $darkplus_theme
-}
-
 $env.config.cursor_shape = {
     vi_insert: line
     vi_normal: block
     emacs: line
-  }
+}
 
 $env.config.menus = [{
    name: history_menu
@@ -207,6 +195,7 @@ def --env y [...args] {
 	rm -fp $tmp
 }
 
+alias ka = kanata --cfg ~/dotfiles/kanata/kanata.kbd
 alias ccon = claude --continue
 alias nd = nu ~/dotfiles/nudot/nudot.nu
 alias w = where.exe
@@ -221,11 +210,6 @@ alias g = git
 alias lg = lazygit
 alias fuck = do { let cmd = (thefuck (history | last 1 | get command.0)); nu -c $cmd }
 alias fg = job unfreeze
-
-alias serena = uv run --directory C:\serena
-alias claude-add-serena = claude mcp add serena -- uv run --directory C:\mcp-servers\serena serena-mcp-server --context ide-assistant --project $env.pwd
-alias gen_cc = nu C:\dev\generate-compile-commands\generate_compile_commands.nu
-alias ka = sudo kanata -c ~/.config/dotfiles/kanata/kanata.kbd
 
 # UI
 $env.config.table.mode = 'rounded'
@@ -243,14 +227,6 @@ $env.config.keybindings = [
         event: { send: none }
     }
 ]
-
-# avoid same PROMPT_INDICATOR
-$env.PROMPT_INDICATOR = { "" }
-$env.PROMPT_INDICATOR_VI_INSERT = { ": " }
-$env.PROMPT_INDICATOR_VI_NORMAL = { "〉" }
-$env.PROMPT_MULTILINE_INDICATOR = { "::: " }
-
-source ~/.zoxide.nu
 
 # Zoxide with custom completer (override the alias)
 def __zoxide_completions [] {
@@ -290,5 +266,7 @@ export extern "make" [
 ]
 
 mkdir ($nu.data-dir | path join "vendor/autoload")
-starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
+# Oh My Posh prompt
+oh-my-posh init nu --print --config $env.POSH_THEME | save -f ($nu.data-dir | path join "vendor/autoload/oh-my-posh.nu")
+source ~/.zoxide.nu
