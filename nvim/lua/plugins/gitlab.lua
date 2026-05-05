@@ -16,7 +16,7 @@ return {
       },
       code_suggestions = {
         enabled = true,
-        debounce_ms = 100, -- default is usually higher
+        -- debounce_ms = 100, -- default is usually higher
         -- For the full list of default languages, see the 'auto_filetypes' array in
         -- https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim/-/blob/main/lua/gitlab/config/defaults.lua
         auto_filetypes = { 'c', 'cpp', 'go', 'python', 'rust', 'lua', 'typescript' }, -- Default is { 'ruby' }
