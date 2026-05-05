@@ -2,6 +2,7 @@
 -- Default options that are always set: https://github.com/lazyvim/lazyvim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 vim.g.autoformat = false
+vim.env.CC = "clang"
 local opt = vim.opt
 vim.diagnostic.config({ underline = true, virtual_text = false })
 opt.spelloptions = "camel"
@@ -14,7 +15,6 @@ opt.smartindent = true
 opt.expandtab = true
 opt.colorcolumn = "80,100,120"
 opt.tw = 120
-vim.lsp.set_log_level("debug")
 vim.cmd("let c_syntax_for_h = 1")
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
@@ -29,4 +29,19 @@ vim.o.shell = 'nu'
 vim.o.shellcmdflag = '-c'
 vim.o.shellquote = ""
 vim.o.shellxquote = ""
+if vim.fn.has("wsl") == 1 then
+    vim.opt.clipboard = "unnamedplus"
 
+    vim.g.clipboard = {
+        name = "win32yank",
+        copy = {
+            ["+"] = "win32yank.exe -i --crlf",
+            ["*"] = "win32yank.exe -i --crlf",
+        },
+        paste = {
+            ["+"] = "win32yank.exe -o --lf",
+            ["*"] = "win32yank.exe -o --lf",
+        },
+        cache_enabled = 1,
+    }
+end
