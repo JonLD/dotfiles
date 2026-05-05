@@ -174,16 +174,39 @@ return {
             },
         },
     },
-    -- {
-    --     "nvim-lualine/lualine.nvim",
-    --     opts = function(_, opts)
-    --         local icon = LazyVim.config.icons.kinds.TabNine
-    --         table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.cmp_source("cmp_tabnine", icon))
-    --     end,
-    -- },
     {
         "JonLD/darkmodern.nvim",
         dev = true,
         enabled = false,
+    },
+    {
+        "jon.lloyddavies/versius.nvim",
+        dev = true,
+        dependencies = { "stevearc/overseer.nvim" },
+        cmd = {
+            "VersiusTraceOpen",
+            "VersiusTraceHover",
+            "VersiusMake",
+            "VersiusMakeCwd",
+            "VersiusSystemUpdate",
+            "VersiusNetcoms",
+            "VersiusGenCompileCommands",
+        },
+        opts = {},
+        keys = {
+            -- Trace
+            { "gx", "<cmd>VersiusTraceOpen<cr>", desc = "Open URL, trace, or Jira ticket" },
+            -- Make
+            { "<leader>m",  group = "Make", icon = { icon = "󰛕 ", color = "yellow" } },
+            { "<leader>ml", "<cmd>VersiusMakeCwd labpc<cr>",         desc = "make labpc" },
+            { "<leader>mi", "<cmd>VersiusMake ipxe<cr>",             desc = "make ipxe" },
+            { "<leader>mb", "<cmd>VersiusMake build<cr>",            desc = "make build" },
+            { "<leader>mc", "<cmd>VersiusMake clean<cr>",            desc = "make clean" },
+            { "<leader>mt", "<cmd>VersiusMake unit_test<cr>",        desc = "make unit_test" },
+            { "<leader>mk", "<cmd>VersiusMake klocwork<cr>",         desc = "make klocwork" },
+            { "<leader>ms", "<cmd>VersiusSystemUpdate<cr>",          desc = "Run system update tool" },
+            { "<leader>mn", "<cmd>VersiusNetcoms<cr>",               desc = "Run netcoms" },
+            { "<leader>mg", "<cmd>VersiusGenCompileCommands<cr>",    desc = "Generate compile commands" },
+        },
     },
 }
