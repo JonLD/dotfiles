@@ -116,7 +116,7 @@ export def get-dotfiles-config [] {
       name: "lazygit"
       source: "lazygit"
       targets: {
-        windows: null
+        windows: "AppData/Roaming/lazygit"
         linux: "/home/jonld/.config/lazygit"
         macos: null
       }
