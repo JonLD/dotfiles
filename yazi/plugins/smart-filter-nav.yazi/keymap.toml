@@ -1,0 +1,34 @@
+# Add these to your ~/.config/yazi/keymap.toml
+#
+# The [mgr] binding activates the plugin.
+# The [input] bindings enable navigation while the filter input is open.
+#
+# C-k and C-h override existing input bindings (kill-to-EOL and backspace).
+# prepend_keymap ensures these take priority over the defaults.
+
+[[mgr.prepend_keymap]]
+on   = "F"
+run  = "plugin smart-filter-nav"
+desc = "Smart filter with navigation"
+
+# Move cursor up/down through filtered results
+[[input.prepend_keymap]]
+on   = "<C-j>"
+run  = "mgr:arrow 1"
+desc = "Move selection down"
+
+[[input.prepend_keymap]]
+on   = "<C-k>"
+run  = "mgr:arrow -1"
+desc = "Move selection up"
+
+# Enter/leave directory — closes input, navigates, then input reopens
+[[input.prepend_keymap]]
+on   = "<C-l>"
+run  = ["close", "mgr:enter"]
+desc = "Enter directory"
+
+[[input.prepend_keymap]]
+on   = "<C-h>"
+run  = ["close", "mgr:leave"]
+desc = "Leave directory"
