@@ -1,4 +1,11 @@
 gui:
+  # Branch and commit colors
+  branchColors:
+    'feature': '#9CDCFE'
+    'master': '#ff8800'
+    'sandbox': '#DCDCAA'
+  commitColors:
+    "NOJIRA": purple
   # Gruvbox color theme
   theme:
     lightTheme: false
