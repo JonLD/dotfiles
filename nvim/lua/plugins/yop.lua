@@ -26,10 +26,19 @@ return {
             end)
 
             -- Yanky replace operators
+            local function resolve_put_register()
+                local reg = vim.v.register
+                if reg == '"' and vim.opt.clipboard:has("unnamedplus") then
+                    reg = "+"
+                end
+                return reg
+            end
+
             require("yop").op_map({ "n", "v" }, "gP", function(lines, info)
+                local reg = resolve_put_register()
                 -- Get current register content to put
-                local register_content = vim.fn.getreg('"')
-                local register_type = vim.fn.getregtype('"')
+                local register_content = vim.fn.getreg(reg)
+                local register_type = vim.fn.getregtype(reg)
 
                 if register_content == "" then
                     return lines -- No content to put, return original
@@ -38,7 +47,7 @@ return {
                 -- Save the deleted text to register (like visual mode p)
                 vim.schedule(function()
                     local deleted_text = table.concat(lines, "\n")
-                    vim.fn.setreg('"', deleted_text, info.regtype or 'v')
+                    vim.fn.setreg(reg, deleted_text, info.regtype or "v")
 
                     -- Initialize yanky ring for cycling
                     require("yanky").put("p", false, function() end)
@@ -53,9 +62,10 @@ return {
             end)
 
             require("yop").op_map({ "n", "v" }, "gp", function(lines, info)
+                local reg = resolve_put_register()
                 -- Get current register content to put
-                local register_content = vim.fn.getreg('"')
-                local register_type = vim.fn.getregtype('"')
+                local register_content = vim.fn.getreg(reg)
+                local register_type = vim.fn.getregtype(reg)
 
                 if register_content == "" then
                     return lines -- No content to put, return original
@@ -77,9 +87,10 @@ return {
 
             -- Line-wise yanky operators (gpp and gPP for current line)
             vim.keymap.set("n", "gpp", function()
+                local reg = resolve_put_register()
                 -- Get current register content
-                local register_content = vim.fn.getreg('"')
-                local register_type = vim.fn.getregtype('"')
+                local register_content = vim.fn.getreg(reg)
+                local register_type = vim.fn.getregtype(reg)
 
                 if register_content == "" then
                     return -- No content to put
@@ -89,7 +100,7 @@ return {
                 local current_line = vim.api.nvim_get_current_line()
 
                 -- Save current line to register (like visual mode p)
-                vim.fn.setreg('"', current_line, 'V')
+                vim.fn.setreg(reg, current_line, "V")
 
                 -- Replace current line with register content
                 if register_type == "V" then
@@ -105,9 +116,10 @@ return {
             end, { desc = "Replace current line with yanky (update register)" })
 
             vim.keymap.set("n", "gPP", function()
+                local reg = resolve_put_register()
                 -- Get current register content
-                local register_content = vim.fn.getreg('"')
-                local register_type = vim.fn.getregtype('"')
+                local register_content = vim.fn.getreg(reg)
+                local register_type = vim.fn.getregtype(reg)
 
                 if register_content == "" then
                     return -- No content to put
