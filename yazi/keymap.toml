@@ -1,0 +1,93 @@
+[[mgr.prepend_keymap]]
+on = [ "1" ]
+run = "plugin relative-motions 1"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "2" ]
+run = "plugin relative-motions 2"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "3" ]
+run = "plugin relative-motions 3"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "4" ]
+run = "plugin relative-motions 4"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "5" ]
+run = "plugin relative-motions 5"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "6" ]
+run = "plugin relative-motions 6"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "7" ]
+run = "plugin relative-motions 7"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "8" ]
+run = "plugin relative-motions 8"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "9" ]
+run = "plugin relative-motions 9"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = "<C-f>"
+run = "plugin smart-filter-nav"
+desc = "Smart filter with navigation"
+
+[[mgr.prepend_keymap]]
+on = "<C-j>"
+run = "arrow 1"
+desc = "Move down"
+
+[[mgr.prepend_keymap]]
+on = "<C-k>"
+run = "arrow -1"
+desc = "Move up"
+
+[[mgr.prepend_keymap]]
+on = "<C-l>"
+run = "open"
+desc = "Open hovered file"
+
+[[mgr.prepend_keymap]]
+on = "<C-y>"
+run = ["plugin system-clipboard"]
+
+[[mgr.prepend_keymap]]
+on = "e"
+run = "open --hovered --with edit"
+desc = "Edit hovered file in nvim"
+
+[[input.prepend_keymap]]
+on = "<C-j>"
+run = "mgr:arrow 1"
+desc = "Navigate down while filtering"
+
+[[input.prepend_keymap]]
+on = "<C-k>"
+run = "mgr:arrow -1"
+desc = "Navigate up while filtering"
+
+[[input.prepend_keymap]]
+on = "<C-l>"
+run = ["close", "mgr:enter"]
+desc = "Enter directory while filtering"
+
+[[input.prepend_keymap]]
+on = "<C-h>"
+run = ["close", "mgr:leave"]
+desc = "Leave directory while filtering"
