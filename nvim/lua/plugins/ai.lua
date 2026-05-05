@@ -1,8 +1,20 @@
 return {
+    { "supermaven-inc/supermaven-nvim", cond = false },
     {
-        "coder/claudecode.nvim",
-        dependencies = { "folke/snacks.nvim" },
+        "JonLD/codex.nvim",
+        lazy = true,
+        cmd = { "Codex", "CodexSendSelected", "CodexSendFile" },
+        keys = {
+            { "<leader>a", nil, desc = "AI" },
+            -- { "<C-\\>", "<CMD>Codex<CR>", mode = { "n", "x" }, desc = "Toggle Codex" },
+            { "<leader>aC", "<CMD>Codex resume --last<CR>", desc = "Codex resume last chat" },
+            -- { "<leader>ar", "<CMD>Codex resume<CR>", desc = "Codex resume last chat" },
+            -- { "<leader>as", "<CMD>CodexReferenceSelected!<CR>", mode = { "n", "v" }, desc = "Send to Codex" },
+            -- { "<leader>at", "<CMD>CodexSendSelected!<CR>", mode = { "n", "v" }, desc = "Send to Codex" },
+            -- { "<leader>af", "<CMD>CodexReferenceFile!<CR>", mode = { "n", "v" }, desc = "Send to Codex" },
+        },
         opts = {
+            log_level = "debug",
             shell = {
                 cmd = "nu",
                 args = { "-c" },
@@ -12,89 +24,88 @@ return {
                     WT_PROFILE_ID = vim.env.WT_PROFILE_ID,
                 },
             },
-            -- Add Windows-specific path handling
-            path_separator = "\\",
-            -- Ensure proper diff handling on Windows
-            diff = {
-                tool = "git", -- Use git diff which works well on Windows
-            },
-            -- Set window width to 40% of screen
-            window = {
-                width = 0.4,  -- 40% of the editor width
-                position = "right",  -- Open on the right side
-            },
-        },
-        keys = {
-            { "<leader>a", nil, desc = "AI/Claude Code" },
-            { "<C-z>", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-            { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-            { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-            { "<leader>ac", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-            { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-            { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-            { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-            {
-                "<leader>as",
-                "<cmd>ClaudeCodeTreeAdd<cr>",
-                desc = "Add file",
-                ft = { "NvimTree", "neo-tree", "oil", "minifiles" },
-            },
-            -- Diff management
-            { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-            { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
         },
     },
     {
-        "ravitemer/mcphub.nvim",
-        cond = false,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
+        "coder/claudecode.nvim",
+        dependencies = { "folke/snacks.nvim" },
+        opts = {
+            -- Preserve Windows Terminal environment variables
+            env = {
+                WT_SESSION = vim.env.WT_SESSION or "",
+                WT_PROFILE_ID = vim.env.WT_PROFILE_ID or "",
+            },
+            terminal = {
+                -- snacks provider has auto_insert=true so it re-enters terminal mode
+                -- when switching back to the Claude buffer (native provider does not)
+                provider = "snacks",
+                snacks_win_opts = {
+                    keys = {
+                        -- Override snacks' expr-based Esc: use chansend to write the raw
+                        -- byte directly to the terminal process, bypassing ConPTY translation.
+                        -- First Esc goes to Claude Code; double Esc within 200ms exits terminal mode.
+                        term_normal = {
+                            "<Esc>",
+                            function(self)
+                                self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
+                                local chan = vim.bo[self.buf].channel
+                                if self.esc_timer:is_active() then
+                                    self.esc_timer:stop()
+                                    vim.cmd("stopinsert")
+                                elseif chan > 0 then
+                                    self.esc_timer:start(200, 0, function() end)
+                                    vim.fn.chansend(chan, "\27")
+                                end
+                            end,
+                            mode = "t",
+                            desc = "Pass Esc to Claude (double Esc exits terminal mode)",
+                        },
+                        -- Windows ConPTY doesn't forward <S-Tab> as the ANSI CSI Z sequence
+                        -- (\e[Z) that Claude Code's TUI expects. Send it directly.
+                        shift_tab = {
+                            "<S-Tab>",
+                            function(self)
+                                local chan = vim.bo[self.buf].channel
+                                if chan > 0 then
+                                    vim.fn.chansend(chan, "\27[Z")
+                                end
+                            end,
+                            mode = "t",
+                            desc = "Pass Shift+Tab to Claude",
+                        },
+                        alt_p = {
+                            "<A-p>",
+                            function(self)
+                                local chan = vim.bo[self.buf].channel
+                                if chan > 0 then
+                                    vim.fn.chansend(chan, "\27p")
+                                end
+                            end,
+                            mode = "t",
+                            desc = "Pass Alt+P to Claude",
+                        },
+                    },
+                },
+            },
+            focus_after_send = true,
         },
         keys = {
-            { "<leader>am", "<CMD>MCPHub<CR>", desc = "Open MCPHub" },
-            { "<leader>as", "<CMD>MCPHubSearch<CR>", desc = "Search MCPHub" },
-            { "<leader>aC", "<CMD>MCPHubChat<CR>", desc = "Chat with MCPHub" },
-            { "<leader>at", "<CMD>MCPHubTools<CR>", desc = "MCPHub Tools" },
+            { "<leader>a", nil, desc = "AI" },
+            { "<C-\\>", "<CMD>ClaudeCode<CR>", desc = "Toggle Claude" },
+            { "<leader>aR", "<CMD>ClaudeCode --resume<CR>", desc = "Resume Claude" },
+            { "<leader>ac", "<CMD>ClaudeCode --continue<CR>", desc = "Continue Claude" },
+            { "<leader>am", "<CMD>ClaudeCodeSelectModel<CR>", desc = "Select Claude model" },
+            { "<leader>ab", "<CMD>ClaudeCodeAdd %<CR>", desc = "Add current buffer" },
+            { "<leader>as", "<CMD>ClaudeCodeSend<CR>", mode = "v", desc = "Send to Claude" },
+            {
+                "<leader>at",
+                "<CMD>ClaudeCodeTreeAdd<CR>",
+                desc = "Add file",
+                ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+            },
+            -- Diff management
+            { "<leader>aa", "<CMD>ClaudeCodeDiffAccept<CR>", desc = "Accept diff" },
+            { "<leader>ad", "<CMD>ClaudeCodeDiffDeny<CR>", desc = "Deny diff" },
         },
-        build = "npm install -g mcp-hub@latest",
-        config = function()
-            require("mcphub").setup({
-                port = 3000,
-                config = vim.fn.expand("~/mcpservers.json"),
-            })
-            -- Load enhanced Neovim integration server
-            require("mcp.neovim_enhanced")
-
-            -- Add custom instructions for neovim_enhanced server
-            vim.defer_fn(function()
-                local mcphub = require("mcphub")
-                local hub = mcphub.get_hub_instance()
-                if hub then
-                    hub:update_server_config("neovim_enhanced", {
-                        custom_instructions = {
-                            disabled = false,
-                            text = [[
-**When user mentions code/functions, ALWAYS:**
-
-1. **`list_buffers`** - See what files are open in Neovim
-2. **`find_symbols`** - Search for the symbol across workspace/buffers to find its location
-3. **Request file access** - "I found the symbol in `file.js`. Can I read that file to help you?"
-4. **Use symbol navigation** - After access, use `goto_definition`, `find_references`, etc.
-
-**ALWAYS PREFER LSP tools for code navigation:**
-- `find_symbols` - Programmatic symbol search (BEST for finding functions/classes/variables)
-- `snacks_symbol_search` - Interactive picker for user exploration and fuzzy finding
-- `goto_definition` - Navigate to definitions
-- `find_references` - Find usage locations
-
-**AVOID text search tools for code navigation** - LSP tools understand code semantically and are far superior.
-
-**Key principle**: Use Neovim tools to DISCOVER files and symbols, then request access - don't wait for manual file attachments!
-                            ]]
-                        }
-                    })
-                end
-            end, 1000)
-        end,
     },
 }
