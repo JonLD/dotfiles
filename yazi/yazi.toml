@@ -6,3 +6,11 @@ show_hidden = true
 edit = [
 	{ run = 'nvim %*',    block = true, desc = "nvim",           for = "windows" },
 ]
+browser = [
+	{ run = 'start %*',   orphan = true, desc = "Open in browser", for = "windows" },
+]
+
+[open]
+rules = [
+	{ mime = "text/html", use = ["browser", "edit"] },
+]
