@@ -94,13 +94,15 @@ def install-dotfile [config: record, force: bool = false, dry_run: bool = false]
   let dotfiles_dir = (get-dotfiles-dir)
 
   # Get target path for current OS
-  let target = ($config.targets | get -o $os)
+  let target_relative = try { $config.targets | get $os } catch { null }
 
-  if ($target == null) {
+  if ($target_relative == null) {
     print $"Skipping ($config.name) - not configured for ($os)"
     return
   }
 
+  # Convert relative target path to absolute path
+  let target = ($env.HOME | path join $target_relative | path expand)
   let source_path = ($dotfiles_dir | path join $config.source)
 
   # Check if source exists
@@ -134,20 +136,36 @@ def install-dotfile [config: record, force: bool = false, dry_run: bool = false]
 
     if $target_type == "symlink" {
       # It's already a symlink, just remove it to recreate
-      rm $target
+      try {
+        rm $target
+      } catch {
+        print $"WARNING: Could not remove existing symlink for ($config.name) - file may be in use"
+        return
+      }
     } else {
       # It's a real file/directory - handle carefully
       if $force {
-        rm -rf $target
+        try {
+          rm -rf $target
+        } catch {
+          print $"WARNING: Could not remove ($config.name) - file may be in use, skipping"
+          return
+        }
       } else {
         # Backup the existing config
-        let backup_path = $"($target).backup"
-        if ($backup_path | path exists) {
-          let timestamp = (date now | format date "%Y%m%d_%H%M%S")
-          let backup_path = $"($target).backup.($timestamp)"
-          mv $target $backup_path
-        } else {
-          mv $target $backup_path
+        try {
+          let backup_path = $"($target).backup"
+          if ($backup_path | path exists) {
+            let timestamp = (date now | format date "%Y%m%d_%H%M%S")
+            let backup_path = $"($target).backup.($timestamp)"
+            mv $target $backup_path
+          } else {
+            mv $target $backup_path
+          }
+          print $"Backed up existing ($config.name) config"
+        } catch {
+          print $"WARNING: Could not backup ($config.name) - file may be in use, skipping"
+          return
         }
       }
     }
@@ -159,10 +177,15 @@ def install-dotfile [config: record, force: bool = false, dry_run: bool = false]
     "windows" => {
       # Use mklink on Windows
       try {
+        print $"DEBUG: Creating symlink from ($target) to ($source_path)"
         if ($source_path | path type) == "dir" {
-          run-external "cmd" "/c" "mklink" "/D" $target $source_path
+          let cmd = $"mklink /D \"($target)\" \"($source_path)\""
+          print $"DEBUG: Running command: ($cmd)"
+          run-external "cmd" "/c" $cmd
         } else {
-          run-external "cmd" "/c" "mklink" $target $source_path
+          let cmd = $"mklink \"($target)\" \"($source_path)\""
+          print $"DEBUG: Running command: ($cmd)"
+          run-external "cmd" "/c" $cmd
         }
       } catch {
         print $"ERROR: Failed to create symlink for ($config.name)"
@@ -193,7 +216,7 @@ def "nudot remove" [target_identifier: string, --force, --backup] {
 
   # First try to match by target path (full path)
   let matching_by_path = ($config | where {|item|
-    let target = ($item.targets | get -o $os)
+    let target = try { $item.targets | get $os } catch { null }
     $target != null and $target == $abs_target
   })
 
@@ -225,7 +248,7 @@ def "nudot remove" [target_identifier: string, --force, --backup] {
   let config_entry = ($matching_config | first)
   let config_name = $config_entry.name
   let source_path = ($dotfiles_dir | path join $config_entry.source)
-  let actual_target = ($config_entry.targets | get -o $os)
+  let actual_target = try { $config_entry.targets | get $os } catch { null }
 
   print (color-info $"Removing (color-bold $config_name) from dotfiles...")
 
@@ -302,9 +325,9 @@ def test-symlink-creation [source_path: string, target_path: string] {
     match (get-os) {
       "windows" => {
         if ($source_path | path type) == "dir" {
-          run-external "cmd" "/c" "mklink" "/D" $test_target $source_path
+          run-external "cmd" "/c" $"mklink /D \"($test_target)\" \"($source_path)\""
         } else {
-          run-external "cmd" "/c" "mklink" $test_target $source_path
+          run-external "cmd" "/c" $"mklink \"($test_target)\" \"($source_path)\""
         }
       }
       _ => {
@@ -365,7 +388,7 @@ def "nudot add" [target_path: string, --name: string, --source: string, --force,
   # Check if config already exists (by name or target path)
   let existing_by_name = ($config | where {|item| $item.name == $config_name})
   let existing_by_target = ($config | where {|item|
-    let target = ($item.targets | get -o $os)
+    let target = try { $item.targets | get $os } catch { null }
     $target != null and $target == $abs_target
   })
 
@@ -441,9 +464,9 @@ def "nudot add" [target_path: string, --name: string, --source: string, --force,
     match (get-os) {
       "windows" => {
         if ($source_full_path | path type) == "dir" {
-          run-external "cmd" "/c" "mklink" "/D" $abs_target $source_full_path
+          run-external "cmd" "/c" $"mklink /D \"($abs_target)\" \"($source_full_path)\""
         } else {
-          run-external "cmd" "/c" "mklink" $abs_target $source_full_path
+          run-external "cmd" "/c" $"mklink \"($abs_target)\" \"($source_full_path)\""
         }
       }
       _ => {
@@ -523,7 +546,7 @@ def "nudot list" [] {
   print ""
 
   for config_item in $config {
-    let target = ($config_item.targets | get -o $os)
+    let target = try { $config_item.targets | get $os } catch { null }
     let status = if ($target == null) {
       color-dim "not configured"
     } else if ($target | path exists) {
@@ -553,7 +576,7 @@ def "nudot status" [] {
   print $"Dotfiles status \(OS: ($os), Dir: ($dotfiles_dir)\):\n"
 
   for config_item in $config {
-    let target = ($config_item.targets | get -o $os)
+    let target = try { $config_item.targets | get $os } catch { null }
     let source_path = ($dotfiles_dir | path join $config_item.source)
 
     print $"($config_item.name):"
@@ -590,7 +613,7 @@ def "nudot detach" [] {
   print "Detaching all dotfile symlinks (files stay in repo)..."
 
   for config_item in $config {
-    let target = ($config_item.targets | get -o $os)
+    let target = try { $config_item.targets | get $os } catch { null }
 
     if ($target == null) {
       continue
