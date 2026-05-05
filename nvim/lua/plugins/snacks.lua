@@ -53,6 +53,12 @@ return {
                     },
                 }
             },
-            dashboard = { enabled = require("utils.util").not_firenvim() }
+            dashboard = { enabled = require("utils.util").not_firenvim() },
+            scroll = {
+                animate = {
+                    duration = { step = 10, total = 100 },
+                    easing = "linear",
+                },
+            },
         },}
 }
