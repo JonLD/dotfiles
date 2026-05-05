@@ -46,7 +46,7 @@ return {
         "HiPhish/rainbow-delimiters.nvim",
     },
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = {
             ensure_installed = {
                 "clangd",
