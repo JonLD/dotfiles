@@ -18,7 +18,6 @@ delete("n", "<leader>bD")
 delete("n", "<leader>gG")
 if require("utils.util").not_firenvim() then
     delete("n", "<C-f>")
-    delete("n", "<leader>cr")
 end
 
 
@@ -100,3 +99,4 @@ wk.add({
     desc = "Rename",
     icon = { icon = "󰑕 ", color = "orange" },
 })
+
