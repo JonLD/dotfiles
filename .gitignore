@@ -1,4 +1,5 @@
 nushell/history.txt
+nushell/vendor/autoload/env.local.nu
 
 # Qutebrowser runtime data (not config)
 qutebrowser/data/
@@ -7,3 +8,4 @@ qutebrowser/qutebrowser/
 # Claude Code - include general preferences only
 .claude/*
 !.claude/CLAUDE.md
+nushell/git-completion-cache
