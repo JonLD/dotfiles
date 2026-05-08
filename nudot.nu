@@ -77,15 +77,10 @@ export def get-dotfiles-config [] \{
 # Get current operating system
 def get-os [] {
   let os_info = (sys host | get name)
-  # Handle various Linux distributions that include "Linux" in their name
-  if ($os_info | str contains "Linux") {
-    "linux"
-  } else {
-    match $os_info {
-      "Windows" => "windows"
-      "Darwin" => "macos"
-      _ => (error make {msg: $"Unsupported OS: ($os_info)"})
-    }
+  match $os_info {
+    "Windows" => "windows"
+    "Darwin" => "macos"
+    _ => "linux"
   }
 }
 
