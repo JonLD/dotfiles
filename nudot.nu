@@ -522,7 +522,7 @@ def "nudot attach" [--force, --dry-run, --only: any] {
   let selected = if ($only != null and not ($only | is-empty)) {
     let invalid = ($only | where {|name| not ($config | any {|item| $item.name == $name})})
     if not ($invalid | is-empty) {
-      print (color-error $"ERROR: Unknown config(s): ($invalid | str join ', ')")
+      print (color-error $"ERROR: Unknown config\(s\): ($invalid | str join ', ')")
       print $"Available: (color-bold ($config | get name | str join ', '))"
       exit 1
     }
@@ -628,7 +628,7 @@ def "nudot detach" [--only: any] {
   if ($only != null and not ($only | is-empty)) {
     let invalid = ($only | where {|name| not ($config | any {|item| $item.name == $name})})
     if not ($invalid | is-empty) {
-      print (color-error $"ERROR: Unknown config(s): ($invalid | str join ', ')")
+      print (color-error $"ERROR: Unknown config\(s\): ($invalid | str join ', ')")
       print $"Available: (color-bold ($config | get name | str join ', '))"
       exit 1
     }
