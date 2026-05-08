@@ -134,7 +134,7 @@ $env.config.keybindings = [
 
 
 $env.PROMPT_COMMAND = {||
-    let dir = ($env.PWD | str replace $nu.home-path "~")
+    let dir = ($env.PWD | str replace $nu.home-dir "~")
     let arrow = if $env.LAST_EXIT_CODE == 0 {
         $"(ansi { fg: $gruvbox_green })❯(ansi reset)"
     } else {
@@ -154,7 +154,9 @@ $env.PROMPT_INDICATOR_VI_INSERT = ""
 $env.PROMPT_INDICATOR_VI_NORMAL = $"(ansi { fg: $gruvbox_gray })[N] (ansi reset)"
 $env.PROMPT_MULTILINE_INDICATOR = $"(ansi { fg: $gruvbox_gray })∙∙∙(ansi reset) "
 
-source ~/.zoxide.nu
+const zoxide_init_path = ($nu.home-dir | path join ".zoxide.nu")
+const zoxide_init = if ($zoxide_init_path | path exists) { $zoxide_init_path } else { null }
+source $zoxide_init
 
 const custom_completions_dir = ($nu.default-config-dir | path join "custom-completions")
 source ($custom_completions_dir | path join "cargo-completions.nu")
