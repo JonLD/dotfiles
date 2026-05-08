@@ -506,7 +506,7 @@ def "nudot add" [target_path: string, --name: string, --source: string, --force,
 }
 
 # Attach all dotfiles (create symlinks)
-def "nudot attach" [--force, --dry-run, --only: list<string>] {
+def "nudot attach" [--force, --dry-run, --only: any] {
   if $dry_run {
     print (color-warning "DRY RUN: Previewing what would be attached...")
     print ""
@@ -516,6 +516,7 @@ def "nudot attach" [--force, --dry-run, --only: list<string>] {
     print (color-info "Attaching dotfiles (existing files will be backed up)...")
   }
 
+  let only = if ($only | describe | str starts-with "string") { [$only] } else { $only }
   let config = (load-config)
 
   if ($config | is-empty) {
@@ -707,7 +708,7 @@ def "nudot help" [] {
 }
 
 # Main entry point
-def main [command?: string, path?: string, --name: string, --source: string, --force, --backup, --dry-run, --config-only, --only: list<string>] {
+def main [command?: string, path?: string, --name: string, --source: string, --force, --backup, --dry-run, --config-only, --only: any] {
   match $command {
     "attach" => {
       if $force and $dry_run {
