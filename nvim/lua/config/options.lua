@@ -21,7 +21,9 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 vim.g.lazyvim_python_lsp = "basedpyright"
-vim.env.PATH = "C:\\Python312;" .. vim.env.PATH
+if vim.fn.has("win32") == 1 and vim.fn.has("wsl") == 0 then
+    vim.env.PATH = "C:\\Python312;" .. vim.env.PATH
+end
 vim.g.root_spec = { { ".git", "lua" }, "cwd" }
 opt.guifont = "JetBrainsMonoNL NF:h10:Consolas"
 
