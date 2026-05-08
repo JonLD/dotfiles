@@ -620,13 +620,30 @@ def "nudot status" [] {
 }
 
 # Remove all symlinks (files stay in repo)
-def "nudot detach" [] {
+def "nudot detach" [--only: any] {
   let os = (get-os)
   let config = (load-config)
+  let only = if ($only | describe | str starts-with "string") { [$only] } else { $only }
 
-  print "Detaching all dotfile symlinks (files stay in repo)..."
+  if ($only != null and not ($only | is-empty)) {
+    let invalid = ($only | where {|name| not ($config | any {|item| $item.name == $name})})
+    if not ($invalid | is-empty) {
+      print (color-error $"ERROR: Unknown config(s): ($invalid | str join ', ')")
+      print $"Available: (color-bold ($config | get name | str join ', '))"
+      exit 1
+    }
+    print (color-info $"Detaching ($only | str join ', ') symlinks (files stay in repo)...")
+  } else {
+    print "Detaching all dotfile symlinks (files stay in repo)..."
+  }
 
-  for config_item in $config {
+  let selected = if ($only != null and not ($only | is-empty)) {
+    $config | where {|item| $only | any {|name| $name == $item.name}}
+  } else {
+    $config
+  }
+
+  for config_item in $selected {
     let target_raw = try { $config_item.targets | get $os } catch { null }
     let target = (resolve-target $target_raw)
 
@@ -718,7 +735,7 @@ def main [command?: string, path?: string, --name: string, --source: string, --f
     }
     "list" => { nudot list }
     "status" => { nudot status }
-    "detach" => { nudot detach }
+    "detach" => { nudot detach --only $only }
     "add" => {
       if ($path == null) {
         print (color-error "ERROR: Path is required for add command")
