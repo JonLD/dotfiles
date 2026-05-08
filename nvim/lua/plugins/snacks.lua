@@ -15,6 +15,9 @@ return {
             { "<leader>N", function() Snacks.notifier.show_history() end, desc = "Notification History" },
         },
         opts = {
+            lazygit = {
+                configure = false,
+            },
             styles = {
                 terminal = {
                     position = "right"
@@ -22,6 +25,11 @@ return {
             },
             picker = {
                 -- layout = "borderless_top",
+                formatters = {
+                    file = {
+                        filename_first = true,
+                    },
+                },
                 layouts = {
                     borderless_top = {
                         layout = {

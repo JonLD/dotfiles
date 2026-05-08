@@ -21,6 +21,7 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 vim.g.lazyvim_python_lsp = "basedpyright"
+vim.env.PATH = "C:\\Python312;" .. vim.env.PATH
 vim.g.root_spec = { { ".git", "lua" }, "cwd" }
 opt.guifont = "JetBrainsMonoNL NF:h10:Consolas"
 
@@ -35,12 +36,27 @@ if vim.fn.has("wsl") == 1 then
     vim.g.clipboard = {
         name = "win32yank",
         copy = {
-            ["+"] = "win32yank.exe -i --crlf",
-            ["*"] = "win32yank.exe -i --crlf",
+            ["+"] = { "win32yank.exe", "-i", "--crlf" },
+            ["*"] = { "win32yank.exe", "-i", "--crlf" },
         },
         paste = {
-            ["+"] = "win32yank.exe -o --lf",
-            ["*"] = "win32yank.exe -o --lf",
+            ["+"] = { "win32yank.exe", "-o", "--lf" },
+            ["*"] = { "win32yank.exe", "-o", "--lf" },
+        },
+        cache_enabled = 1,
+    }
+elseif vim.fn.has("win32") == 1 then
+    vim.opt.clipboard = "unnamedplus"
+    local win32yank = vim.fn.fnamemodify(vim.v.progpath, ":h") .. "\\win32yank.exe"
+    vim.g.clipboard = {
+        name = "win32yank",
+        copy = {
+            ["+"] = { win32yank, "-i", "--crlf" },
+            ["*"] = { win32yank, "-i", "--crlf" },
+        },
+        paste = {
+            ["+"] = { win32yank, "-o", "--lf" },
+            ["*"] = { win32yank, "-o", "--lf" },
         },
         cache_enabled = 1,
     }

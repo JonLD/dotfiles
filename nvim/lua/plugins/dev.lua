@@ -182,6 +182,7 @@ return {
     {
         "jon.lloyddavies/versius.nvim",
         dev = true,
+        enabled = true,
         dependencies = { "stevearc/overseer.nvim" },
         cmd = {
             "VersiusTraceOpen",
