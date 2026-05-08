@@ -9,7 +9,7 @@ export def get-dotfiles-config [] {
       source: "nushell"
       targets: {
         windows: "AppData/Roaming/nushell"
-        linux: "/home/jonld/.config/nushell"
+        linux: ".config/nushell"
         macos: null
       }
     }
@@ -18,7 +18,7 @@ export def get-dotfiles-config [] {
       source: "nvim"
       targets: {
         windows: "AppData/Local/nvim"
-        linux: "/home/jonld/.config/nvim"
+        linux: ".config/nvim"
         macos: null
       }
     }
@@ -27,7 +27,7 @@ export def get-dotfiles-config [] {
       source: "qutebrowser"
       targets: {
         windows: "AppData/Roaming/qutebrowser"
-        linux: "/home/jonld/.config/qutebrowser"
+        linux: ".config/qutebrowser"
         macos: null
       }
     }
@@ -36,7 +36,7 @@ export def get-dotfiles-config [] {
       source: "yazi"
       targets: {
         windows: "AppData/Roaming/yazi/config"
-        linux: "/home/jonld/.config/yazi"
+        linux: ".config/yazi"
         macos: null
       }
     }
@@ -45,7 +45,7 @@ export def get-dotfiles-config [] {
       source: "CLAUDE.md"
       targets: {
         windows: ".claude/CLAUDE.md"
-        linux: "/home/jonld/.claude/CLAUDE.md"
+        linux: ".claude/CLAUDE.md"
         macos: null
       }
     }
@@ -54,7 +54,7 @@ export def get-dotfiles-config [] {
       source: "ghostty"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/ghostty"
+        linux: ".config/ghostty"
         macos: null
       }
     }
@@ -63,7 +63,7 @@ export def get-dotfiles-config [] {
       source: "hypr"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/hypr"
+        linux: ".config/hypr"
         macos: null
       }
     }
@@ -72,7 +72,7 @@ export def get-dotfiles-config [] {
       source: "mako"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/mako"
+        linux: ".config/mako"
         macos: null
       }
     }
@@ -81,7 +81,7 @@ export def get-dotfiles-config [] {
       source: "waybar"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/waybar"
+        linux: ".config/waybar"
         macos: null
       }
     }
@@ -90,7 +90,7 @@ export def get-dotfiles-config [] {
       source: "tmux"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/tmux"
+        linux: ".config/tmux"
         macos: null
       }
     }
@@ -99,7 +99,7 @@ export def get-dotfiles-config [] {
       source: "tmux-sessionizer"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/tmux-sessionizer"
+        linux: ".config/tmux-sessionizer"
         macos: null
       }
     }
@@ -108,7 +108,7 @@ export def get-dotfiles-config [] {
       source: "fuzzel"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/fuzzel"
+        linux: ".config/fuzzel"
         macos: null
       }
     }
@@ -117,7 +117,7 @@ export def get-dotfiles-config [] {
       source: "lazygit"
       targets: {
         windows: "AppData/Roaming/lazygit"
-        linux: "/home/jonld/.config/lazygit"
+        linux: ".config/lazygit"
         macos: null
       }
     }
@@ -126,7 +126,7 @@ export def get-dotfiles-config [] {
       source: "kanata"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/kanata"
+        linux: ".config/kanata"
         macos: null
       }
     }
@@ -135,7 +135,7 @@ export def get-dotfiles-config [] {
       source: "zellij"
       targets: {
         windows: null
-        linux: "/home/jonld/.config/zellij"
+        linux: ".config/zellij"
         macos: null
       }
     }
