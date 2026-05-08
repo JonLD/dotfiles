@@ -25,10 +25,16 @@ $env.PATH = ($env.PATH
     | prepend ($env.HOME | path join ".local" "bin")
     | prepend ($env.HOME | path join ".nvm" "versions" "node" "v24.11.1" "bin")
     | prepend "/opt/nvim"
+    | prepend "/home/linuxbrew/.linuxbrew/sbin"
+    | prepend "/home/linuxbrew/.linuxbrew/bin"
 )
 
-# Local env vars are loaded from vendor/autoload/env.local.nu (gitignored)
-zoxide init nushell | save -f ~/.zoxide.nu
+# Generate the zoxide init file before config.nu sources it.
+if (which zoxide | is-not-empty) {
+    zoxide init nushell | save -f ($nu.home-dir | path join ".zoxide.nu")
+}
+
 # Load local env vars (gitignored)
-const local_env = ($nu.default-config-dir | path join "vendor" "autoload" "env.local.nu")
+const local_env_path = ($nu.default-config-dir | path join "vendor" "autoload" "env.local.nu")
+const local_env = if ($local_env_path | path exists) { $local_env_path } else { null }
 source-env $local_env

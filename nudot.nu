@@ -4,6 +4,12 @@
 # Configuration file path
 const CONFIG_FILE = "nudot-config.nu"
 
+let DOTFILES_DIR = if ("FILE_PWD" in ($env | columns)) {
+  $env.FILE_PWD
+} else {
+  $env.PWD
+}
+
 # Color helper functions for nice output
 def color-error [text: string] { $"\e[31m($text)\e[0m" }      # Red
 def color-success [text: string] { $"\e[32m($text)\e[0m" }    # Green
@@ -85,7 +91,38 @@ def get-os [] {
 
 # Get the dotfiles directory (assumes script is in dotfiles repo)
 def get-dotfiles-dir [] {
-  $env.PWD
+  $DOTFILES_DIR
+}
+
+def resolve-target [target_path] {
+  if ($target_path == null) {
+    null
+  } else {
+    ($env.HOME | path join $target_path | path expand)
+  }
+}
+
+# Create a symlink using the platform-native command.
+def create-symlink [source_path: string, target_path: string] {
+  match (get-os) {
+    "windows" => {
+      # Pass mklink as separate arguments; a composed command string fails under Nushell on Windows.
+      if ($source_path | path type) == "dir" {
+        run-external "cmd" "/d" "/c" "mklink" "/D" $target_path $source_path
+      } else {
+        run-external "cmd" "/d" "/c" "mklink" $target_path $source_path
+      }
+    }
+    _ => {
+      run-external "ln" "-sf" $source_path $target_path
+    }
+  }
+}
+
+def get-symlink-target [target_path: string] {
+  let parent_dir = ($target_path | path dirname)
+  let entry = (ls -la $parent_dir | where name == $target_path | first)
+  $entry.target
 }
 
 # Install a single dotfile
@@ -102,7 +139,7 @@ def install-dotfile [config: record, force: bool = false, dry_run: bool = false]
   }
 
   # Convert relative target path to absolute path
-  let target = ($env.HOME | path join $target_relative | path expand)
+  let target = (resolve-target $target_relative)
   let source_path = ($dotfiles_dir | path join $config.source)
 
   # Check if source exists
@@ -172,36 +209,20 @@ def install-dotfile [config: record, force: bool = false, dry_run: bool = false]
   }
 
   # Create symlink
-
-  match (get-os) {
-    "windows" => {
-      # Use mklink on Windows
-      try {
-        print $"DEBUG: Creating symlink from ($target) to ($source_path)"
-        if ($source_path | path type) == "dir" {
-          let cmd = $"mklink /D \"($target)\" \"($source_path)\""
-          print $"DEBUG: Running command: ($cmd)"
-          run-external "cmd" "/c" $cmd
-        } else {
-          let cmd = $"mklink \"($target)\" \"($source_path)\""
-          print $"DEBUG: Running command: ($cmd)"
-          run-external "cmd" "/c" $cmd
-        }
-      } catch {
-        print $"ERROR: Failed to create symlink for ($config.name)"
-        print "This usually means you need Administrator privileges on Windows."
-        print "Solutions:"
-        print "  1. Run your terminal as Administrator (Right-click > Run as Administrator)"
-        print "  2. Enable Developer Mode in Windows Settings (Settings > Update & Security > For Developers)"
-        print "  3. Use 'nudot attach' from an elevated terminal"
-        print ""
-        print "Alternatively, you can manually copy the files instead of using symlinks."
-      }
-    }
-    _ => {
-      # Use ln on Unix-like systems
-      run-external "ln" "-sf" $source_path $target
-    }
+  try {
+    print $"DEBUG: Creating symlink from ($target) to ($source_path)"
+    create-symlink $source_path $target
+  } catch {
+    print $"ERROR: Failed to create symlink for ($config.name)"
+    print "This usually means you need Administrator privileges on Windows."
+    print "Solutions:"
+    print "  1. Run your terminal as Administrator (Right-click > Run as Administrator)"
+    print "  2. Enable Developer Mode in Windows Settings"
+    print "     Windows 11: Settings > System > For developers"
+    print "     Windows 10: Settings > Update & Security > For Developers"
+    print "  3. Use 'nudot attach' from an elevated terminal"
+    print ""
+    print "Alternatively, you can manually copy the files instead of using symlinks."
   }
 }
 
@@ -216,8 +237,9 @@ def "nudot remove" [target_identifier: string, --force, --backup] {
 
   # First try to match by target path (full path)
   let matching_by_path = ($config | where {|item|
-    let target = try { $item.targets | get $os } catch { null }
-    $target != null and $target == $abs_target
+    let target_raw = try { $item.targets | get $os } catch { null }
+    let target = (resolve-target $target_raw)
+    $target != null and ($target == $abs_target or $target_raw == $target_identifier)
   })
 
   # If no match by path, try to match by config name
@@ -248,7 +270,8 @@ def "nudot remove" [target_identifier: string, --force, --backup] {
   let config_entry = ($matching_config | first)
   let config_name = $config_entry.name
   let source_path = ($dotfiles_dir | path join $config_entry.source)
-  let actual_target = try { $config_entry.targets | get $os } catch { null }
+  let target_raw = try { $config_entry.targets | get $os } catch { null }
+  let actual_target = (resolve-target $target_raw)
 
   print (color-info $"Removing (color-bold $config_name) from dotfiles...")
 
@@ -322,18 +345,7 @@ def test-symlink-creation [source_path: string, target_path: string] {
   let test_target = $"($target_path).nudot_test"
 
   try {
-    match (get-os) {
-      "windows" => {
-        if ($source_path | path type) == "dir" {
-          run-external "cmd" "/c" $"mklink /D \"($test_target)\" \"($source_path)\""
-        } else {
-          run-external "cmd" "/c" $"mklink \"($test_target)\" \"($source_path)\""
-        }
-      }
-      _ => {
-        run-external "ln" "-sf" $source_path $test_target
-      }
-    }
+    create-symlink $source_path $test_target
 
     # If we got here, the symlink worked - clean it up
     rm $test_target
@@ -388,7 +400,8 @@ def "nudot add" [target_path: string, --name: string, --source: string, --force,
   # Check if config already exists (by name or target path)
   let existing_by_name = ($config | where {|item| $item.name == $config_name})
   let existing_by_target = ($config | where {|item|
-    let target = try { $item.targets | get $os } catch { null }
+    let target_raw = try { $item.targets | get $os } catch { null }
+    let target = (resolve-target $target_raw)
     $target != null and $target == $abs_target
   })
 
@@ -438,8 +451,9 @@ def "nudot add" [target_path: string, --name: string, --source: string, --force,
       print ""
       print (color-bold "Solutions:")
       print "  1. Run your terminal as Administrator"
-      print "  2. Enable Developer Mode (Windows 10/11):"
-      print (color-dim "     Settings > Update & Security > For Developers > Developer Mode")
+      print "  2. Enable Developer Mode:"
+      print (color-dim "     Windows 11: Settings > System > For developers > Developer Mode")
+      print (color-dim "     Windows 10: Settings > Update & Security > For Developers > Developer Mode")
 
       # Clean up: remove the copy we made if we made one
       if $need_to_copy {
@@ -461,18 +475,7 @@ def "nudot add" [target_path: string, --name: string, --source: string, --force,
     }
 
     # Create the actual symlink (we know this will work since we tested it)
-    match (get-os) {
-      "windows" => {
-        if ($source_full_path | path type) == "dir" {
-          run-external "cmd" "/c" $"mklink /D \"($abs_target)\" \"($source_full_path)\""
-        } else {
-          run-external "cmd" "/c" $"mklink \"($abs_target)\" \"($source_full_path)\""
-        }
-      }
-      _ => {
-        run-external "ln" "-sf" $source_full_path $abs_target
-      }
-    }
+    create-symlink $source_full_path $abs_target
   }
 
   # Step 4: Save configuration
@@ -503,7 +506,7 @@ def "nudot add" [target_path: string, --name: string, --source: string, --force,
 }
 
 # Attach all dotfiles (create symlinks)
-def "nudot attach" [--force, --dry-run] {
+def "nudot attach" [--force, --dry-run, --only: list<string>] {
   if $dry_run {
     print (color-warning "DRY RUN: Previewing what would be attached...")
     print ""
@@ -520,7 +523,19 @@ def "nudot attach" [--force, --dry-run] {
     return
   }
 
-  for config_item in $config {
+  let selected = if ($only != null and not ($only | is-empty)) {
+    let invalid = ($only | where {|name| not ($config | any {|item| $item.name == $name})})
+    if not ($invalid | is-empty) {
+      print (color-error $"ERROR: Unknown config(s): ($invalid | str join ', ')")
+      print $"Available: (color-bold ($config | get name | str join ', '))"
+      exit 1
+    }
+    $config | where {|item| $only | any {|name| $name == $item.name}}
+  } else {
+    $config
+  }
+
+  for config_item in $selected {
     install-dotfile $config_item $force $dry_run
   }
 
@@ -546,7 +561,8 @@ def "nudot list" [] {
   print ""
 
   for config_item in $config {
-    let target = try { $config_item.targets | get $os } catch { null }
+    let target_raw = try { $config_item.targets | get $os } catch { null }
+    let target = (resolve-target $target_raw)
     let status = if ($target == null) {
       color-dim "not configured"
     } else if ($target | path exists) {
@@ -576,19 +592,21 @@ def "nudot status" [] {
   print $"Dotfiles status \(OS: ($os), Dir: ($dotfiles_dir)\):\n"
 
   for config_item in $config {
-    let target = try { $config_item.targets | get $os } catch { null }
+    let target_raw = try { $config_item.targets | get $os } catch { null }
+    let target = (resolve-target $target_raw)
     let source_path = ($dotfiles_dir | path join $config_item.source)
 
     print $"($config_item.name):"
-    print $"  Source: ($source_path) " + (if ($source_path | path exists) { "✓" } else { "✗" })
+    let source_status = if ($source_path | path exists) { "✓" } else { "✗" }
+    print $"  Source: ($source_path) ($source_status)"
 
     if ($target == null) {
       print $"  Target: not configured for ($os)"
     } else {
       let target_status = if ($target | path exists) {
         if ($target | path type) == "symlink" {
-          let link_target = (run-external "readlink" $target | str trim)
-          if ($link_target == $source_path) {
+          let link_target = (get-symlink-target $target)
+          if (($link_target | path expand) == ($source_path | path expand)) {
             "✓ correctly linked"
           } else {
             $"✗ linked to wrong target: ($link_target)"
@@ -613,7 +631,8 @@ def "nudot detach" [] {
   print "Detaching all dotfile symlinks (files stay in repo)..."
 
   for config_item in $config {
-    let target = try { $config_item.targets | get $os } catch { null }
+    let target_raw = try { $config_item.targets | get $os } catch { null }
+    let target = (resolve-target $target_raw)
 
     if ($target == null) {
       continue
@@ -634,7 +653,7 @@ def "nudot help" [] {
   print ""
   
   print (color-bold "Usage:")
-  print ("  " + (color-info "nudot attach") + " [--force] [--dry-run] - " + (color-dim "Attach all dotfiles (create symlinks)"))
+  print ("  " + (color-info "nudot attach") + " [--force] [--dry-run] [--only <names>] - " + (color-dim "Attach dotfiles (create symlinks)"))
   print ("  " + (color-info "nudot list") + "                          - " + (color-dim "List all configured dotfiles"))
   print ("  " + (color-info "nudot status") + "                        - " + (color-dim "Show detailed status of all dotfiles"))
   print ("  " + (color-info "nudot detach") + "                        - " + (color-dim "Detach all symlinks (files stay in repo)"))
@@ -651,6 +670,7 @@ def "nudot help" [] {
   print ("  " + (color-info "nudot add") + " ~/.config/nvim --config-only      - " + (color-dim "Add config path only (for other OS)"))
   print ("  " + (color-info "nudot attach") + " --dry-run                      - " + (color-dim "Preview what would be attached"))
   print ("  " + (color-info "nudot attach") + " --force                        - " + (color-dim "Attach and override existing files"))
+  print ("  " + (color-info "nudot attach") + " --only [nvim nushell]          - " + (color-dim "Attach only selected configs"))
   print ("  " + (color-info "nudot remove") + " ~/.config/nvim                 - " + (color-dim "Remove neovim from management"))
   print ("  " + (color-info "nudot remove") + " ~/.config/nvim --backup        - " + (color-dim "Remove and backup existing file"))
   print ""
@@ -659,6 +679,7 @@ def "nudot help" [] {
   print ("  " + (color-success "attach") + "    - " + (color-dim "Creates symlinks from target locations to your dotfiles repo"))
   print ("              --force: " + (color-dim "Override existing files without backup"))
   print ("              --dry-run: " + (color-dim "Preview what would be attached without making changes"))
+  print ("              --only: " + (color-dim "Attach only the named configs (list), e.g. --only [nvim nushell]"))
   print ""
   print ("  " + (color-success "detach") + "    - " + (color-dim "Removes all symlinks but leaves files safely in your dotfiles repo"))
   print ("              " + (color-dim "Useful for temporarily disabling dotfiles management"))
@@ -686,17 +707,17 @@ def "nudot help" [] {
 }
 
 # Main entry point
-def main [command?: string, path?: string, --name: string, --source: string, --force, --backup, --dry-run, --config-only] {
+def main [command?: string, path?: string, --name: string, --source: string, --force, --backup, --dry-run, --config-only, --only: list<string>] {
   match $command {
     "attach" => {
       if $force and $dry_run {
-        nudot attach --force --dry-run
+        nudot attach --force --dry-run --only $only
       } else if $force {
-        nudot attach --force
+        nudot attach --force --only $only
       } else if $dry_run {
-        nudot attach --dry-run
+        nudot attach --dry-run --only $only
       } else {
-        nudot attach
+        nudot attach --only $only
       }
     }
     "list" => { nudot list }
