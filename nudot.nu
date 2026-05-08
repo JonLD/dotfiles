@@ -25,7 +25,7 @@ def load-config [] {
   if ($config_path | path exists) {
     # Import the config file and call its function
     # We execute it in a subprocess to get the config data
-    let result = (nu -c $"source '($config_path)'; get-dotfiles-config | to json")
+    let result = (^$nu.current-exe -c $"source '($config_path)'; get-dotfiles-config | to json")
     if ($result | is-empty) {
       []
     } else {
