@@ -196,6 +196,7 @@ return {
             "VersiusRemoteDisconnect",
             "VersiusRemoteSync",
             "VersiusRemoteTerminal",
+            "VersiusRemoteRunTest",
             "VersiusYankSvtPath",
         },
         opts = {
@@ -233,6 +234,7 @@ return {
             { "<leader>vrd", "<cmd>VersiusRemoteDisconnect<cr>", desc = "Disconnect from remote" },
             { "<leader>vrs", "<cmd>VersiusRemoteSync<cr>",       desc = "Sync current file to remote" },
             { "<leader>vrt", "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
+            { "<leader>vrr", "<cmd>VersiusRemoteRunTest<cr>",   desc = "Run SVT test on remote host" },
         },
     },
     {
