@@ -227,6 +227,7 @@ return {
             { "<leader>vrS", "<cmd>VersiusRemoteSyncShellConfig<cr>", desc = "Sync shell config to remote" },
             { "<leader>vrk", "<cmd>VersiusRemoteCopyKey<cr>",         desc = "Copy SSH key to remote host" },
         },
+        opts = {},
     },
     {
         "nvim-lualine/lualine.nvim",
