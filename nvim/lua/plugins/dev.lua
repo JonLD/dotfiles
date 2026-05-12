@@ -196,6 +196,7 @@ return {
             "VersiusRemoteDisconnect",
             "VersiusRemoteSync",
             "VersiusRemoteTerminal",
+            "VersiusYankSvtPath",
         },
         opts = {
             remote = {
@@ -226,6 +227,7 @@ return {
             { "<leader>vmn", "<cmd>VersiusNetcoms<cr>",               desc = "Run netcoms" },
             { "<leader>vmg", "<cmd>VersiusGenCompileCommands<cr>",    desc = "Generate compile commands" },
             -- Remote
+            { "<leader>vy",  "<cmd>VersiusYankSvtPath<cr>",        desc = "Yank SVT path" },
             { "<leader>vr",  group = "Remote", icon = { icon = "󰢹 ", color = "cyan" } },
             { "<leader>vrc", "<cmd>VersiusRemoteConnect<cr>",    desc = "Connect to remote host" },
             { "<leader>vrd", "<cmd>VersiusRemoteDisconnect<cr>", desc = "Disconnect from remote" },
