@@ -198,20 +198,8 @@ return {
             "VersiusRemoteTerminal",
             "VersiusRemoteRunTest",
             "VersiusRemoteSyncShellConfig",
+            "VersiusRemoteCopyKey",
             "VersiusYankSvtPath",
-        },
-        opts = {
-            remote = {
-                hosts = {
-                    -- {
-                    --     name = "My Robot",
-                    --     host = "192.168.1.100",
-                    --     user = "user",
-                    --     local_root = "C:/dev/versius",
-                    --     remote_root = "/home/user/versius",
-                    -- },
-                },
-            },
         },
         keys = {
             { "gx", "<cmd>VersiusTraceOpen<cr>", desc = "Open URL, trace, or Jira ticket" },
@@ -237,6 +225,7 @@ return {
             { "<leader>vrt", "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
             { "<leader>vrr", "<cmd>VersiusRemoteRunTest<cr>",        desc = "Run SVT test on remote host" },
             { "<leader>vrS", "<cmd>VersiusRemoteSyncShellConfig<cr>", desc = "Sync shell config to remote" },
+            { "<leader>vrk", "<cmd>VersiusRemoteCopyKey<cr>",         desc = "Copy SSH key to remote host" },
         },
     },
     {
