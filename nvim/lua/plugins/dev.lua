@@ -198,6 +198,7 @@ return {
             "VersiusRemoteTerminal",
             "VersiusRemoteRunTest",
             "VersiusRemoteSyncShellConfig",
+            "VersiusRemoteInstallShell",
             "VersiusRemoteCopyKey",
             "VersiusYankSvtPath",
         },
@@ -224,10 +225,16 @@ return {
             { "<leader>vrs", "<cmd>VersiusRemoteSync<cr>",       desc = "Sync current file to remote" },
             { "<leader>vrt", "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
             { "<leader>vrr", "<cmd>VersiusRemoteRunTest<cr>",        desc = "Run SVT test on remote host" },
-            { "<leader>vrS", "<cmd>VersiusRemoteSyncShellConfig<cr>", desc = "Sync shell config to remote" },
+            { "<leader>vrS", "<cmd>VersiusRemoteSyncShellConfig<cr>",  desc = "Sync shell config to remote" },
+            { "<leader>vri", "<cmd>VersiusRemoteInstallShell<cr>",     desc = "Install shell on remote host" },
             { "<leader>vrk", "<cmd>VersiusRemoteCopyKey<cr>",         desc = "Copy SSH key to remote host" },
         },
-        opts = {},
+        opts = {
+            remote = {
+                shell = "nu",
+                shell_install_cmd = "choco install nushell -y --source https://community.chocolatey.org/api/v2/",
+            },
+        },
     },
     {
         "nvim-lualine/lualine.nvim",
