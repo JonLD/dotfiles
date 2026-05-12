@@ -199,6 +199,7 @@ return {
             "VersiusRemoteRunTest",
             "VersiusRemoteSyncShellConfig",
             "VersiusRemoteInstallShell",
+            "VersiusRemoteBrowse",
             "VersiusRemoteCopyKey",
             "VersiusYankSvtPath",
         },
@@ -227,6 +228,7 @@ return {
             { "<leader>vrr", "<cmd>VersiusRemoteRunTest<cr>",        desc = "Run SVT test on remote host" },
             { "<leader>vrS", "<cmd>VersiusRemoteSyncShellConfig<cr>",  desc = "Sync shell config to remote" },
             { "<leader>vri", "<cmd>VersiusRemoteInstallShell<cr>",     desc = "Install shell on remote host" },
+            { "<leader>vrb", "<cmd>VersiusRemoteBrowse<cr>",          desc = "Browse remote files" },
             { "<leader>vrk", "<cmd>VersiusRemoteCopyKey<cr>",         desc = "Copy SSH key to remote host" },
         },
         opts = {
