@@ -192,22 +192,57 @@ return {
             "VersiusSystemUpdate",
             "VersiusNetcoms",
             "VersiusGenCompileCommands",
+            "VersiusRemoteConnect",
+            "VersiusRemoteDisconnect",
+            "VersiusRemoteSync",
+            "VersiusRemoteTerminal",
         },
-        opts = {},
+        opts = {
+            remote = {
+                hosts = {
+                    -- {
+                    --     name = "My Robot",
+                    --     host = "192.168.1.100",
+                    --     user = "user",
+                    --     local_root = "C:/dev/versius",
+                    --     remote_root = "/home/user/versius",
+                    -- },
+                },
+            },
+        },
         keys = {
-            -- Trace
             { "gx", "<cmd>VersiusTraceOpen<cr>", desc = "Open URL, trace, or Jira ticket" },
+            -- Versius
+            { "<leader>v",   group = "Versius", icon = { icon = "󰢛 ", color = "blue" } },
             -- Make
-            { "<leader>m",  group = "Make", icon = { icon = "󰛕 ", color = "yellow" } },
-            { "<leader>ml", "<cmd>VersiusMakeCwd labpc<cr>",         desc = "make labpc" },
-            { "<leader>mi", "<cmd>VersiusMake ipxe<cr>",             desc = "make ipxe" },
-            { "<leader>mb", "<cmd>VersiusMake build<cr>",            desc = "make build" },
-            { "<leader>mc", "<cmd>VersiusMake clean<cr>",            desc = "make clean" },
-            { "<leader>mt", "<cmd>VersiusMake unit_test<cr>",        desc = "make unit_test" },
-            { "<leader>mk", "<cmd>VersiusMake klocwork<cr>",         desc = "make klocwork" },
-            { "<leader>ms", "<cmd>VersiusSystemUpdate<cr>",          desc = "Run system update tool" },
-            { "<leader>mn", "<cmd>VersiusNetcoms<cr>",               desc = "Run netcoms" },
-            { "<leader>mg", "<cmd>VersiusGenCompileCommands<cr>",    desc = "Generate compile commands" },
+            { "<leader>vm",  group = "Make", icon = { icon = "󰛕 ", color = "yellow" } },
+            { "<leader>vml", "<cmd>VersiusMakeCwd labpc<cr>",         desc = "make labpc" },
+            { "<leader>vmi", "<cmd>VersiusMake ipxe<cr>",             desc = "make ipxe" },
+            { "<leader>vmb", "<cmd>VersiusMake build<cr>",            desc = "make build" },
+            { "<leader>vmc", "<cmd>VersiusMake clean<cr>",            desc = "make clean" },
+            { "<leader>vmt", "<cmd>VersiusMake unit_test<cr>",        desc = "make unit_test" },
+            { "<leader>vmk", "<cmd>VersiusMake klocwork<cr>",         desc = "make klocwork" },
+            { "<leader>vms", "<cmd>VersiusSystemUpdate<cr>",          desc = "Run system update tool" },
+            { "<leader>vmn", "<cmd>VersiusNetcoms<cr>",               desc = "Run netcoms" },
+            { "<leader>vmg", "<cmd>VersiusGenCompileCommands<cr>",    desc = "Generate compile commands" },
+            -- Remote
+            { "<leader>vr",  group = "Remote", icon = { icon = "󰢹 ", color = "cyan" } },
+            { "<leader>vrc", "<cmd>VersiusRemoteConnect<cr>",    desc = "Connect to remote host" },
+            { "<leader>vrd", "<cmd>VersiusRemoteDisconnect<cr>", desc = "Disconnect from remote" },
+            { "<leader>vrs", "<cmd>VersiusRemoteSync<cr>",       desc = "Sync current file to remote" },
+            { "<leader>vrt", "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
         },
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        opts = function(_, opts)
+            table.insert(opts.sections.lualine_x, 1, {
+                function()
+                    return require("versius.remote").statusline()
+                end,
+                color = { fg = "#7dcfff" },
+            })
+            return opts
+        end,
     },
 }
