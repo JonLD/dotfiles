@@ -135,6 +135,7 @@ $env.config.keybindings = [
 
 $env.PROMPT_COMMAND = {||
     let dir = ($env.PWD | str replace $nu.home-dir "~")
+    let hostname = (sys host | get hostname)
     let arrow = if $env.LAST_EXIT_CODE == 0 {
         $"(ansi { fg: $gruvbox_green })❯(ansi reset)"
     } else {
@@ -146,7 +147,7 @@ $env.PROMPT_COMMAND = {||
             $"  (ansi { fg: $gruvbox_yellow }) ($branch.stdout | str trim) (ansi reset)"
         } else { "" }
     } catch { "" })
-    $"(ansi { fg: $gruvbox_blue })($dir)(ansi reset)($git_segment)\n($arrow) "
+    $"(ansi { fg: $gruvbox_blue })($dir)(ansi reset)($git_segment) (ansi { fg: $gruvbox_aqua })($hostname)(ansi reset)\n($arrow) "
 }
 $env.PROMPT_COMMAND_RIGHT = ""
 $env.PROMPT_INDICATOR = ""
