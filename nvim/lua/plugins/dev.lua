@@ -202,11 +202,17 @@ return {
             "VersiusRemoteBrowse",
             "VersiusRemoteCopyKey",
             "VersiusYankSvtPath",
+            "VersiusTeamCityAgents",
+            "VersiusTeamCityReenable",
         },
         keys = {
             { "gx", "<cmd>VersiusTraceOpen<cr>", desc = "Open URL, trace, or Jira ticket" },
             -- Versius
             { "<leader>v",   group = "Versius", icon = { icon = "󰢛 ", color = "blue" } },
+            -- Apps
+            { "<leader>va",   group = "Apps", icon = { icon = "󰢛 ", color = "blue" } },
+            { "<leader>vas", "<cmd>VersiusSystemUpdate<cr>",          desc = "Run system update tool" },
+            { "<leader>van", "<cmd>VersiusNetcoms<cr>",               desc = "Run netcoms" },
             -- Make
             { "<leader>vm",  group = "Make", icon = { icon = "󰛕 ", color = "yellow" } },
             { "<leader>vml", "<cmd>VersiusMakeCwd labpc<cr>",         desc = "make labpc" },
@@ -215,21 +221,21 @@ return {
             { "<leader>vmc", "<cmd>VersiusMake clean<cr>",            desc = "make clean" },
             { "<leader>vmt", "<cmd>VersiusMake unit_test<cr>",        desc = "make unit_test" },
             { "<leader>vmk", "<cmd>VersiusMake klocwork<cr>",         desc = "make klocwork" },
-            { "<leader>vms", "<cmd>VersiusSystemUpdate<cr>",          desc = "Run system update tool" },
-            { "<leader>vmn", "<cmd>VersiusNetcoms<cr>",               desc = "Run netcoms" },
+            { "<leader>vmf", "<cmd>VersiusSvtMake format<cr>",         desc = "make klocwork" },
             { "<leader>vmg", "<cmd>VersiusGenCompileCommands<cr>",    desc = "Generate compile commands" },
+            -- TeamCity
+            { "<leader>vt",  group = "TeamCity" },
+            { "<leader>vtt",  "<cmd>VersiusTeamCityAgents<cr>",     desc = "TeamCity agents" },
+            { "<leader>vtr",  "<cmd>VersiusTeamCityReenable<cr>",  desc = "Re-enable my TeamCity agents" },
             -- Remote
             { "<leader>vy",  "<cmd>VersiusYankSvtPath<cr>",        desc = "Yank SVT path" },
             { "<leader>vr",  group = "Remote", icon = { icon = "󰢹 ", color = "cyan" } },
-            { "<leader>vrc", "<cmd>VersiusRemoteConnect<cr>",    desc = "Connect to remote host" },
+            { "<leader>vc", "<cmd>VersiusRemoteConnect<cr>",    desc = "Connect to remote host" },
             { "<leader>vrd", "<cmd>VersiusRemoteDisconnect<cr>", desc = "Disconnect from remote" },
             { "<leader>vrs", "<cmd>VersiusRemoteSync<cr>",       desc = "Sync current file to remote" },
-            { "<leader>vrt", "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
+            { "<leader>vv", "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
             { "<leader>vrr", "<cmd>VersiusRemoteRunTest<cr>",        desc = "Run SVT test on remote host" },
-            { "<leader>vrS", "<cmd>VersiusRemoteSyncShellConfig<cr>",  desc = "Sync shell config to remote" },
-            { "<leader>vri", "<cmd>VersiusRemoteInstallShell<cr>",     desc = "Install shell on remote host" },
             { "<leader>vrb", "<cmd>VersiusRemoteBrowse<cr>",          desc = "Browse remote files" },
-            { "<leader>vrk", "<cmd>VersiusRemoteCopyKey<cr>",         desc = "Copy SSH key to remote host" },
         },
         opts = {
             remote = {
