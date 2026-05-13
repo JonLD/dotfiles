@@ -89,6 +89,17 @@ def --env gwtn [repo?: string] {
 	}
 }
 
+def --env gwta [name: string, branch?: string] {
+	let repo_root = (^git rev-parse --show-toplevel | str trim)
+	let worktree_dir = ($repo_root | path join ".worktrees" $name)
+	if ($branch | is-empty) {
+		^git -C $repo_root worktree add $worktree_dir -b $name
+	} else {
+		^git -C $repo_root worktree add $worktree_dir $branch
+	}
+	cd $worktree_dir
+}
+
 def gwr [repo?: string] {
 	let repo_root = if ($repo | is-empty) {
 		(^git rev-parse --show-toplevel | str trim)

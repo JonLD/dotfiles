@@ -7,6 +7,7 @@ gui:
   commitColors:
     "NOJIRA": purple
   # Gruvbox color theme
+
   theme:
     lightTheme: false
     activeBorderColor:
@@ -29,92 +30,114 @@ gui:
     defaultFgColor:
       - '#ebdbb2' # gruvbox light foreground
   # Show branch graph in commits panel
+
   showBranchCommitHash: true
   # Show command log
+
   showCommandLog: false
   # Mouse support
+
   mouseEvents: true
   # Skip hook prompts
+
   skipHookPrefix: WIP
   # Show file tree
+
   showFileTree: true
   # Show list footer
+
   showListFooter: true
   # Show random tip
+
   showRandomTip: true
   # Commit length
+
   commitLength:
     show: true
   # Skip discarding change confirmations  
+
   skipDiscardChangeWarning: false
   # Skip stash warning
+
   skipStashWarning: false
   # Side panel width as a ratio
+
   sidePanelWidth: 0.3333
   # Expand focused side panel
+
   expandFocusedSidePanel: false
   # Main panel split mode: 'horizontal' | 'vertical'
+
   mainPanelSplitMode: 'horizontal'
   # Language (auto-detect if not set)
+
   language: 'auto'
   # Time format
-  timeFormat: '02 Jan 06 15:04 MST'
 
+  timeFormat: '02 Jan 06 15:04 MST'
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
   commit:
     signOff: false
   merging:
     # Use external merge tool
     manualCommit: false
     # Extra args for merge tool
+
     args: ''
   log:
     # Order commits by date vs topo
     order: 'topo-order'
     # Show graph
+
     showGraph: 'when-maximised'
   skipHookPrefix: WIP
   # Auto-fetch on app start  
+
   autoFetch: true
   # Auto-refresh on file change
+
   autoRefresh: true
   # Fetch all remotes
+
   fetchAll: true
   # Branch log order
+
   branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
   # All branches log order  
+
   allBranchesLogCmds:
     - 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=medium'
   # Disable force push
-  disableForcePushing: false
 
+  disableForcePushing: false
 os:
   # Editor for commit messages
   editCommand: 'nvim'
   # Editor for adding files
+
   editCommandTemplate: '{{editor}} {{filename}}'
   # Open command
-  openCommand: 'xdg-open {{filename}}'
 
+  openCommand: 'xdg-open {{filename}}'
 refresher:
   # Refresh interval in seconds
   refreshInterval: 10
   # Fetch interval in seconds  
-  fetchInterval: 60
 
+  fetchInterval: 60
 update:
   # Update method: prompt | background | never
   method: prompt
   # Update days
-  days: 14
 
+  days: 14
 confirmOnQuit: false
 # Quit on top level return
-quitOnTopLevelReturn: false
 
+quitOnTopLevelReturn: false
 keybinding:
   universal:
     quit: 'q'
