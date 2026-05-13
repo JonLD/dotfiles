@@ -1,13 +1,16 @@
 return {
     {
         "JonLD/snacks-file-browser.nvim",
+        dev = true,
         dependencies = { "folke/snacks.nvim" },
+        cmd = { "FileBrowser", "FileBrowserCwd" },
         keys = {
-            { "<leader>e", function() require("snacks-file-browser").browse_current() end, desc = "File Browser" },
-            { "<leader>E", function() require("snacks-file-browser").browse_cwd() end, desc = "File Browser (CWD)" },
+            { "<leader>e",  "<CMD>FileBrowser<CR>", desc = "File Browser" },
+            { "<leader>E", "<CMD>FileBrowserCwd<CR>", desc = "File Browser (CWD)" },
         },
     },
-    {"folke/snacks.nvim",
+    {
+        "folke/snacks.nvim",
         keys = {
             { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
             { "<leader>sb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
@@ -20,7 +23,7 @@ return {
             },
             styles = {
                 terminal = {
-                    position = "right"
+                    position = "right",
                 },
             },
             picker = {

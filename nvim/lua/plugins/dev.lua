@@ -223,7 +223,8 @@ return {
             { "<leader>vmc", "<cmd>VersiusMake clean<cr>",            desc = "make clean" },
             { "<leader>vmt", "<cmd>VersiusMake unit_test<cr>",        desc = "make unit_test" },
             { "<leader>vmk", "<cmd>VersiusMake klocwork<cr>",         desc = "make klocwork" },
-            { "<leader>vmf", "<cmd>VersiusSvtMake format<cr>",         desc = "make klocwork" },
+            { "<leader>vmf", "<cmd>VersiusSvtMake format<cr>",         desc = "make format" },
+            { "<leader>vmp", "<cmd>VersiusSvtMake pylint<cr>",         desc = "make pylint" },
             { "<leader>vmg", "<cmd>VersiusGenCompileCommands<cr>",    desc = "Generate compile commands" },
             -- TeamCity
             { "<leader>vt",  group = "TeamCity" },
@@ -237,7 +238,7 @@ return {
             { "<leader>vro", "<cmd>VersiusRemoteCheckout<cr>",   desc = "Checkout local branch on remote" },
             { "<leader>vrg", "<cmd>VersiusRemoteSetupAgent<cr>", desc = "Full agent setup on remote" },
             { "<leader>vrs", "<cmd>VersiusRemoteSync<cr>",       desc = "Sync current file to remote" },
-            { "<leader>vv", "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
+            { "<leader>vv",  "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
             { "<leader>vrr", "<cmd>VersiusRemoteRunTest<cr>",        desc = "Run SVT test on remote host" },
             { "<leader>vrb", "<cmd>VersiusRemoteBrowse<cr>",          desc = "Browse remote files" },
         },
@@ -245,6 +246,7 @@ return {
             remote = {
                 shell = "nu",
                 shell_install_cmd = "choco install nushell -y --source https://community.chocolatey.org/api/v2/",
+                gitlab_token_env = "GITLAB_CMED_TOKEN",
             },
         },
     },
