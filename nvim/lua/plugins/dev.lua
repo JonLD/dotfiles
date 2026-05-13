@@ -204,6 +204,7 @@ return {
             "VersiusYankSvtPath",
             "VersiusTeamCityAgents",
             "VersiusTeamCityReenable",
+            "VersiusRemoteCheckout",
         },
         keys = {
             { "gx", "<cmd>VersiusTraceOpen<cr>", desc = "Open URL, trace, or Jira ticket" },
@@ -232,6 +233,7 @@ return {
             { "<leader>vr",  group = "Remote", icon = { icon = "󰢹 ", color = "cyan" } },
             { "<leader>vc", "<cmd>VersiusRemoteConnect<cr>",    desc = "Connect to remote host" },
             { "<leader>vrd", "<cmd>VersiusRemoteDisconnect<cr>", desc = "Disconnect from remote" },
+            { "<leader>vro", "<cmd>VersiusRemoteCheckout<cr>",  desc = "Checkout local branch on remote" },
             { "<leader>vrs", "<cmd>VersiusRemoteSync<cr>",       desc = "Sync current file to remote" },
             { "<leader>vv", "<cmd>VersiusRemoteTerminal<cr>",  desc = "Open terminal on remote host" },
             { "<leader>vrr", "<cmd>VersiusRemoteRunTest<cr>",        desc = "Run SVT test on remote host" },
