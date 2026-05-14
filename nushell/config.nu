@@ -136,23 +136,18 @@ $env.config.keybindings = [
 $env.PROMPT_COMMAND = {||
     let dir = ($env.PWD | str replace $nu.home-dir "~")
     let hostname = (sys host | get hostname)
-    let arrow = if $env.LAST_EXIT_CODE == 0 {
-        $"(ansi { fg: $gruvbox_green })❯(ansi reset)"
-    } else {
-        $"(ansi { fg: $gruvbox_red })❯(ansi reset)"
-    }
     let git_segment = (try {
         let branch = (^git --no-optional-locks branch --show-current | complete)
         if $branch.exit_code == 0 and ($branch.stdout | str trim | is-not-empty) {
             $"  (ansi { fg: $gruvbox_yellow }) ($branch.stdout | str trim) (ansi reset)"
         } else { "" }
     } catch { "" })
-    $"(ansi { fg: $gruvbox_blue })($dir)(ansi reset)($git_segment) (ansi { fg: $gruvbox_aqua })($hostname)(ansi reset)\n($arrow) "
+    $"(ansi { fg: $gruvbox_blue })($dir)(ansi reset)($git_segment) (ansi { fg: $gruvbox_aqua })($hostname)(ansi reset)\n"
 }
 $env.PROMPT_COMMAND_RIGHT = ""
 $env.PROMPT_INDICATOR = ""
-$env.PROMPT_INDICATOR_VI_INSERT = ""
-$env.PROMPT_INDICATOR_VI_NORMAL = $"(ansi { fg: $gruvbox_gray })[N] (ansi reset)"
+$env.PROMPT_INDICATOR_VI_INSERT = $"(ansi { fg: $gruvbox_green })❯ (ansi reset)"
+$env.PROMPT_INDICATOR_VI_NORMAL = $"(ansi { fg: $gruvbox_blue })◆ (ansi reset)"
 $env.PROMPT_MULTILINE_INDICATOR = $"(ansi { fg: $gruvbox_gray })∙∙∙(ansi reset) "
 
 const zoxide_init_path = ($nu.home-dir | path join ".zoxide.nu")
