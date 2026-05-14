@@ -14,6 +14,61 @@ return {
         keys = {
             { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
             { "<leader>sb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+            {
+                "<leader>fb",
+                function()
+                    local base
+                    for _, ref in ipairs({ "origin/HEAD", "origin/main", "origin/master" }) do
+                        local out = vim.trim(vim.fn.system("git merge-base HEAD " .. ref))
+                        if vim.v.shell_error == 0 and out ~= "" then
+                            base = out
+                            break
+                        end
+                    end
+                    if not base then
+                        Snacks.notify.warn("Could not determine branch base")
+                        return
+                    end
+                    local files = vim.fn.systemlist("git diff --name-only " .. base .. " HEAD")
+                    if #files == 0 then
+                        Snacks.notify.info("No changed files on branch")
+                        return
+                    end
+                    Snacks.picker.pick({
+                        title = "Branch Changed Files",
+                        items = vim.tbl_map(function(f) return { file = f, text = f } end, files),
+                        format = "file",
+                    })
+                end,
+                desc = "Branch Changed Files",
+            },
+            {
+                "<leader>fj",
+                function()
+                    local base
+                    for _, ref in ipairs({ "origin/HEAD", "origin/main", "origin/master" }) do
+                        local out = vim.trim(vim.fn.system("git merge-base HEAD " .. ref))
+                        if vim.v.shell_error == 0 and out ~= "" then
+                            base = out
+                            break
+                        end
+                    end
+                    if not base then
+                        Snacks.notify.warn("Could not determine branch base")
+                        return
+                    end
+                    local files = vim.fn.systemlist("git diff --name-only " .. base .. " HEAD")
+                    if #files == 0 then
+                        Snacks.notify.info("No changed files on branch")
+                        return
+                    end
+                    for _, f in ipairs(files) do
+                        vim.cmd("edit " .. vim.fn.fnameescape(f))
+                    end
+                    Snacks.notify.info("Opened " .. #files .. " changed files")
+                end,
+                desc = "Open All Branch Changed Files",
+            },
             { "<leader>sf", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
             { "<leader>N", function() Snacks.notifier.show_history() end, desc = "Notification History" },
         },
