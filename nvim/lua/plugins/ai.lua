@@ -35,6 +35,9 @@ return {
                 WT_SESSION = vim.env.WT_SESSION or "",
                 WT_PROFILE_ID = vim.env.WT_PROFILE_ID or "",
             },
+            diff_opts = {
+                open_in_new_tab = true,
+            },
             terminal = {
                 -- snacks provider has auto_insert=true so it re-enters terminal mode
                 -- when switching back to the Claude buffer (native provider does not)
