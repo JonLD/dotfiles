@@ -82,6 +82,7 @@ return {
                 },
             },
             picker = {
+                ui_select = true,
                 -- layout = "borderless_top",
                 formatters = {
                     file = {
