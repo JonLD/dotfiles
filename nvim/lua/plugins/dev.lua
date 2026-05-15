@@ -48,6 +48,11 @@ return {
             'folke/snacks.nvim',
         },
         cmd = "Nerdy",
+        opts = {},
+        keys = {
+
+            {"<leader>sN", "<CMD>Nerdy<CR>", desc = "Nerd font icons"}
+        },
     },
     {
         "folke/which-key.nvim",
