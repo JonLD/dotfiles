@@ -79,6 +79,32 @@ local function set_custom_highlights()
     hl(0, "PmenuThumb", { bg = c.gray })
     hl(0, "NormalFloat", { fg = c.fg, bg = c.menu_bg })
     hl(0, "FloatBorder", { fg = c.gray, bg = c.menu_bg })
+
+    -- gitlab.nvim inline discussions (rendered as virt_lines below commented
+    -- diff lines). Notes alternate between Body and BodyAlt to make replies
+    -- easy to parse at a glance.
+    hl(0, "GitlabDiscussionBody",      { fg = c.fg,           bg = c.alt_bg })
+    hl(0, "GitlabDiscussionBodyAlt",   { fg = c.fg,           bg = c.dark_gray })
+    hl(0, "GitlabDiscussionFooter",    { fg = c.alt_fg,       bg = c.reference })
+    hl(0, "GitlabDiscussionBorder",    { fg = c.context,      bg = "NONE" })
+    hl(0, "GitlabDiscussionCollapsed", { fg = c.alt_fg,       bg = c.fold_bg })
+    hl(0, "GitlabDiscussionResolved",  { fg = c.fg,           bg = c.alt_bg })
+    hl(0, "GitlabDiscussionSeparator", { fg = c.context,      bg = "NONE" })
+    hl(0, "GitlabDiscussionSystem",    { fg = c.context,      bg = c.alt_bg })
+    -- Foreground-only groups layered on top of the body bg. No `bg` set so the
+    -- alternating Body / BodyAlt background still shows through.
+    hl(0, "GitlabDiscussionHeader",    { fg = c.light_blue,                      bold = true })
+    hl(0, "GitlabDiscussionMention",   { fg = c.vivid_blue,                      bold = true })
+    hl(0, "GitlabDiscussionCode",      { fg = c.orange })
+    hl(0, "GitlabDiscussionLink",      { fg = c.ui4_blue,                        underline = true })
+    hl(0, "GitlabDiscussionIssueRef",  { fg = c.light_green })
+    hl(0, "GitlabDiscussionQuote",     { fg = c.green })
+
+    -- Diff colours (tokyonight-storm palette; vscode theme uses red for both DiffChange and DiffDelete)
+    hl(0, "DiffAdd",    { bg = "#2d4a35" })
+    hl(0, "DiffChange", { bg = "#1e2d4a" })
+    hl(0, "DiffDelete", { bg = "#52313f" })
+    hl(0, "DiffText",   { bg = "#394b70" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme",
